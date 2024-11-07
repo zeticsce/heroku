@@ -64,6 +64,7 @@ class HikkaInfoMod(loader.Module):
         for emoji, icon in [
             ("🍊", "<emoji document_id=5449599833973203438>🧡</emoji>"),
             ("🍇", "<emoji document_id=5449468596952507859>💜</emoji>"),
+            ("☁️", "<emoji document_id=5195381467047288408>☁️</emoji>"),
             ("❓", "<emoji document_id=5407025283456835913>📱</emoji>"),
             ("🍀", "<emoji document_id=5395325195542078574>🍀</emoji>"),
             ("🦾", "<emoji document_id=5386766919154016047>🦾</emoji>"),
