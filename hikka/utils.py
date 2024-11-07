@@ -908,6 +908,15 @@ def get_named_platform() -> str:
     if main.IS_WSL:
         return "🍀 WSL"
 
+    if main.IS_ORACLE:
+        return "☁️ Oracle"
+
+    if main.IS_AWS:
+        return "☁️ AWS"
+
+    if main.IS_SERV00:
+        return "💎 Serv00"
+    
     if main.IS_GOORM:
         return "🦾 GoormIDE"
 
@@ -926,7 +935,7 @@ def get_named_platform() -> str:
     if main.IS_CODESPACES:
         return "🐈‍⬛ Codespaces"
 
-    return f"✌️ lavHost {os.environ['LAVHOST']}" if main.IS_LAVHOST else "WhoHost"
+    return f"✌️ lavHost {os.environ['LAVHOST']}" if main.IS_LAVHOST else "💎 VDS"
 
 
 def get_platform_emoji() -> str:
@@ -946,6 +955,15 @@ def get_platform_emoji() -> str:
 
     if main.IS_DOCKER:
         return BASE.format(5298554256603752468)
+
+    if main.IS_ORACLE:
+        return BASE.format(5195381467047288408)
+
+    if main.IS_AWS:
+        return BASE.format(5197529358717179346)
+
+    if main.IS_SERV00:
+        return BASE.format(5192765204898783881)
 
     if main.IS_LAVHOST:
         return BASE.format(5301078610747074753)
