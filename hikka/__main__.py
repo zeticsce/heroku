@@ -16,7 +16,7 @@ from ._internal import restart
 if (
     getpass.getuser() == "root"
     and "--root" not in " ".join(sys.argv)
-    and all(trigger not in os.environ for trigger in {"DOCKER", "GOORM"})
+    and all(trigger not in os.environ for trigger in {"DOCKER", "GOORM", "NO_SUDO"})
 ):
     print("🚫" * 15)
     print("You attempted to run Hikka on behalf of root user")
@@ -25,8 +25,13 @@ if (
     print("🚫" * 15)
     print()
     print("Type force_insecure to ignore this warning")
+    print("Type no_sudo if your system has no sudo (Debian vibes)")
     if input("> ").lower() != "force_insecure":
         sys.exit(1)
+    elif input("> ").lower() != 'no_sudo':
+        os.environ['NO_SUDO'] = '1'
+        print('Added NO_SUDO in your environment variables')
+        restart()
 
 
 def deps():
