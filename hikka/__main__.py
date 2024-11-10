@@ -28,9 +28,9 @@ if (
     print("Type no_sudo if your system has no sudo (Debian vibes)")
     if input("> ").lower() != "force_insecure":
         sys.exit(1)
-    elif input("> ").lower() != 'no_sudo':
-        os.environ['NO_SUDO'] = '1'
-        print('Added NO_SUDO in your environment variables')
+    elif input("> ").lower() != "no_sudo":
+        os.environ["NO_SUDO"] = "1"
+        print("Added NO_SUDO in your environment variables")
         restart()
 
 
