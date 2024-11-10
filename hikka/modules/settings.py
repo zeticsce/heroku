@@ -246,11 +246,14 @@ class CoreMod(loader.Module):
         self._db.clear()
         self._db.save()
         await utils.answer(call, self.strings("db_cleared"))
-    
+
     async def installationcmd(self, message: Message):
         """| Guide of installation"""
 
-
         await message.delete()
 
-        await self.client.send_file(message.peer_id, "https://i.imgur.com/Tfj0Wud.png", caption = self.strings["installation"])
+        await self.client.send_file(
+            message.peer_id,
+            "https://i.imgur.com/Tfj0Wud.png",
+            caption=self.strings["installation"],
+        )
