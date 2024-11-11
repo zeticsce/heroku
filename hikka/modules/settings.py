@@ -255,5 +255,4 @@ class CoreMod(loader.Module):
         await self.client.send_file(
             message.peer_id,
             "https://i.imgur.com/Tfj0Wud.png",
-            caption=self.strings["installation"],
-        )
+            caption=self.strings["installation"], reply_to=getattr(message, "reply_to_msg_id", None),)
