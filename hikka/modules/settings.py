@@ -250,9 +250,9 @@ class CoreMod(loader.Module):
     async def installationcmd(self, message: Message):
         """| Guide of installation"""
 
-        await message.delete()
-
         await self.client.send_file(
             message.peer_id,
             "https://i.imgur.com/Tfj0Wud.png",
             caption=self.strings["installation"], reply_to=getattr(message, "reply_to_msg_id", None),)
+    
+        await message.delete()
