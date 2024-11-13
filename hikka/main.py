@@ -97,6 +97,7 @@ IS_ORACLE = "ORACLE_OS" in os.environ
 IS_AWS = "AWS_OS" in os.environ
 IS_SERV00 = "serv00" in socket.gethostname()
 IS_TOTHOST = "tothost" in socket.gethostname()
+IS_AEZA = "aeza" in socket.gethostname()
 IS_WSL = False
 with contextlib.suppress(Exception):
     from platform import uname
