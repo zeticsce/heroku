@@ -1,4 +1,11 @@
 # Hikka Changelog
+## 🌑 Hikka 1.6.6
+
+- add ToThost, oracle, AWS, aeza and serv00 detection
+- fixed some bugs
+- update telethon version to 1.37.0
+- removed all languages excluding: Russian, English, Ukrainian
+  
 ## 🌑 Hikka 1.6.6 beta
 
 - formatting ruff
