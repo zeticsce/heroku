@@ -831,7 +831,7 @@ class Hikka:
 
             await client.hikka_inline.bot.send_animation(
                 logging.getLogger().handlers[0].get_logid_by_client(client.tg_id),
-                "https://x0.at/WO4-.mp4",
+                "https://imgur.com/a/vdOmEWU.png",
                 caption=(
                     "🌘 <b>Hikka {} started!</b>\n\n🌳 <b>GitHub commit SHA: <a"
                     ' href="https://github.com/coddrago/Hikka/commit/{}">{}</a></b>\n✊'
