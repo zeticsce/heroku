@@ -9,6 +9,7 @@ import logging
 
 from .. import loader, utils
 from ..inline.types import BotInlineMessage, InlineCall
+from ..types import Message
 
 logger = logging.getLogger(__name__)
 
@@ -114,9 +115,10 @@ class Presets(loader.Module):
         await self._menu()
 
     async def _menu(self):
-        await self.inline.bot.send_message(
+        await self.inline.bot.send_photo(
             self._client.tg_id,
-            self.strings("welcome"),
+            'https://imgur.com/a/Z6PP9as.png',
+            caption=self.strings('welcome'),
             reply_markup=self.inline.generate_markup(self._markup),
         )
 
@@ -201,3 +203,12 @@ class Presets(loader.Module):
             return
 
         await self._menu()
+
+    @loader.command()
+    async def presets(self, message: Message):
+        await self.inline.form(
+            message=message,
+            photo='https://imgur.com/a/Z6PP9as.png',
+            text=self.strings('welcome').replace('/presets', self.get_prefix() + 'presets'),
+            reply_markup=self._markup,
+        )
