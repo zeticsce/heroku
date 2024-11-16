@@ -118,6 +118,7 @@ class Presets(loader.Module):
         await self.inline.bot.send_message(
             self._client.tg_id,
             self.strings("welcome"),
+            photo='https://imgur.com/a/Z6PP9as.png',
             reply_markup=self.inline.generate_markup(self._markup),
         )
 
@@ -207,6 +208,7 @@ class Presets(loader.Module):
     async def presets(self, message: Message):
         await self.inline.form(
             message=message,
+            photo='https://imgur.com/a/Z6PP9as.png',
             text=self.strings('welcome'),
             reply_markup=self._markup,
         )
