@@ -1,4 +1,8 @@
 # Hikka Changelog
+## 🌑 Hikka 1.6.7
+
+- new desing
+  
 ## 🌑 Hikka 1.6.6
 
 - add ToThost, oracle, AWS, aeza and serv00 detection
