@@ -48,7 +48,7 @@ class CoreMod(loader.Module):
     async def hikkacmd(self, message: Message):
         await utils.answer_file(
             message,
-            "https://x0.at/6Y_4.png",
+            "https://imgur.com/a/mqhVESA.png",
             self.strings("hikka").format(
                 (
                     utils.get_platform_emoji()
@@ -252,7 +252,7 @@ class CoreMod(loader.Module):
 
         await self.client.send_file(
             message.peer_id,
-            "https://i.imgur.com/Tfj0Wud.png",
+            "https://imgur.com/a/AYmh8W8.png",
             caption=self.strings["installation"], reply_to=getattr(message, "reply_to_msg_id", None),)
     
         await message.delete()
