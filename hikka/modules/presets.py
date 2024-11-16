@@ -9,6 +9,7 @@ import logging
 
 from .. import loader, utils
 from ..inline.types import BotInlineMessage, InlineCall
+from ..types import Message
 
 logger = logging.getLogger(__name__)
 
@@ -201,3 +202,11 @@ class Presets(loader.Module):
             return
 
         await self._menu()
+
+    @loader.command()
+    async def presets(self, message: Message):
+        await self.inline.form(
+            message=message,
+            text=self.strings('welcome'),
+            reply_markup=self._markup,
+        )
