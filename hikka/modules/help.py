@@ -324,9 +324,7 @@ class Help(loader.Module):
     @loader.command()
     async def support(self, message):
         """| link for support chat"""
-        if message.out:
-            await self.request_join("@whoblogs_chat", self.strings("request_join"))
-
+       
         await utils.answer(
             message,
             self.strings("support").format(
