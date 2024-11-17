@@ -142,9 +142,9 @@ class UpdateNotifier(loader.Module):
     @loader.command()
     async def changelog(self, message: Message):
         """Shows the changelog of the last major update"""
-        with open('../CHANGELOG.md', mode='r', encoding='utf-8') as f:
+        with open('CHANGELOG.md', mode='r', encoding='utf-8') as f:
             changelog = f.read().split('##')[1].strip()
-        if self.client.hikka_me.premium:
+        if (await self._client.get_me()).premium:
             changelog.replace('🌑 Hikka', '<emoji document_id=5192765204898783881>🌘</emoji><emoji document_id=5195311729663286630>🌘</emoji><emoji document_id=5195045669324201904>🌘</emoji>')
 
         await utils.answer(message, self.strings('changelog').format(changelog))
