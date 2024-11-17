@@ -385,7 +385,7 @@ update_notifier:
   latest_disabled: "Notifications about the latest update have been suppressed"
   update: "🔄 Update"
   ignore: "🚫 Ignore"
-  changelog: "<emoji document_id=5434144690511290129>📰</emoji> <b>Changelog of the last major update:</b>\n{}"
+  changelog: '<emoji document_id=5434144690511290129>📰</emoji> <b>Changelog of the last major update:</b>\n<pre><code class="language-hikka">{}</code></pre>'
   _cls_doc: "Tracks latest Hikka releases, and notifies you, if update is required"
 
 updater:
