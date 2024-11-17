@@ -1,4 +1,4 @@
-__version__ = (3, 3, 3)
+__version__ = (3, 3, 4)
 # meta developer: @Foxy437
 # change-log: 🎉🎉🎉🎉🎉🎉🎉🎉 ADDED INLINE!!! 
 # ©️ Fixyres, 2024
@@ -16,7 +16,6 @@ import json
 import io
 import inspect
 from hikkatl.types import Message
-from difflib import get_close_matches
 import random
 from ..types import InlineQuery
 
@@ -79,22 +78,7 @@ class FHeta(loader.Module):
             modules = await self.search_modules(args.replace(" ", ""))
 
         if not modules:
-            modules = await self.get_closest_match(args)
-
-            if modules:
-                result = self.strings["closest_match"].format(
-                    query=args,
-                    module_name=modules[0]["name"],
-                    author=modules[0].get("author", "???"),
-                    repo_url=f"https://github.com/{modules[0]['repo']}",
-                    install_command=f"{self.get_prefix()}{modules[0]['install']}",
-                    description=utils.escape_html(modules[0].get("description", "No description")),
-                    commands=self.strings["commands"].format(commands_list="\n".join(
-                        [f"<code>{self.get_prefix()}{cmd['name']}</code> {utils.escape_html(cmd['description'])}" for cmd in modules[0].get('commands', [])]))
-                )
-                await utils.answer(message, result)
-            else:
-                await utils.answer(message, self.strings["no_modules_found"])
+            await utils.answer(message, self.strings["no_modules_found"])
         else:
             seen_modules = set()
             formatted_modules = []
@@ -106,15 +90,18 @@ class FHeta(loader.Module):
                     install = module['install']
 
                     commands_section = ""
-                    if "commands" in module:
-                        commands_list = "\n".join(
+                    if "commands" in module and module['commands']:
+                        commands_section = self.strings["commands"].format(commands_list="\n".join(
                             [f"<code>{self.get_prefix()}{cmd['name']}</code> {utils.escape_html(cmd['description'])}" for cmd in module['commands']]
-                        )
-                        commands_section = self.strings["commands"].format(commands_list=commands_list)
+                        ))
+                    elif "commands" not in module or not module['commands']:
+                        commands_section = self.strings["no_commands"]
 
                     description_section = ""
-                    if "description" in module:
+                    if "description" in module and module["description"]:
                         description_section = self.strings["description"].format(description=utils.escape_html(module["description"]))
+                    elif "description" not in module or not module["description"]:
+                        description_section = self.strings["no_description"]
 
                     author_info = utils.escape_html(module.get("author", "???"))
                     module_name = utils.escape_html(module['name'].replace('.py', ''))
@@ -140,16 +127,8 @@ class FHeta(loader.Module):
                     continue
 
             if len(formatted_modules) == 1:
-                result = self.strings["closest_match"].format(
-                    query=args,
-                    module_name=module_name,
-                    author=author_info,
-                    repo_url=repo_url,
-                    install_command=f"{self.get_prefix()}{install}",
-                    description=description_section,
-                    commands=commands_section
-                )
-                await utils.answer(message, result)
+                closest_match_result = formatted_modules[0]
+                await utils.answer(message, closest_match_result)
             else:
                 results = "".join(formatted_modules)
                 await utils.answer(message, results)
@@ -179,9 +158,6 @@ class FHeta(loader.Module):
 
         if not modules:
             modules = await self.search_modules(args.replace(" ", ""))
-
-        if not modules:
-            modules = await self.get_closest_match(args)
 
         if not modules:
             await query.answer(
@@ -259,23 +235,6 @@ class FHeta(loader.Module):
                 continue
 
         await query.answer(results)
-
-    async def get_closest_match(self, query: str):
-        url = "https://raw.githubusercontent.com/Fixyres/FHeta/refs/heads/main/modules.json"
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url) as response:
-                if response.status == 200:
-                    data = await response.text()
-                    modules = json.loads(data)
-                    
-                    module_names = [module['name'] for module in modules]
-                    closest_matches = get_close_matches(query, module_names, n=1, cutoff=0.5)
-
-                    if closest_matches:
-                        module = next((m for m in modules if m['name'] == closest_matches[0]), None)
-                        if module:
-                            return await self.format_module(module, query)
-                    return None
 
     async def search_modules(self, query: str):
         url = "https://raw.githubusercontent.com/Fixyres/FHeta/refs/heads/main/modules.json"
