@@ -367,6 +367,7 @@ update_notifier:
   latest_disabled: "Повідомлення про останнє оновлення було вимкнено"
   update: "🔄 Оновити"
   ignore: "🚫 Ігнорувати"
+  changelog: '<emoji document_id=5434144690511290129>📰</emoji> <b>Список змін останнього великого оновлення:</b>\n<pre><code class="language-hikka">{}</code></pre>'
 
 updater:
   source: "<emoji document_id=5456255401194429832>📖</emoji> <b>Вихідний код можна прочитати</b> <a href='{}'>тут</a>"
