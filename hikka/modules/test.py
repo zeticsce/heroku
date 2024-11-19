@@ -372,7 +372,7 @@ class TestMod(loader.Module):
 
         await utils.answer(
             message,
-            self.config["text"].format(
+            self.config["Text_Of_Ping"].format(
                 ping=round((time.perf_counter_ns() - start) / 10**6, 3),
                 uptime=utils.formatted_uptime(),
                 ping_hint=(
