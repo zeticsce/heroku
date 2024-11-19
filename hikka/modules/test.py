@@ -32,7 +32,24 @@ for mod in os.scandir(DEBUG_MODS_DIR):
 class TestMod(loader.Module):
     """Perform operations based on userbot self-testing"""
 
-    strings = {"name": "Tester"}
+    strings = {
+        "name": "Tester",
+        "configping": "Your custom text.\n"
+        "You can use placeholders:\n"
+        "{ping} - That's your ping.\n"
+        "{uptime} - It's your uptime.\n"
+        "{ping_hint} - This is the same hint as in the hikka module, it is chosen with random chance, also you can specify this hint in the config ",
+        "hint": "Set a hint",
+    }
+
+    strings_ru = {
+        "configping": "Ваш кастомный текст.\n"
+        "Вы можете использовать плейсхолдеры:\n"
+        "{ping} - Это ваш пинг\n"
+        "{uptime} - Это ваш аптайм\n"
+        "{ping_hint} - подсказка\n",
+        "hint": "Укажите подсказку",
+    }
 
     def __init__(self):
         self._memory = {}
@@ -70,6 +87,19 @@ class TestMod(loader.Module):
                 "Ignore common errors (e.g. 'TypeError' in telethon)",
                 validator=loader.validators.Boolean(),
                 on_change=self._pass_config_to_logger,
+            ),
+            loader.ConfigValue(
+                "text",
+                "<emoji document_id=5920515922505765329>⚡️</emoji> <b>𝙿𝚒𝚗𝚐: </b><code>319.31</code><b> 𝚖𝚜 </b>
+<emoji document_id=5900104897885376843>🕓</emoji><b> 𝚄𝚙𝚝𝚒𝚖𝚎: </b><code>6:06:55</code>",
+                lambda: self.strings["configping"],
+                validator=loader.validators.String(),
+            ),
+            loader.ConfigValue(
+                "hint",
+                None,
+                lambda: self.strings["hint"],
+                validator=loader.validators.String(),
             ),
         )
 
@@ -337,14 +367,18 @@ class TestMod(loader.Module):
 
     @loader.command()
     async def ping(self, message: Message):
+        """- Find out your userbot ping"""
         start = time.perf_counter_ns()
         message = await utils.answer(message, "🌘")
 
         await utils.answer(
             message,
-            self.strings["results_ping"].format(
-                round((time.perf_counter_ns() - start) / 10**6, 3),
-                utils.formatted_uptime(),
+            self.config["text"].format(
+                ping=round((time.perf_counter_ns() - start) / 10**6, 3),
+                uptime=utils.formatted_uptime(),
+                ping_hint=(
+                    (self.config["hint"]) if random.choice([0, 0, 1]) == 1 else ""
+                ),
             ),
         )
 
