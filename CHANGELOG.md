@@ -1,7 +1,12 @@
 # Hikka Changelog
 ## 🌑 Hikka 1.6.7
 
-- new desing
+- new design
+- added changelog command
+- added presets command
+- better design in help
+- fix strings
+- removed command pbe
   
 ## 🌑 Hikka 1.6.6
 
