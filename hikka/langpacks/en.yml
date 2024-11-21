@@ -241,7 +241,7 @@ settings:
 
 <emoji document_id=5471895949804575096>🤲</emoji> However, if you want to migrate from hikariatama Hikka, run the following command:
 
-<pre><code class="language-hikka">{}terminal git pull https://github.com/coddrago/Hikka master</code></pre>
+<pre><code class="language-hikka">{prefix}terminal git pull https://github.com/coddrago/Hikka master</code></pre>
 I also recommend resetting all built-in module configurations to their default values to avoid any unforeseen errors!'
   too_many_args: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Too many args</b>"
   blacklisted: "<emoji document_id=5197474765387864959>👍</emoji> <b>Chat {} blacklisted from userbot</b>"
