@@ -310,7 +310,7 @@ class Help(loader.Module):
 
         await utils.answer(
             message,
-            "<blockquote>{}\n{}{}</blockquote>".format(
+            "{}\n<blockquote>{}</blockquote><blockuote>{}</blockquote>".format(
                 reply,
                 "".join(core_ + plain_ + (no_commands_ if force else [])),
                 (
