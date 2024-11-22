@@ -75,7 +75,7 @@ class HikkaInfoMod(loader.Module):
             ("✌️", "<emoji document_id=5469986291380657759>✌️</emoji>"),
             ("💎", "<emoji document_id=5471952986970267163>💎</emoji>"),
             ("🛡", "<emoji document_id=5287571024500498635>☁️</emoji>"),
-            ("💘", "<emoji document_id=5452140079495518256>💘</emoji>),
+            ("💘", "<emoji document_id=5452140079495518256>💘</emoji>"),
         ]:
             platform = platform.replace(emoji, icon)
 
