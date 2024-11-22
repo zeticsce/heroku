@@ -4,6 +4,7 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
+import re
 import difflib
 import inspect
 import logging
@@ -304,9 +305,13 @@ class Help(loader.Module):
                 )
                 shown_warn = True
 
-        plain_.sort(key=lambda x: x.split()[1])
-        core_.sort(key=lambda x: x.split()[1])
-        no_commands_.sort(key=lambda x: x.split()[1])
+        def extract_name(line):
+            match = re.search(r'[\U0001F300-\U0001FAFF\U0001F900-\U0001F9FF]*\s*(name.*)', line)
+            return match.group(1) if match else line
+
+        plain_.sort(key=extract_name)
+        core_.sort(key=extract_name)
+        no_commands_.sort(key=extract_name)
 
         await utils.answer(
             message,
