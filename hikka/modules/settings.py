@@ -63,7 +63,7 @@ class CoreMod(loader.Module):
                 (
                     "\n\n<emoji document_id=5287454910059654880>❤️</emoji> <b>Designer: t.me/tr4mq</b>"
                 )
-                if random.choice([0, 0, 0, 1]) == 1
+                if random.choice([0, 1]) == 1
                 else ""
             ),
         )
