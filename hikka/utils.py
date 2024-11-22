@@ -909,10 +909,10 @@ def get_named_platform() -> str:
         return "🍀 WSL"
 
     if main.IS_ORACLE:
-        return "☁️ Oracle"
+        return "😶‍🌫️ Oracle"
 
     if main.IS_AWS:
-        return "☁️ AWS"
+        return "😶‍🌫️ AWS"
 
     if main.IS_SERV00:
         return "💎 Serv00"
