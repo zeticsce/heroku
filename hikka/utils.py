@@ -918,7 +918,7 @@ def get_named_platform() -> str:
         return "💎 Serv00"
 
     if main.IS_TOTHOST:
-        return "☁️ ToTHost"
+        return "💘 ToTHost"
 
     if main.IS_AEZA:
         return "🛡 Aeza"
