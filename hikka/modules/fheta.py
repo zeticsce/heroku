@@ -276,10 +276,6 @@ class FHeta(loader.Module):
 
                     return found_modules
 
-    async def client_ready(self):
-        from telethon.tl.functions.channels import JoinChannelRequest
-        await self.client(JoinChannelRequest("fmodules"))
-        
     async def format_module(self, module, query):
         repo_url = f"https://github.com/{module['repo']}"
         install = module['install']

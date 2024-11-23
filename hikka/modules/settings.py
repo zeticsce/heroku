@@ -19,6 +19,16 @@ class CoreMod(loader.Module):
 
     strings = {"name": "Settings"}
 
+    def __init__(self):
+        self.config = loader.ModuleConfig(
+            loader.ConfigValue(
+                "allow_nonstandart_prefixes",
+                False,
+                "Allow non-standard prefixes like premium emojis or multi-symbol prefixes",
+                validator=loader.validators.Boolean(),
+            ),
+        )
+
     async def blacklistcommon(self, message: Message):
         args = utils.get_args(message)
 
@@ -138,7 +148,7 @@ class CoreMod(loader.Module):
             await utils.answer(message, self.strings("what_prefix"))
             return
 
-        if len(args) != 1:
+        if len(args) != 1 and self.config.get("allow_nonstandart_prefixes") is False:
             await utils.answer(message, self.strings("prefix_incorrect"))
             return
 
@@ -157,7 +167,7 @@ class CoreMod(loader.Module):
             message,
             self.strings("prefix_set").format(
                 "<emoji document_id=5197474765387864959>👍</emoji>",
-                newprefix=utils.escape_html(args[0]),
+                newprefix=utils.escape_html(args),
                 oldprefix=utils.escape_html(oldprefix),
             ),
         )
