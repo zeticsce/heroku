@@ -286,7 +286,7 @@ class CommandDispatcher:
 
         if (
             message.out
-            and len(message.message) > 2
+            and len(message.message) > len(prefix) * 2
             and (
                 message.message.startswith(prefix * 2)
                 and any(s != prefix for s in message.message)
@@ -297,7 +297,7 @@ class CommandDispatcher:
             # Allow escaping commands using .'s
             if not watcher:
                 await message.edit(
-                    message.message[1:],
+                    message.message[len(prefix):],
                     parse_mode=lambda s: (
                         s,
                         utils.relocate_entities(message.entities, -1, message.message)
@@ -342,12 +342,12 @@ class CommandDispatcher:
         ):
             return False
 
-        if not message.message or len(message.message) == 1:
+        if not message.message or len(message.message) == len(prefix):
             return False  # Message is just the prefix
 
         initiator = getattr(event, "sender_id", 0)
 
-        command = message.message[1:].strip().split(maxsplit=1)[0]
+        command = message.message[len(prefix):].strip().split(maxsplit=1)[0]
         tag = command.split("@", maxsplit=1)
 
         if len(tag) == 2:
