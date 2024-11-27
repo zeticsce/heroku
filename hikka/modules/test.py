@@ -40,6 +40,7 @@ class TestMod(loader.Module):
         "{uptime} - It's your uptime.\n"
         "{ping_hint} - This is the same hint as in the hikka module, it is chosen with random chance, also you can specify this hint in the config ",
         "hint": "Set a hint",
+        "ping_emoji": "Emoji that appears when ping does not increase significantly",
     }
 
     strings_ru = {
@@ -49,6 +50,7 @@ class TestMod(loader.Module):
         "{uptime} - Это ваш аптайм\n"
         "{ping_hint} - подсказка\n",
         "hint": "Укажите подсказку",
+        "ping_emoji": "Эмодзи которое появляется при не значительном росте пинга.",
     }
 
     def __init__(self):
@@ -98,6 +100,12 @@ class TestMod(loader.Module):
                 "hint",
                 None,
                 lambda: self.strings["hint"],
+                validator=loader.validators.String(),
+            ),
+            loader.ConfigValue(
+                "ping emoji",
+                🪐,
+                lambda: self.strings["ping_emoji"],
                 validator=loader.validators.String(),
             ),
         )
@@ -368,7 +376,7 @@ class TestMod(loader.Module):
     async def ping(self, message: Message):
         """- Find out your userbot ping"""
         start = time.perf_counter_ns()
-        message = await utils.answer(message, "🌘")
+        message = await utils.answer(message, self.config["ping_emoji"])
 
         await utils.answer(
             message,
