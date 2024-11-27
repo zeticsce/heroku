@@ -103,7 +103,7 @@ class TestMod(loader.Module):
                 validator=loader.validators.String(),
             ),
             loader.ConfigValue(
-                "ping emoji",
+                "ping_emoji",
                 🪐,
                 lambda: self.strings["ping_emoji"],
                 validator=loader.validators.String(),
