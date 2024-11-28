@@ -953,15 +953,15 @@ def get_platform_emoji() -> str:
 
     BASE = "".join(
         (
-            "<emoji document_id={}>😀</emoji>",
-            "<emoji document_id=5350509994947140482>😀</emoji>",
-            "<emoji document_id=5350361028301446061>😀</emoji>",
-            "<emoji document_id=5352628990077068879>😀</emoji>",
+            "<emoji document_id={}>🪐</emoji>",
+            "<emoji document_id=5352934134618549768>🪐</emoji>",
+            "<emoji document_id=5352663371290271790>🪐</emoji>",
+            "<emoji document_id=5350822883314655367>🪐</emoji>",
         )
     )
 
     if main.IS_DOCKER:
-        return BASE.format(5298554256603752468)
+        return BASE.format(5352678227582152630)
 
     if main.IS_ORACLE:
         return BASE.format(5195381467047288408)
@@ -973,24 +973,24 @@ def get_platform_emoji() -> str:
         return BASE.format(5192765204898783881)
 
     if main.IS_LAVHOST:
-        return BASE.format(5301078610747074753)
+        return BASE.format(5352753797531721191)
 
     if main.IS_GOORM:
         return BASE.format(5298947740032573902)
 
     if main.IS_CODESPACES:
-        return BASE.format(5194976881127989720)
+        return BASE.format(5350807743554937610)
 
     if main.IS_TERMUX:
-        return BASE.format(5193051778001673828)
+        return BASE.format(5350588498359377932)
 
     if main.IS_RAILWAY:
-        return BASE.format(5199607521593007466)
+        return BASE.format(5352539534498224966)
 
     if main.IS_HIKKAHOST:
         return BASE.format(5370731117588523522)
 
-    return BASE.format(5350316669879212903)
+    return BASE.format(5350791439859081726)
 
 
 def uptime() -> int:
