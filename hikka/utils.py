@@ -953,9 +953,10 @@ def get_platform_emoji() -> str:
 
     BASE = "".join(
         (
-            "<emoji document_id={}>🌘</emoji>",
-            "<emoji document_id=5195311729663286630>🌘</emoji>",
-            "<emoji document_id=5195045669324201904>🌘</emoji>",
+            "<emoji document_id={}>😀</emoji>",
+            "<emoji document_id=5350509994947140482>😀</emoji>",
+            "<emoji document_id=5350361028301446061>😀</emoji>",
+            "<emoji document_id=5352628990077068879>😀</emoji>",
         )
     )
 
@@ -989,7 +990,7 @@ def get_platform_emoji() -> str:
     if main.IS_HIKKAHOST:
         return BASE.format(5370731117588523522)
 
-    return BASE.format(5192765204898783881)
+    return BASE.format(5350316669879212903)
 
 
 def uptime() -> int:
