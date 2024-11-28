@@ -230,7 +230,7 @@ settings:
   name: "Settings"
   installation: '<emoji document_id=5363805650327450240>▪️</emoji> The installation is very easy! Just enter the following in your servers terminal:
 
-<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git &amp;&amp; sudo apt install python3-pip &amp;&amp; git clone https://github.com/coddrago/Hikka &amp;&amp; cd Hikka &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m hikka</code></pre>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git &amp;&amp; sudo apt install python3-pip &amp;&amp; git clone https://github.com/coddrago/Heroku &amp;&amp; cd Heroku &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m hikka</code></pre>
 <emoji document_id=5299027123913105700>😐</emoji> If you dont have sudo access, simply remove the initial steps.
 
 <emoji document_id=5300777464820145682>🥳</emoji> Lets go over a few arguments:
