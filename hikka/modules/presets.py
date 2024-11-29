@@ -117,7 +117,7 @@ class Presets(loader.Module):
     async def _menu(self):
         await self.inline.bot.send_photo(
             self._client.tg_id,
-            'https://imgur.com/a/Z6PP9as.png',
+            'https://imgur.com/a/7xwuOEt.png',
             caption=self.strings('welcome'),
             reply_markup=self.inline.generate_markup(self._markup),
         )
