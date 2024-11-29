@@ -262,7 +262,7 @@ class CoreMod(loader.Module):
 
         await self.client.send_file(
             message.peer_id,
-            "https://imgur.com/a/AYmh8W8.png",
+            "https://imgur.com/a/JOnh0OX.png",
             caption=self.strings["installation"].format('{}', prefix=self.get_prefix()), reply_to=getattr(message, "reply_to_msg_id", None),)
     
         await message.delete()
