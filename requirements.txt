@@ -7,13 +7,13 @@ aiohttp_jinja2==1.5
 aiohttp==3.8.3
 Jinja2==3.0.3
 requests==2.27.1
-aiogram==2.23.1
+aiogram==2.25.2
 grapheme==0.6.0
 emoji==2.1.0
 werkzeug==2.2.2
-psutil==5.9.4
+psutil==6.0.0
 tgcrypto==1.2.5
 rsa==4.9
-ruamel.yaml==0.17.21
+ruamel.yaml==0.17.10
 
 # Python 3.8+
