@@ -55,10 +55,10 @@ class CoreMod(loader.Module):
         return f"{str(chatid)}.{module}" if module else chatid
 
     @loader.command()
-    async def hikkacmd(self, message: Message):
+    async def herokucmd(self, message: Message):
         await utils.answer_file(
             message,
-            "https://imgur.com/a/mqhVESA.png",
+            "https://imgur.com/a/Dymf2HT.png",
             self.strings("hikka").format(
                 (
                     utils.get_platform_emoji()
@@ -73,7 +73,7 @@ class CoreMod(loader.Module):
                 (
                     "\n\n<emoji document_id=5287454910059654880>❤️</emoji> <b>Designer: t.me/tr4mq</b>"
                 )
-                if random.choice([0, 1]) == 1
+                if random.choice([1, 1]) == 1
                 else ""
             ),
         )
