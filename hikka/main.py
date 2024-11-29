@@ -829,9 +829,9 @@ class Hikka:
                 )
                 self.omit_log = True
 
-            await client.hikka_inline.bot.send_animation(
+            await client.hikka_inline.bot.send_photo(
                 logging.getLogger().handlers[0].get_logid_by_client(client.tg_id),
-                "https://x0.at/pYQV.mp4",
+                "https://imgur.com/a/9y8LJO6.png",
                 caption=(
                     "🌘 <b>Heroku {} started!</b>\n\n🌳 <b>GitHub commit SHA: <a"
                     ' href="https://github.com/coddrago/Heroku/commit/{}">{}</a></b>\n✊'
