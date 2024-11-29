@@ -82,8 +82,8 @@ class HikkaInfoMod(loader.Module):
 
         return (
             (
-                "<b>🌘 Hikka</b>\n"
-                if "hikka" not in self.config["custom_message"].lower()
+                "<b>🪐 Heroku</b>\n"
+                if "heroku" not in self.config["custom_message"].lower()
                 else ""
             )
             + self.config["custom_message"].format(
