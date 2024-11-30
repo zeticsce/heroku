@@ -46,13 +46,13 @@ class TokenObtainment(InlineUnit):
                     pass
                 else:
                     uid = utils.rand(6)
-                    username = f"@hikka_{uid}_bot"
+                    username = f"@heroku_{uid}_bot"
             else:
                 uid = utils.rand(6)
-                username = f"@hikka_{uid}_bot"
+                username = f"@heroku_{uid}_bot"
 
             for msg in [
-                f"🌘 Hikka Userbot of {self._name}"[:64],
+                f"🪐 Heroku userbot of {self._name}"[:64],
                 username,
                 "/setuserpic",
                 username,
@@ -72,7 +72,7 @@ class TokenObtainment(InlineUnit):
                 await fw_protect()
                 from .. import main
 
-                m = await conv.send_file(main.BASE_PATH / "assets" / "bot_pfp.png")
+                m = await conv.send_file(main.BASE_PATH / "assets" / "heroku_ava.png")
                 r = await conv.get_response()
 
                 logger.debug(">> <Photo>")
