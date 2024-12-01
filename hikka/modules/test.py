@@ -11,8 +11,6 @@ import random
 import time
 import typing
 from io import BytesIO
-import datetime
-from time import strftime
 
 from hikkatl.tl.types import Message
 
@@ -379,23 +377,12 @@ class TestMod(loader.Module):
         """- Find out your userbot ping"""
         start = time.perf_counter_ns()
         message = await utils.answer(message, self.config["ping_emoji"])
-        now = datetime.datetime.today()
-        newyear_upt = datetime.datetime(int(strftime("%Y")) + 1, 1, 1)
-        summer_upt = datetime.datetime(int)strftime("%Y")) + 1, 6, 1)
-        halloween_upt = datetime.datetime(int(strftime("%Y")) + 1, 10, 30)
-        
-        newyear_d = newyear_upt - now
-        summer_d = summer_upt - now
-        halloween_d = halloween_upt - now
 
         await utils.answer(
             message,
             self.config["Text_Of_Ping"].format(
                 ping=round((time.perf_counter_ns() - start) / 10**6, 3),
                 uptime=utils.formatted_uptime(),
-                newyear=newyear_d.days,
-                summer=summer_d.days,
-                halloween=halloween_d.days,
                 ping_hint=(
                     (self.config["hint"]) if random.choice([0, 0, 1]) == 1 else ""
                 ),
