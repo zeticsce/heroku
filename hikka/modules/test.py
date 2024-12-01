@@ -385,10 +385,10 @@ class TestMod(loader.Module):
             self.config["Text_Of_Ping"].format(
                 ping=round((time.perf_counter_ns() - start) / 10**6, 3),
                 uptime=utils.formatted_uptime(),
-                now = datetime.datetime.today()
-                newyear = datetime.datetime(int(strftime("%Y")) + 1, 1, 1)
-                summer = datetime.datetime(int)strftime("%Y")) + 1, 6, 1)
-                halloween = datetime.datetime(int(strftime("%Y")) + 1, 10, 30)
+                now = datetime.datetime.today(),
+                newyear = datetime.datetime(int(strftime("%Y")) + 1, 1, 1),
+                summer = datetime.datetime(int)strftime("%Y")) + 1, 6, 1),
+                halloween = datetime.datetime(int(strftime("%Y")) + 1, 10, 30),
                 ping_hint=(
                     (self.config["hint"]) if random.choice([0, 0, 1]) == 1 else ""
                 ),
