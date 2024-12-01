@@ -379,16 +379,23 @@ class TestMod(loader.Module):
         """- Find out your userbot ping"""
         start = time.perf_counter_ns()
         message = await utils.answer(message, self.config["ping_emoji"])
+        now = datetime.datetime.today()
+        newyear_upt = datetime.datetime(int(strftime("%Y")) + 1, 1, 1)
+        summer_upt = datetime.datetime(int)strftime("%Y")) + 1, 6, 1)
+        halloween_upt = datetime.datetime(int(strftime("%Y")) + 1, 10, 30)
+        
+        newyear = now - newyear_upt
+        summer = now - summer_upt
+        halloween = now - halloween_upt
 
         await utils.answer(
             message,
             self.config["Text_Of_Ping"].format(
                 ping=round((time.perf_counter_ns() - start) / 10**6, 3),
                 uptime=utils.formatted_uptime(),
-                now = datetime.datetime.today(),
-                newyear = datetime.datetime(int(strftime("%Y")) + 1, 1, 1),
-                summer = datetime.datetime(int)strftime("%Y")) + 1, 6, 1),
-                halloween = datetime.datetime(int(strftime("%Y")) + 1, 10, 30),
+                newyear=newyear.days,
+                summer=summer.days,
+                halloween=halloween.days,
                 ping_hint=(
                     (self.config["hint"]) if random.choice([0, 0, 1]) == 1 else ""
                 ),
