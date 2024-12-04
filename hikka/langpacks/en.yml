@@ -330,10 +330,10 @@ test:
   name: "Tester"
   set_loglevel: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Please specify verbosity as an integer or string</b>"
   no_logs: "<emoji document_id=5363948200291998612>🤷‍♀️</emoji> <b>You don't have any logs at verbosity</b> <code>{}</code><b>.</b>"
-  configping: "Your custom text.\n"
-  "You can use placeholders:\n"
-  "{ping} - That's your ping.\n"
-  "{uptime} - It's your uptime.\n"
+  configping: "Your custom text."
+  "You can use placeholders:"
+  "{ping} - That's your ping."
+  "{uptime} - It's your uptime."
   "{ping_hint} - This is the same hint as in the hikka module, it is chosen with random chance, also you can specify this hint in the config ",
   hint: "Set a hint",
   ping_emoji: "Emoji that appears when ping does not increase significantly",
