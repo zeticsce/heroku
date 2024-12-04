@@ -34,23 +34,6 @@ class TestMod(loader.Module):
 
     strings = {
         "name": "Tester",
-        "configping": "Your custom text.\n"
-        "You can use placeholders:\n"
-        "{ping} - That's your ping.\n"
-        "{uptime} - It's your uptime.\n"
-        "{ping_hint} - This is the same hint as in the hikka module, it is chosen with random chance, also you can specify this hint in the config ",
-        "hint": "Set a hint",
-        "ping_emoji": "Emoji that appears when ping does not increase significantly",
-    }
-
-    strings_ru = {
-        "configping": "Ваш кастомный текст.\n"
-        "Вы можете использовать плейсхолдеры:\n"
-        "{ping} - Это ваш пинг\n"
-        "{uptime} - Это ваш аптайм\n"
-        "{ping_hint} - подсказка\n",
-        "hint": "Укажите подсказку",
-        "ping_emoji": "Эмодзи которое появляется при не значительном росте пинга.",
     }
 
     def __init__(self):
