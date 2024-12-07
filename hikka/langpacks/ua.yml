@@ -307,7 +307,7 @@ inline_stuff:
   bot_username_invalid: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Неправильний нік бота. Він має закінчитися на</b> <code>bot</code> <b>і бути не коротше ніж 5 символів</b>"
   bot_username_occupied: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Такий нік бота вже зайнятий</b>"
   bot_updated: "<emoji document_id=6318792204118656433>🎉</emoji> <b>Налаштування збережені. Для їх застосування треба перезавантажити юзербота</b>"
-  this_is_hikka: "🌘 <b>Привіт! Це Hikka — потужний модульний Telegram юзербот. Ви можете встановити його на свій акаунт!</b>\n\n<b>🌍 <a href=\"https://github.com/coddrago/Heroku\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/heroku_talks\">Чат підтримки</a></b>"
+  this_is_hikka: "🌘 <b>Привіт! Це Heroku — потужний модульний Telegram юзербот. Ви можете встановити його на свій акаунт!</b>\n\n<b>🌍 <a href=\"https://github.com/coddrago/Heroku\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/heroku_talks\">Чат підтримки</a></b>"
   _cmd_doc_ch_hikka_bot: "<юзернейм> - Змінити юзернейм інлайн бота"
 
 test:
@@ -321,10 +321,6 @@ test:
   debugging_disabled: "<emoji document_id=5332533929020761310>✅</emoji> <b>Режим розробника вімкнено</b>"
   suspend_invalid_time: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Неверное время заморозки</b>"
   suspended: "<emoji document_id=5452023368054216810>🥶</emoji> <b>Бота заморожено на</b> <code>{}</code> <b>секунд</b>"
-  results_ping: "<emoji document_id=5920515922505765329>⚡️</emoji> <b>𝙿𝚒𝚗𝚐: </b><code>{}</code><b> 𝚖𝚜
-</b>\n<emoji document_id=5900104897885376843>🕓</emoji><b> 𝚄𝚙𝚝𝚒𝚖𝚎: </b><code>{}</code>"
-  noprem_ping: "⚡️ 𝙿𝚒𝚗𝚐: <code>{}</code> 𝚖𝚜\n🚀 𝚄𝚙𝚝𝚒𝚖𝚎: <code>{}</code>"
-  ping_hint: "\n"
   confidential: "⚠️ <b>Рівень логів</b> <code>{}</code> <b>може містити особисту інформацію, будь обережний</b>"
   confidential_text: "⚠️ <b>Рівень логів</b> <code>{0}</code> <b>може містити особисту інформацію, будь обережний</b>\n<b>Напиши</b> <code>.logs {0} force_insecure</code><b>, щоб надіслати логи ігноруючи попередження</b>"
   choose_loglevel: "💁‍♂️ <b>Вибери рівень логів</b>"
@@ -364,7 +360,7 @@ unit_heta:
   _cmd_doc_dlh: "<hash> - Встановити модуль із хешу"
 
 update_notifier:
-  update_required: "🆕 <b>Доступне оновлення Hikka!</b>\n\nОпубліковано нову версію Hikka.\n🔮 <b>Hikka <s>{}</s> -> {}</b>\n\n{}"
+  update_required: "🆕 <b>Доступне оновлення Hikka!</b>\n\nОпубліковано нову версію Heroku.\n🔮 <b>Heroku <s>{}</s> -> {}</b>\n\n{}"
   more: "\n<i><b>🎥 І ще {}...</b></i>"
   _cfg_doc_disable_notifications: "Вимкнути сповіщення про оновлення"
   latest_disabled: "Повідомлення про останнє оновлення було вимкнено"
@@ -385,7 +381,7 @@ updater:
   btn_update: "🧭 Оновитися"
   restart_confirm: "❓ <b>Ти впевнений, що хочеш перезавантажитися?</b>"
   secure_boot_confirm: "❓ <b>Ти впевнений, що хочеш перезавантажитися в режимі безпечного завантаження?</b>"
-  update_confirm: "❓ <b>Ти впевнений, що хочеш оновитися?\n\n<a href=\"https://github.com/hikariatama/Hikka/commit/{}\">{}</a> ⤑ <a href=\"https://github.com/hikariatama/Hikka/commit/{}\">{}</a></b>"
+  update_confirm: "❓ <b>Ти впевнений, що хочеш оновитися?\n\n<a href=\"https://github.com/coddrago/Heroku/commit/{}\">{}</a> ⤑ <a href=\"https://github.com/coddrago/Heroku/commit/{}\">{}</a></b>"
   no_update: "🚸 <b>У тебе остання версія. Оновитися примусово?</b>"
   cancel: "🚫 Скасувати"
   _cls_doc: "Оновлює юзербот"
