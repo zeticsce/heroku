@@ -831,9 +831,9 @@ class Hikka:
 
             await client.hikka_inline.bot.send_photo(
                 logging.getLogger().handlers[0].get_logid_by_client(client.tg_id),
-                "https://imgur.com/a/9y8LJO6.png",
+                "https://imgur.com/a/uUF9zYL.png",
                 caption=(
-                    "🌘 <b>Heroku {} started!</b>\n\n🌳 <b>GitHub commit SHA: <a"
+                    "🪐 <b>Heroku {} started!</b>\n\n🌳 <b>GitHub commit SHA: <a"
                     ' href="https://github.com/coddrago/Heroku/commit/{}">{}</a></b>\n✊'
                     " <b>Update status: {}</b>\n<b>{}</b>".format(
                         ".".join(list(map(str, list(__version__)))),
