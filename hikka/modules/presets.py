@@ -208,7 +208,7 @@ class Presets(loader.Module):
     async def presets(self, message: Message):
         await self.inline.form(
             message=message,
-            photo='https://imgur.com/a/Z6PP9as.png',
+            photo='https://imgur.com/a/SF0MPmQ.png',
             text=self.strings('welcome').replace('/presets', self.get_prefix() + 'presets'),
             reply_markup=self._markup,
         )
