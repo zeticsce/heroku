@@ -455,8 +455,8 @@ hikka_info:
 loader:
   loadmod_pm_timeout: "Будь ласка, зачекайте 10 секунд перед підтвердженням цієї дії"
   loadmod_not_allowed_fresh_pm: "<emoji document_id=5447644880824181073>⚠️</emoji> <b><u>Уважно прочитайте це!</u></b> <emoji document_id=5447644880824181073>⚠️</emoji>\n\n<b>Ви намагаєтеся завантажити модуль в приватні повідомлення з користувачем, якого не знаєте.</b> Модули, не подтверждённые разработчиком, могут вызвать много проблем, от <b>манипуляций с вашей учётной записью до удаления учётной записи или компрометации сессии</b>. Если вы знаете этого пользователя и <b><u>100%</u></b> доверяете ему, подождите несколько дней и попробуйте снова."
-  link: "<emoji document_id=5280658777148760247>🌐</emoji> <b><a href=\"{url}\">Посилання</a> на</b> <code>{class_name}</code>\n\n<emoji document_id=5188377234380954537>🌘</emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
-  file: "<emoji document_id=5433653135799228968>📁</emoji> <b>Файл</b> <code>{class_name}</code>\n\n<emoji document_id=5188377234380954537>🌘</emoji> <code>{prefix}lm</code> <b>у відповідь на це повідомлення, щоб встановити</b>\n\n{not_exact}"
+  link: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵    <b><a href=\"{url}\">𝙻𝚒𝚗𝚔</a> 𝚘𝚗</b> <code>{class_name}</code>\n╵     ╴╴╴╴╴╴╴╴╴╴╴╴\n╵<b>𝚃𝚊𝚙 𝚝𝚘 𝚌𝚘𝚙𝚢 👇</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯\n<code>{prefix}dlm {url}</code>"
+  file: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵             <code>{class_name}</code>\n╵     ╴╴╴╴╴╴╴╴╴╴╴╴\n╵\n╵  <code>{prefix}lm</code> 𝚘𝚗 𝚛𝚎𝚙𝚕𝚢 𝚝𝚘 𝚒𝚗𝚜𝚝𝚊𝚕𝚕\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯\n\n{not_exact}"
   not_exact: "<emoji document_id=5312383351217201533>⚠️</emoji> <b>Точного збігу не знайдено, тому показано найближчий результат</b>"
   loadmod_confirm_pm_message: "<emoji document_id=5451732530048802485>⏳</emoji> <i>Очікую вашого підтвердження...</i>"
   loadmod_cancelled: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Завантаження модуля скасовано</b>"
