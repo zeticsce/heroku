@@ -58,7 +58,7 @@ class CoreMod(loader.Module):
     async def herokucmd(self, message: Message):
         await utils.answer_file(
             message,
-            "https://imgur.com/a/Dymf2HT.png",
+            "https://imgur.com/a/i0Mq22X.png",
             self.strings("hikka").format(
                 (
                     utils.get_platform_emoji()
