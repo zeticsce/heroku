@@ -114,6 +114,6 @@ class InlineStuff(loader.Module):
             return
 
         await message.answer_photo(
-            "https://imgur.com/a/y0amYvo.png",
+            "https://imgur.com/a/0gmlFYI.png",
             caption=self.strings("this_is_hikka"),
         )
