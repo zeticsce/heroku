@@ -322,7 +322,7 @@ inline_stuff:
   bot_username_invalid: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Specified bot username is invalid. It must end with</b> <code>bot</code> <b>and contain at least 4 symbols</b>"
   bot_username_occupied: "<emoji document_id=5210952531676504517>🚫</emoji> <b>This username is already occupied</b>"
   bot_updated: "<emoji document_id=6318792204118656433>🎉</emoji> <b>Config successfully saved. Restart userbot to apply changes</b>"
-  this_is_hikka: "🌘 <b>Hi! This is Heroki — powerful modular Telegram userbot. You can install it to your account!</b>\n\n<b>🌍 <a href=\"https://github.com/coddrago/Heroku\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/heroku_talks\">Support chat</a></b>"
+  this_is_hikka: "🌘 <b>Hi! This is Heroku — powerful modular Telegram userbot. You can install it to your account!</b>\n\n<b>🌍 <a href=\"https://github.com/coddrago/Heroku\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/heroku_talks\">Support chat</a></b>"
   _cmd_doc_ch_hikka_bot: "<username> - Change your Heroku inline bot username"
   _cls_doc: "Provides support for inline stuff"
 
@@ -380,7 +380,7 @@ unit_heta:
 
 update_notifier:
   name: "UpdateNotifier"
-  update_required: "🆕 <b>Heroku Update available!</b>\n\nNew Hikka version released.\n🔮 <b>Hikka <s>{}</s> -> {}</b>\n\n{}"
+  update_required: "🆕 <b>Heroku Update available!</b>\n\nNew Heroku version released.\n🔮 <b>Heroku <s>{}</s> -> {}</b>\n\n{}"
   more: "\n<i><b>🎥 And {} more...</b></i>"
   _cfg_doc_disable_notifications: "Disable update notifications"
   latest_disabled: "Notifications about the latest update have been suppressed"
@@ -401,7 +401,7 @@ updater:
   btn_update: "🧭 Update"
   restart_confirm: "❓ <b>Are you sure you want to restart?</b>"
   secure_boot_confirm: "❓ <b>Are you sure you want to restart in secure boot mode?</b>"
-  update_confirm: "❓ <b>Are you sure you want to update?\n\n<a href=\"https://github.com/hikariatama/Hikka/commit/{}\">{}</a> ⤑ <a href=\"https://github.com/hikariatama/Hikka/commit/{}\">{}</a></b>"
+  update_confirm: "❓ <b>Are you sure you want to update?\n\n<a href=\"https://github.com/coddrago/Heroku/commit/{}\">{}</a> ⤑ <a href=\"https://github.com/coddrago/Heroku/commit/{}\">{}</a></b>"
   no_update: "🚸 <b>You are on the latest version, pull updates anyway?</b>"
   cancel: "🚫 Cancel"
   lavhost_update: "<emoji document_id=5469986291380657759>✌️</emoji> <b>Your {} is updating...</b>"
