@@ -63,19 +63,12 @@ class CoreMod(loader.Module):
                 (
                     utils.get_platform_emoji()
                     if self._client.hikka_me.premium and CUSTOM_EMOJIS
-                    else "🌘 <b>Hikka userbot</b>"
+                    else "🌘 <b>Heroku userbot</b>"
                 ),
                 *version.__version__,
                 utils.get_commit_url(),
                 f"{hikkatl.__version__} #{hikkatl.tl.alltlobjects.LAYER}",
             )
-            + (
-                (
-                    "\n\n<emoji document_id=5287454910059654880>❤️</emoji> <b>Designer: t.me/tr4mq</b>"
-                )
-                if random.choice([1, 1]) == 1
-                else ""
-            ),
         )
 
     @loader.command()
