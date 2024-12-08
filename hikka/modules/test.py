@@ -43,7 +43,7 @@ class TestMod(loader.Module):
                 "force_send_all",
                 False,
                 (
-                    "⚠️ Do not touch, if you don't know what it does!\nBy default,"
+                    "⚠️ Do not touch, if you don't know what it does!\nBy default, "
                     " Hikka will try to determine, which client caused logs. E.g. there"
                     " is a module TestModule installed on Client1 and TestModule2 on"
                     " Client2. By default, Client2 will get logs from TestModule2, and"
