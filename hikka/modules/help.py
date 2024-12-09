@@ -315,7 +315,7 @@ class Help(loader.Module):
 
         await utils.answer(
             message,
-            "пенис".format(
+            "{}\n<blockquote>{}</blockquote><blockquote>{}</blockquote>".format(
                 reply,
                 "".join(core_ + plain_ + (no_commands_ if force else [])),
                 (
