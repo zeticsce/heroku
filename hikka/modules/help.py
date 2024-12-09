@@ -42,8 +42,9 @@ class Help(loader.Module):
             ),
         )
 
-    @loader.command()
+    @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module")
     async def helphide(self, message: Message):
+        """[args] | hide your modules"""
         if not (modules := utils.get_args(message)):
             await utils.answer(message, self.strings("no_mod"))
             return
@@ -199,9 +200,9 @@ class Help(loader.Module):
             ),
         )
 
-    @loader.command()
+    @loader.command(ru_doc="[args] | Помощь с вашими модулями!", ua_doc="[args] | допоможіть з вашими модулями!", de_doc="[args] | Hilfe mit deinen Modulen!")
     async def help(self, message: Message):
-        """| help with your modules!"""
+        """[args] | help with your modules!"""
         args = utils.get_args_raw(message)
         force = False
         if "-f" in args:
@@ -326,7 +327,7 @@ class Help(loader.Module):
             ),
         )
 
-    @loader.command()
+    @loader.command(ru_doc="| Ссылка на чат помощи", ua_doc="| посилання для чату служби підтримки", de_doc="| Link zum Support-Chat")
     async def support(self, message):
         """| link for support chat"""
        
