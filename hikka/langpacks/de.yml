@@ -308,7 +308,7 @@ inline_stuff:
   bot_username_invalid: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Ungültiger Bot-Benutzername. Er muss auf</b> <code>bot</code> <b>enden und mindestens 5 Zeichen lang sein</b>"
   bot_username_occupied: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Dieser Bot-Benutzername ist bereits vergeben</b>"
   bot_updated: "<emoji document_id=6318792204118656433>🎉</emoji> <b>Einstellungen gespeichert. Um sie anzuwenden, starte den Userbot neu</b>"
-  this_is_hikka: "🌘 <b>Hallo! Das ist Hikka — ein leistungsstarker modularer Telegram-Userbot. Du kannst ihn auf deinem Account installieren!</b>\n\n<b>🌍 <a href=\"https://github.com/coddrago/Hikka\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/heroku_talks\">Support-Chat</a></b>"
+  this_is_hikka: "🌘 <b>Hallo! Das ist Heroku — ein leistungsstarker modularer Telegram-Userbot. Du kannst ihn auf deinem Account installieren!</b>\n\n<b>🌍 <a href=\"https://github.com/coddrago/Heroku\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/heroku_talks\">Support-Chat</a></b>"
   _cmd_doc_ch_hikka_bot: "<Benutzername> - Ändert den Benutzernamen des Inline-Bots"
 
 test:
@@ -336,7 +336,7 @@ test:
   _cmd_doc_clearlogs: "Löscht die Logs"
 
 update_notifier:
-  update_required: "🆕 <b>Ein Hikka-Update ist verfügbar!</b>\n\nEine neue Version von Heroku wurde veröffentlicht.\n🔮 <b>Heroku <s>{}</s> -> {}</b>\n\n{}"
+  update_required: "🆕 <b>Ein Heroku-Update ist verfügbar!</b>\n\nEine neue Version von Heroku wurde veröffentlicht.\n🔮 <b>Heroku <s>{}</s> -> {}</b>\n\n{}"
   more: "\n<i><b>🎥 Und noch {}...</b></i>"
   _cfg_doc_disable_notifications: "Update-Benachrichtigungen deaktivieren"
   latest_disabled: "Benachrichtigungen über das neueste Update wurden deaktiviert"
