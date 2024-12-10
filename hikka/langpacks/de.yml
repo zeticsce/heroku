@@ -390,9 +390,9 @@ api_protection:
 
 help:
   undoc: "🦥 Keine Beschreibung"
-  all_header: "<emoji document_id=5188377234380954537>🌘</emoji> <b>{} Module verfügbar, {} verborgen:</b>"
+  all_header: "<b>{} Module verfügbar, {} verborgen:</b>"
   no_mod: "🚫 <b>Gib das Modul(-e) an, das(-e) versteckt werden soll(en)</b>"
-  hidden_shown: "<emoji document_id=5188377234380954537>🌘</emoji> <b>{} Module verborgen, {} Module angezeigt:</b>\n{}\n{}"
+  hidden_shown: "<b>{} Module verborgen, {} Module angezeigt:</b>\n{}\n{}"
   support: "{} <b>Link zum</b> <a href='https://t.me/heroku_talks'>Hilfe-Chat</a></b>"
   _cls_doc: "Zeigt Hilfe zu Modulen an"
   partial_load: "<emoji document_id=5312383351217201533>☝️</emoji> <b>Der Userbot ist noch nicht vollständig geladen, daher werden nicht alle Module angezeigt</b>"
