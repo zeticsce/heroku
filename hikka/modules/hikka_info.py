@@ -24,15 +24,7 @@ class HikkaInfoMod(loader.Module):
                 "custom_message",
                 doc=lambda: self.strings("_cfg_cst_msg"),
             ),
-            loader.ConfigValue(
-                "custom_button",
-                ["🌘 Support chat", "https://t.me/heroku_talks"],
-                lambda: self.strings("_cfg_cst_btn"),
-                validator=loader.validators.Union(
-                    loader.validators.Series(fixed_len=2),
-                    loader.validators.NoneType(),
-                ),
-            ),
+
             loader.ConfigValue(
                 "banner_url",
                 "https://imgur.com/a/7LBPJiq.png",
@@ -117,7 +109,7 @@ class HikkaInfoMod(loader.Module):
                     (
                         (
                             utils.get_platform_emoji()
-                            if self._client.hikka_me.premium and not inline
+                            if self._client.hikka_me.premium
                             else "🪐 Heroku"
                         ),
                         "<emoji document_id=5373141891321699086>😎</emoji>",
@@ -133,20 +125,6 @@ class HikkaInfoMod(loader.Module):
             )
         )
 
-    def _get_mark(self):
-        return (
-            {
-                "text": self.config["custom_button"][0],
-                "url": self.config["custom_button"][1],
-            }
-            if self.config["custom_button"]
-            else None
-        )
-
-    @loader.inline_handler(
-        thumb_url="https://img.icons8.com/external-others-inmotus-design/344/external-Moon-round-icons-others-inmotus-design-2.png"
-    )
-    @loader.inline_everyone
     async def info(self, _: InlineQuery) -> dict:
         """Send userbot info"""
 
@@ -166,23 +144,11 @@ class HikkaInfoMod(loader.Module):
 
     @loader.command()
     async def infocmd(self, message: Message):
-        if self.config["custom_button"]:
-            await self.inline.form(
-                message=message,
-                text=self._render_info(True),
-                reply_markup=self._get_mark(),
-                **(
-                    {"photo": self.config["banner_url"]}
-                    if self.config["banner_url"]
-                    else {}
-                ),
-            )
-        else:
-            await utils.answer_file(
-                message,
-                self.config["banner_url"],
-                self._render_info(False),
-            )
+        await utils.answer_file(
+            message,
+            self.config["banner_url"],
+            self._render_info(False),
+        )
 
     @loader.command()
     async def hikkainfo(self, message: Message):
