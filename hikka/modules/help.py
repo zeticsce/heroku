@@ -40,6 +40,11 @@ class Help(loader.Module):
                 "<emoji document_id=5100652175172830068>🟠</emoji>",
                 lambda: "Empty modules bullet",
             ),
+            loader.ConfigValue(
+                "desc_icon",
+                "<emoji document_id=5188377234380954537>🌘</emoji>",
+                lamda: "Desc emoji",
+            ),
         )
 
     @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module")
@@ -316,7 +321,7 @@ class Help(loader.Module):
 
         await utils.answer(
             message,
-            "{}\n <blockquote>{}</blockquote><blockquote>{}</blockquote>".format(
+            "self.config["desc_icon"] {}\n <blockquote>{}</blockquote><blockquote>{}</blockquote>".format(
                 reply,
                 "".join(core_ + plain_ + (no_commands_ if force else [])),
                 (
