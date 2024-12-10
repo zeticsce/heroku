@@ -43,7 +43,7 @@ class Help(loader.Module):
             loader.ConfigValue(
                 "desc_icon",
                 "<emoji document_id=5188377234380954537>🌘</emoji>",
-                lamda: "Desc emoji",
+                lambda: "Desc emoji",
             ),
         )
 
