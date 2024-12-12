@@ -182,7 +182,7 @@ class CoreMod(loader.Module):
             self.strings("aliases")
             + "\n".join(
                 [
-                    f(self.config["alias_emoji"] + " <code>{i}</code> &lt;- {y}")
+                    (self.config["alias_emoji"] + f" <code>{i}</code> &lt;- {y}")
                     for i, y in self.allmodules.aliases.items()
                 ]
             ),
