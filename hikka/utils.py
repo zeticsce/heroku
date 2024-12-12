@@ -993,7 +993,7 @@ def get_platform_emoji() -> str:
     if main.IS_HIKKAHOST:
         return BASE.format(5370731117588523522)
 
-    return BASE.format(5350791439859081726)
+    return BASE.format(5393588431026674882)
 
 
 def uptime() -> int:
