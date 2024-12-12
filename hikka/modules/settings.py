@@ -27,6 +27,11 @@ class CoreMod(loader.Module):
                 "Allow non-standard prefixes like premium emojis or multi-symbol prefixes",
                 validator=loader.validators.Boolean(),
             ),
+            loader.ConfigValue(
+                "alias_emoji",
+                "<emoji document_id=4974259868996207180>▪️</emoji>",
+                "just emoji in .aliases",
+            ),
         )
 
     async def blacklistcommon(self, message: Message):
@@ -177,7 +182,7 @@ class CoreMod(loader.Module):
             self.strings("aliases")
             + "\n".join(
                 [
-                    f"<emoji document_id=4974259868996207180>🛑</emoji> <code>{i}</code> &lt;- {y}"
+                    f(self.config["alias_emoji"] + " <code>{i}</code> &lt;- {y}")
                     for i, y in self.allmodules.aliases.items()
                 ]
             ),
