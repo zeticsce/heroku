@@ -963,8 +963,8 @@ def get_platform_emoji() -> str:
     if main.IS_TOTHOST:
         return BASE.format(5372887118156683469)
 
-    if main.IS_DOCKER:
-        return BASE.format(5352678227582152630)
+    if main.IS_HIKKAHOST:
+        return BASE.format(5395745114494624362)
 
     if main.IS_ORACLE:
         return BASE.format(5195381467047288408)
@@ -990,8 +990,8 @@ def get_platform_emoji() -> str:
     if main.IS_RAILWAY:
         return BASE.format(5352539534498224966)
 
-    if main.IS_HIKKAHOST:
-        return BASE.format(5370731117588523522)
+    if main.IS_DOCKER:
+        return BASE.format(5352678227582152630)
 
     return BASE.format(5393588431026674882)
 
