@@ -8,6 +8,7 @@ import inspect
 import logging
 import os
 import random
+import subprocess
 import time
 import typing
 from io import BytesIO
@@ -369,6 +370,7 @@ class TestMod(loader.Module):
                 ping_hint=(
                     (self.config["hint"]) if random.choice([0, 0, 1]) == 1 else ""
                 ),
+                hostname=subprocess.run(['hostname'], stdout=subprocess.PIPE).stdout.decode('utf-8'),
             ),
         )
 
