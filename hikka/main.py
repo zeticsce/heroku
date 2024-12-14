@@ -564,8 +564,8 @@ class Hikka:
 
     async def _web_banner(self):
         """Shows web banner"""
-        logging.info("✅ Web mode ready for configuration")
-        logging.info("🌐 Please visit %s", self.web.url)
+        logging.info("🔎 Web mode ready for configuration")
+        logging.info("🔗 Please visit %s", self.web.url)
 
     async def wait_for_web_auth(self, token: str) -> bool:
         """
@@ -816,12 +816,12 @@ class Hikka:
             if not self.omit_log:
                 print(logo)
                 web_url = (
-                    f"🌐 Web url: {self.web.url}"
+                    f"🔗 Web url: {self.web.url}"
                     if self.web and hasattr(self.web, "url")
                     else ""
                 )
                 logging.debug(
-                    "\n🌘 Heroku %s #%s (%s) started\n%s",
+                    "\n🪐 Heroku %s #%s (%s) started\n%s",
                     ".".join(list(map(str, list(__version__)))),
                     build[:7],
                     upd,
@@ -833,8 +833,8 @@ class Hikka:
                 logging.getLogger().handlers[0].get_logid_by_client(client.tg_id),
                 "https://imgur.com/a/uUF9zYL.png",
                 caption=(
-                    "🪐 <b>Heroku {} started!</b>\n\n🌳 <b>GitHub commit SHA: <a"
-                    ' href="https://github.com/coddrago/Heroku/commit/{}">{}</a></b>\n✊'
+                    "🪐 <b>Heroku {} started!</b>\n\n🔎 <b>GitHub commit SHA: <a"
+                    ' href="https://github.com/coddrago/Heroku/commit/{}">{}</a></b>\n🔎'
                     " <b>Update status: {}</b>\n<b>{}</b>".format(
                         ".".join(list(map(str, list(__version__)))),
                         build,
