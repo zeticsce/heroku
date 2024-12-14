@@ -61,7 +61,7 @@ class HikkaBackupMod(loader.Module):
 
         self._backup_channel, _ = await utils.asset_channel(
             self._client,
-            "hikka-backups",
+            "heroku-backups",
             "📼 Your database backups will appear here",
             silent=True,
             archive=True,
