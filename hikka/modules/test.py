@@ -313,7 +313,7 @@ class TestMod(loader.Module):
         logs = self.lookup("evaluator").censor(logs)
 
         logs = BytesIO(logs.encode("utf-16"))
-        logs.name = "hikka-logs.txt"
+        logs.name = "heroku-logs.txt"
 
         ghash = utils.get_git_hash()
 
