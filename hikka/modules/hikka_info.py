@@ -10,6 +10,7 @@ from hikkatl.utils import get_display_name
 
 from .. import loader, utils, version
 from ..inline.types import InlineQuery
+import subprocess
 
 
 @loader.tds
@@ -89,6 +90,7 @@ class HikkaInfoMod(loader.Module):
                 cpu_usage=utils.get_cpu_usage(),
                 ram_usage=f"{utils.get_ram_usage()} MB",
                 branch=version.branch,
+                hostname=subprocess.run(['hostname'], capture_output=True).stdout.decode().strip()
             )
             if self.config["custom_message"]
             else (
@@ -124,6 +126,7 @@ class HikkaInfoMod(loader.Module):
                 )
             )
         )
+
 
     async def info(self, _: InlineQuery) -> dict:
         """Send userbot info"""
