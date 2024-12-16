@@ -90,7 +90,8 @@ class HikkaInfoMod(loader.Module):
                 cpu_usage=utils.get_cpu_usage(),
                 ram_usage=f"{utils.get_ram_usage()} MB",
                 branch=version.branch,
-                hostname=subprocess.run(['hostname'], capture_output=True).stdout.decode().strip()
+                hostname=subprocess.run(['hostname'], stdout=subprocess.PIPE).stdout.decode().strip(),
+                user=subprocess.run(['whoami'], stdout=subprocess.PIPE).stdout.decode().strip(),
             )
             if self.config["custom_message"]
             else (
