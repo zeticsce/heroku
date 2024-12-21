@@ -13,6 +13,7 @@ from .. import loader, utils, version
 from ..inline.types import InlineQuery
 import subprocess
 
+start = time.perf_counter_ns()
 
 @loader.tds
 class HikkaInfoMod(loader.Module):
@@ -168,4 +169,3 @@ class HikkaInfoMod(loader.Module):
         self.config["custom_message"] = args
         await utils.answer(message, self.strings("setinfo_success"))
 
-start = time.perf_counter_ns()
