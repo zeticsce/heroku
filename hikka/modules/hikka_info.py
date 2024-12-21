@@ -5,6 +5,7 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import git
+import time
 from hikkatl.tl.types import Message
 from hikkatl.utils import get_display_name
 
