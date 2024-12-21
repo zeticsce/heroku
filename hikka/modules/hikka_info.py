@@ -93,7 +93,7 @@ class HikkaInfoMod(loader.Module):
                 branch=version.branch,
                 hostname=subprocess.run(['hostname'], stdout=subprocess.PIPE).stdout.decode().strip(),
                 user=subprocess.run(['whoami'], stdout=subprocess.PIPE).stdout.decode().strip(),
-                ping=round((time.perf_counter_ns() - time.perf_counter_ns()) / 10**6, 3),
+                ping=round((time.perf_counter_ns() - start) / 10**6, 3),
             )
             if self.config["custom_message"]
             else (
@@ -167,3 +167,5 @@ class HikkaInfoMod(loader.Module):
 
         self.config["custom_message"] = args
         await utils.answer(message, self.strings("setinfo_success"))
+
+start = time.perf_counter_ns()
