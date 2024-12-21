@@ -17,7 +17,7 @@ import subprocess
 class HikkaInfoMod(loader.Module):
     """Show userbot info"""
 
-    strings = {"name": "HikkaInfo"}
+    strings = {"name": "HerokuInfo"}
 
     def __init__(self):
         self.config = loader.ModuleConfig(
