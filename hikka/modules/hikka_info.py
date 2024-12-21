@@ -53,8 +53,6 @@ class HikkaInfoMod(loader.Module):
         prefix = f"«<code>{utils.escape_html(self.get_prefix())}</code>»"
 
         platform = utils.get_named_platform()
-        start = time.perf_counter_ns()
-        ping=round((time.perf_counter_ns() - start) / 10**6, 3)
 
         for emoji, icon in [
             ("🍊", "<emoji document_id=5449599833973203438>🧡</emoji>"),
@@ -94,7 +92,6 @@ class HikkaInfoMod(loader.Module):
                 branch=version.branch,
                 hostname=subprocess.run(['hostname'], stdout=subprocess.PIPE).stdout.decode().strip(),
                 user=subprocess.run(['whoami'], stdout=subprocess.PIPE).stdout.decode().strip(),
-                ping=ping,
             )
             if self.config["custom_message"]
             else (
