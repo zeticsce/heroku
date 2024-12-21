@@ -751,7 +751,7 @@ class Hikka:
                     patcher.patch(client, session)
 
                 await client.connect()
-                client.phone = "ХАХАХАХАХХАХА, размечтался, иди нахуй!"
+                client.phone = "Why do you need your own phone number?"
 
                 self.clients += [client]
             except sqlite3.OperationalError:
