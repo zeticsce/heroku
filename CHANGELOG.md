@@ -6,7 +6,7 @@
 - many changes and improvements
 - many bugs fixed, work sped up
 - replacing UpgradedEval with Executor
-- added non-standrart prefixes
+- added non-standard prefixes
 - All banners, chats and avatars have been replaced.
 - fixed bug with disabling debugger
 - removed the button with info (hotfix for a bug where it was reinstalled)
