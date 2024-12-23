@@ -1003,19 +1003,41 @@ def get_platform_emoji() -> str:
 def uptime() -> int:
     """
     Returns userbot uptime in seconds
-    :return: Uptime in seconds
     """
-    return round(time.perf_counter() - init_ts)
+    current_uptime = round(time.perf_counter() - init_ts)
+    return current_uptime
 
 
 def formatted_uptime() -> str:
     """
-    Returnes formmated uptime
+    Returns formatted uptime including days if applicable.
     :return: Formatted uptime
     """
-    return str(timedelta(seconds=uptime()))
+    total_seconds = uptime()
+    days, remainder = divmod(total_seconds, 86400)
+    time_formatted = str(timedelta(seconds=remainder))
+    if days > 0:
+        return f"{days} day(s), {time_formatted}"
+    return time_formatted
 
+def add_uptime(minutes: int) -> None:
+    """
+    Adds a custom uptime in minutes to the current uptime.
+    :param minutes: The custom uptime in minutes to add
+    """
+    global init_ts
+    seconds = minutes * 60
+    init_ts -= seconds
 
+def set_uptime(minutes: int) -> None:
+    """
+    Sets a custom uptime in minutes. This will adjust the init_ts accordingly.
+    :param minutes: The custom uptime in minutes to set
+    """
+    global init_ts
+    seconds = minutes * 60 
+    init_ts = time.perf_counter() - seconds
+    
 def ascii_face() -> str:
     """
     Returnes cute ASCII-art face
