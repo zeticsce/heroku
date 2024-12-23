@@ -752,7 +752,7 @@ label {
     background: rgba(255, 255, 255, 0.8);
 }
 
-.hikka_label {
+.heroku_label {
     display: inline-block;
     background: #fff;
     padding: 10px 15px;
@@ -767,6 +767,6 @@ label {
     display: flex;
 }
 
-.moon {
+.ringed_planet {
     height: 30px;
 }

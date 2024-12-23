@@ -197,7 +197,7 @@ class TokenObtainment(InlineUnit):
                     for msg in [
                         "/setinline",
                         button.text,
-                        "user@hikka:~$",
+                        "user@heroku:~$",
                         "/setinlinefeedback",
                         button.text,
                         "Enabled",
