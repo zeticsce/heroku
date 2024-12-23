@@ -806,8 +806,11 @@ class Hikka:
             upd = "Update required" if diff else "Up-to-date"
 
             logo = (
-                "█ █ █ █▄▀ █▄▀ ▄▀█\n"
-                "█▀█ █ █ █ █ █ █▀█\n\n"
+                "                          _           \n"
+                "  /\  /\ ___  _ __  ___  | | __ _   _ \n"
+                " / /_/ // _ \| '__|/ _ \ | |/ /| | | |\n"
+                "/ __  /|  __/| |  | (_) ||   < | |_| |\n"
+                "\/ /_/  \___||_|   \___/ |_|\_\ \__,_|\n\n"
                 f"• Build: {build[:7]}\n"
                 f"• Version: {'.'.join(list(map(str, list(__version__))))}\n"
                 f"• {upd}\n"
