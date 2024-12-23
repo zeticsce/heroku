@@ -87,7 +87,7 @@ class Web(root.Web):
                 )
 
         if not url:
-            # вырезана проверка на lavhost
+            # вырезана проверка на докер
             ip = "127.0.0.1"
 
             url = f"http://{ip}:{self.port}"
