@@ -29,7 +29,7 @@ if (
     inp = input('> ').lower()
     if inp != "force_insecure":
         sys.exit(1)
-    elif inp != "no_sudo":
+    elif inp == "no_sudo":
         os.environ["NO_SUDO"] = "1"
         print("Added NO_SUDO in your environment variables")
         restart()
