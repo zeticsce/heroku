@@ -40,7 +40,7 @@ def getlines(filename: str, module_globals=None) -> str:
     Update the cache if it doesn't contain an entry for this file already.
 
     Modified version of original `linecache.getlines`, which returns the
-    source code of Hikka modules properly. This is needed for
+    source code of Heroku modules properly. This is needed for
     interactive line debugger in werkzeug web debugger.
     """
 
