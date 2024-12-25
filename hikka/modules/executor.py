@@ -30,7 +30,7 @@ class Executor(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "hide_phone",
-                False,
+                True,
                 lambda: "Скрывает твой номер телефона при выводе",
                 validator=loader.validators.Boolean()
             ),
