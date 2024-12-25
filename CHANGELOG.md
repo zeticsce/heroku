@@ -2,7 +2,6 @@
 ## 🪐 Heroku 1.6.8
 
 - Finally renamed to Heroku and new Emoji
-- rewritten bot from aio2 to aio3
 - many changes and improvements
 - many bugs fixed, work sped up
 - replacing UpgradedEval with Executor
@@ -17,6 +16,7 @@
 - fixed links in /presets, now modules are installed without problems
 - added several variables to info and ping ({hostname}, {user})
 - added .presets command
+- fixed bug with "bot.inline.send.message is never awaited"
 
 ## 🌑 Hikka 1.6.7
 
