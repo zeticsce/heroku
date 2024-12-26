@@ -17,6 +17,10 @@
 - added several variables to info and ping ({hostname}, {user})
 - added .presets command
 - fixed bug with "bot.inline.send.message is never awaited"
+- added DJHost in info
+- added config for profile picture in info
+- added config for show "Heroku" in info
+- removed UnitHeta
 
 ## 🌑 Hikka 1.6.7
 
