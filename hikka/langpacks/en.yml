@@ -355,6 +355,17 @@ test:
   _cmd_doc_suspend: "<time> - Suspends the bot for N seconds"
   _cls_doc: "Perform operations based on userbot self-testing"
 
+update_notifier:
+  name: "UpdateNotifier"
+  update_required: "🆕 <b>Heroku Update available!</b>\n\nNew Heroku version released.\n🔮 <b>Heroku <s>{}</s> -> {}</b>\n\n{}"
+  more: "\n<i><b>🎥 And {} more...</b></i>"
+  _cfg_doc_disable_notifications: "Disable update notifications"
+  latest_disabled: "Notifications about the latest update have been suppressed"
+  update: "🔄 Update"
+  ignore: "🚫 Ignore"
+  changelog: '<emoji document_id=5434144690511290129>📰</emoji> <b>Changelog of the last major update:</b><pre><code class="language-heroku">{}</code></pre>'
+  _cls_doc: "Tracks latest Heroku releases, and notifies you, if update is required"
+
 updater:
   name: "Updater"
   source: "<emoji document_id=5456255401194429832>📖</emoji> <b>Read the source code from</b> <a href='{}'>here</a>"
