@@ -1,4 +1,4 @@
-hikka_security:
+heroku_security:
   invalid_name: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Неправильне ім'я</b>"
   no_command: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Команда</b> <code>{}</code> <b>не знайдена!</b>"
   permissions: "🔐 <b>Тут можна налаштувати дозволи для команди</b> <code>{}{}</code>"
@@ -89,7 +89,7 @@ hikka_security:
   _cmd_doc_sgroupadd: "<ім'я> [користувач або відповідь] - Додати користувача до групи безпеки"
   _cmd_doc_sgroupdel: "<ім'я> [користувач або відповідь] - Видалити користувача з групи безпеки"
 
-hikka_settings:
+heroku_settings:
   watchers: "<emoji document_id=5424885441100782420>👀</emoji> <b>Наглядачі:</b>\n\n<b>{}</b>"
   mod404: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Наглядача {} не знайдено</b>"
   disabled: "<emoji document_id=5424885441100782420>👀</emoji> <b>Наглядача {} тепер <u>вимкнено</u></b>"
@@ -179,7 +179,7 @@ terminal:
   _cmd_doc_terminal: "<команда> - Запустити команду в системі"
   _cmd_doc_terminate: "[-f to force kill] - Дай відповідь на повідомлення, щоб вбити процес"
 
-hikka_backup:
+heroku_backup:
   period: "⌚️ <b>Юніт «ALPHA»</b> створює регулярні резервні копії. Ці налаштування можна змінити пізніше.\n\nБудь-ласка, оберіть періодичність резервного копіювання"
   saved: "✅ Періодичність збережено! Її можна змінити за допомогою .set_backup_period"
   never: "✅ Я не буду робити автоматичні резервні копії. Можна скасувати використовуючи .set_backup_period"
@@ -266,7 +266,7 @@ settings:
   _cmd_doc_unblacklist: "[чат] - Увімкнути бота де-небудь"
   _cmd_doc_unblacklistuser: "[користувач] - Дозволити користувачу виконувати команди"
 
-hikka_config:
+heroku_config:
   choose_core: "⚙️ <b>Обери категорію</b>"
   configure: "⚙️ <b>Обери модуль для налаштування</b>"
   configure_lib: "📦 <b>Обери бібліотеку для налаштування</b>"
@@ -333,31 +333,6 @@ test:
   cancel: "🚫 Скасування"
   logs_cleared: "🗑 <b>Логи очищено</b>"
   _cmd_doc_clearlogs: "Очистити логи"
-
-unit_heta:
-  "name": "UnitHeta"
-  no_query: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵    ❌ <b>𝚈𝚘𝚞 𝚖𝚞𝚜𝚝 𝚠𝚛𝚒𝚝𝚎 𝚚𝚞𝚎𝚛𝚢</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  no_results: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵    ❌<b> 𝙽𝚘 𝚛𝚎𝚜𝚞𝚕𝚝𝚜</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  api_error: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵   💤 <b>API 𝚒𝚜 𝚜𝚕𝚎𝚎𝚙𝚒𝚗𝚐</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  result: "🥰 <b>Результати для</b> <code>{query}</code><b>:</b>\n\n🧳 <code>{name}</code> <b>від</b> <code>{dev}</code>\n👨‍🏫 <i>{cls_doc}</i>\n\n📚 <b>Команди:</b>\n{commands}\n\n🔗 <b>Встановити:</b> <code>{prefix}dlh {mhash}</code>"
-  install: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵    💦 <b>𝙸𝚗𝚜𝚝𝚊𝚕𝚕</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  loaded: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵    ✅ <b>𝙸𝚗𝚜𝚝𝚊𝚕𝚕𝚎𝚍!</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  not_loaded: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵    ❌ <b>𝙽𝚘𝚝 𝚒𝚗𝚜𝚝𝚊𝚕𝚕𝚎𝚍! </b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  language: "en"
-  _cls_doc: "Керує речами, пов'язаними з @hikkamods_bot"
-  404: "<emoji document_id=5210952531676504517>❌</emoji> <b>Модуль не знайдено</b>"
-  args: "<emoji document_id=5210952531676504517>❌</emoji> <b>Ви маєте вказати аргументи</b>"
-  _cmd_doc_heta: "<запит> - Шукає модулі в репозиторії Heta"
-  _cmd_doc_ml: "<ім'я модуля> - Надіслати посилання на модуль"
-  enter_search_query: "🔎 Введіть пошуковий запит"
-  search_query_desc: "Команда, назва модуля, опис, тощо."
-  _ihandle_doc_heta: "Шукає модулі в репозиторії Heta"
-  enter_hash: "<emoji document_id=5210952531676504517>❌</emoji> <b>Вам потрібно вказати хеш</b>"
-  resolving_hash: "<emoji document_id=5325731315004218660>⏳</emoji> <b>Дозволяю хеш...</b>"
-  installing_from_hash: "<emoji document_id=5325731315004218660>⏳</emoji> <b>Встановлюю модуль</b> <code>{}</code> <b>...</b>"
-  installed: "<emoji document_id=5398001711786762757>✅</emoji> <b>Модуль</b> <code>{}</code> <b>встановлений</b>"
-  error: "<emoji document_id=5210952531676504517>❌</emoji> <b>Помилка, хай йому грець!</b>"
-  _cmd_doc_dlh: "<hash> - Встановити модуль із хешу"
 
 update_notifier:
   update_required: "🆕 <b>Доступне оновлення Heroku!</b>\n\nОпубліковано нову версію Heroku.\n🔮 <b>Heroku <s>{}</s> -> {}</b>\n\n{}"
@@ -427,7 +402,7 @@ help:
   _cmd_doc_helphide: "<модуль або модулі> - Сховати модуль(-і) з help\n*Розділяй модулі пробілами"
   _cmd_doc_support: "Показати посилання на чат допомоги Heroku"
 
-hikka_info:
+heroku_info:
   owner: "Власник"
   version: "Версія"
   build: "Збірка"
