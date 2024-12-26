@@ -14,7 +14,7 @@ from ..inline.types import InlineQuery
 import subprocess
 
 @loader.tds
-class HikkaInfoMod(loader.Module):
+class HerokuInfoMod(loader.Module):
     """Show userbot info"""
 
     strings = {"name": "HerokuInfo"}
@@ -31,6 +31,12 @@ class HikkaInfoMod(loader.Module):
                 "https://imgur.com/a/7LBPJiq.png",
                 lambda: self.strings("_cfg_banner"),
                 validator=loader.validators.Link(),
+            ),
+
+            loader.ConfigValue(
+                "show_heroku",
+                True,
+                validator=loader.validators.Boolean(),
             ),
         )
 
@@ -72,11 +78,10 @@ class HikkaInfoMod(loader.Module):
             ("🌼", " <emoji document_id=5224219153077914783>❤️</emoji>"),
         ]:
             platform = platform.replace(emoji, icon)
-
         return (
             (
                 "<b>🪐 Heroku</b>\n"
-                if "heroku" not in self.config["custom_message"].lower()
+                if not self.config["show_heroku"]
                 else ""
             )
             + self.config["custom_message"].format(
@@ -112,8 +117,8 @@ class HikkaInfoMod(loader.Module):
                     (
                         (
                             utils.get_platform_emoji()
-                            if self._client.hikka_me.premium
-                            else "🪐 Heroku"
+                            if self._client.hikka_me.premium and self.config["show_heroku"]
+                            else ""
                         ),
                         "<emoji document_id=5373141891321699086>😎</emoji>",
                         "<emoji document_id=5469741319330996757>💫</emoji>",
@@ -165,4 +170,5 @@ class HikkaInfoMod(loader.Module):
 
         self.config["custom_message"] = args
         await utils.answer(message, self.strings("setinfo_success"))
+
 
