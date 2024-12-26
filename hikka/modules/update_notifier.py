@@ -96,7 +96,7 @@ class UpdateNotifier(loader.Module):
                 "https://t.me/hikari_assets/71",
                 caption=self.strings("update_required").format(
                     utils.get_git_hash()[:6],
-                    '<a href="https://github.com/coddrago/Hikka/compare/{}...{}">{}</a>'.format(
+                    '<a href="https://github.com/coddrago/Heroku/compare/{}...{}">{}</a>'.format(
                         utils.get_git_hash()[:12],
                         self.get_latest()[:12],
                         self.get_latest()[:6],
@@ -124,10 +124,10 @@ class UpdateNotifier(loader.Module):
     @loader.callback_handler()
     async def update(self, call: InlineCall):
         """Process update buttons clicks"""
-        if call.data not in {"hikka/update", "hikka/ignore_upd"}:
+        if call.data not in {"heroku/update", "heroku/ignore_upd"}:
             return
 
-        if call.data == "hikka/ignore_upd":
+        if call.data == "heroku/ignore_upd":
             self.set("ignore_permanent", self.get_latest())
             await call.answer(self.strings("latest_disabled"))
             return
@@ -145,6 +145,6 @@ class UpdateNotifier(loader.Module):
         with open('CHANGELOG.md', mode='r', encoding='utf-8') as f:
             changelog = f.read().split('##')[1].strip()
         if (await self._client.get_me()).premium:
-            changelog.replace('🌑 Hikka', '<emoji document_id=5192765204898783881>🌘</emoji><emoji document_id=5195311729663286630>🌘</emoji><emoji document_id=5195045669324201904>🌘</emoji>')
+            changelog.replace('🌑 Heroku', '<emoji document_id=5192765204898783881>🌘</emoji><emoji document_id=5195311729663286630>🌘</emoji><emoji document_id=5195045669324201904>🌘</emoji>')
 
         await utils.answer(message, self.strings('changelog').format(changelog))
