@@ -15,7 +15,7 @@ from ..inline.types import InlineQuery
 import subprocess
 
 @loader.tds
-class HikkaInfoMod(loader.Module):
+class HerokuInfoMod(loader.Module):
     """Show userbot info"""
 
     strings = {"name": "HerokuInfo"}
@@ -87,7 +87,7 @@ class HikkaInfoMod(loader.Module):
         return (
             (
                 "<b>🪐 Heroku</b>\n"
-                if not self.config["show_heroku"]
+                if self.config["show_heroku"]
                 else ""
             )
             + self.config["custom_message"].format(
