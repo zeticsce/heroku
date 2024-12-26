@@ -912,6 +912,9 @@ def get_named_platform() -> str:
     if main.IS_WSL:
         return "🍀 WSL"
 
+    if main.IS_DJHOST:
+        return "🎡 DJHost"
+
     if main.IS_ORACLE:
         return "😶‍🌫️ Oracle"
 
@@ -969,6 +972,9 @@ def get_platform_emoji() -> str:
 
     if main.IS_HIKKAHOST:
         return BASE.format(5395745114494624362)
+
+    if main.IS_DJHOST:
+        return BASE.format(5352678227582152630)
 
     if main.IS_ORACLE:
         return BASE.format(5195381467047288408)
