@@ -8,13 +8,14 @@ import git
 import time
 from hikkatl.tl.types import Message
 from hikkatl.utils import get_display_name
-
+import requests
+import os
 from .. import loader, utils, version
 from ..inline.types import InlineQuery
 import subprocess
 
 @loader.tds
-class HerokuInfoMod(loader.Module):
+class HikkaInfoMod(loader.Module):
     """Show userbot info"""
 
     strings = {"name": "HerokuInfo"}
@@ -30,9 +31,8 @@ class HerokuInfoMod(loader.Module):
                 "banner_url",
                 "https://imgur.com/a/7LBPJiq.png",
                 lambda: self.strings("_cfg_banner"),
-                validator=loader.validators.Link(),
             ),
-
+            
             loader.ConfigValue(
                 "pp_to_banner",
                 False,
@@ -45,26 +45,6 @@ class HerokuInfoMod(loader.Module):
                 validator=loader.validators.Boolean(),
             ),
         )
-
-    async def upload_pp_to_oxo(self, photo):
-        save_path = "profile_photo.jpg"
-        await self._client.download_media(photo, file=save_path)
-        try:
-            oxo = await utils.run_sync(
-                requests.post,
-                "https://0x0.st",
-                files={"file": open(save_path, 'rb')},
-                data={"secret": True},
-            )
-            return oxo.text.strip()
-        except Exception:
-            return ""
-
-    async def get_pp_for_banner(self):
-        photos = await self._client.get_profile_photos('me')
-        if photos:
-            return await self.upload_pp_to_oxo(photos[0])
-        return ""
 
     def _render_info(self, inline: bool) -> str:
         try:
@@ -102,13 +82,12 @@ class HerokuInfoMod(loader.Module):
             ("🛡", "<emoji document_id=5282731554135615450>🌩</emoji>"),
             ("💘", "<emoji document_id=5452140079495518256>💘</emoji>"),
             ("🌼", " <emoji document_id=5224219153077914783>❤️</emoji>"),
-            ("🎡", "<emoji document_id=5226711870492126219>🎡</emoji>"),
         ]:
             platform = platform.replace(emoji, icon)
         return (
             (
                 "<b>🪐 Heroku</b>\n"
-                if self.config["show_heroku"]
+                if not self.config["show_heroku"]
                 else ""
             )
             + self.config["custom_message"].format(
@@ -160,6 +139,36 @@ class HerokuInfoMod(loader.Module):
             )
         )
 
+    async def upload_pp_to_oxo(self, photo):
+        save_path = "profile_photo.jpg"
+        await self._client.download_media(photo, file=save_path)
+
+        try:
+            with open(save_path, 'rb') as file:
+                oxo = await utils.run_sync(
+                    requests.post,
+                    "https://0x0.st",
+                    files={"file": file},
+                    data={"secret": True},
+                )
+
+            if oxo.status_code == 200:
+                return oxo.text.strip()
+            else:
+                return "https://imgur.com/a/7LBPJiq.png"
+
+        except Exception:
+            return "https://imgur.com/H56KRbM"
+
+        finally:
+            if os.path.exists(save_path):
+                os.remove(save_path)
+
+    async def get_pp_for_banner(self):
+        photos = await self._client.get_profile_photos('me')
+        if photos:
+            return await self.upload_pp_to_oxo(photos[0])
+        return "https://imgur.com/a/7LBPJiq.png"
 
     async def info(self, _: InlineQuery) -> dict:
         """Send userbot info"""
@@ -180,8 +189,15 @@ class HerokuInfoMod(loader.Module):
 
     @loader.command()
     async def infocmd(self, message: Message):
-        if self.config['pp_to_banner']:
-            self.config['banner_url'] = await self.get_pp_for_banner()
+        if self.config.get('pp_to_banner', True):
+            print(self.config['banner_url'])
+            try:
+                new_banner_url = await self.get_pp_for_banner()
+                if new_banner_url:
+                    self.config['banner_url'] = new_banner_url
+                    await self._db.set("Config", "banner_url", new_banner_url)
+            except Exception:
+                pass
         await utils.answer_file(
             message,
             self.config["banner_url"],
@@ -199,5 +215,4 @@ class HerokuInfoMod(loader.Module):
 
         self.config["custom_message"] = args
         await utils.answer(message, self.strings("setinfo_success"))
-
 
