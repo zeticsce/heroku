@@ -81,7 +81,7 @@ class HerokuInfoMod(loader.Module):
         return (
             (
                 "<b>🪐 Heroku</b>\n"
-                if not self.config["show_heroku"]
+                if self.config["show_heroku"]
                 else ""
             )
             + self.config["custom_message"].format(
