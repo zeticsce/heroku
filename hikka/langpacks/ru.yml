@@ -1,4 +1,4 @@
-hikka_security:
+heroku_security:
   invalid_name: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Неправильное имя</b>"
   no_command: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Команда</b> <code>{}</code> <b>не найдена!</b>"
   permissions: "🔐 <b>Здесь можно настроить разрешения для команды</b> <code>{}{}</code>"
@@ -89,7 +89,7 @@ hikka_security:
   _cmd_doc_sgroupadd: "<имя> [пользователь или ответ] - Добавить пользователя в группу безопасности"
   _cmd_doc_sgroupdel: "<имя> [пользователь или ответ] - Удалить пользователя из группы безопасности"
 
-hikka_settings:
+heroku_settings:
   watchers: "<emoji document_id=5424885441100782420>👀</emoji> <b>Смотрители:</b>\n\n<b>{}</b>"
   mod404: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Смотритель {} не найден</b>"
   disabled: "<emoji document_id=5424885441100782420>👀</emoji> <b>Смотритель {} теперь <u>выключен</u></b>"
@@ -179,7 +179,7 @@ terminal:
   _cmd_doc_terminal: "<команда> - Запустить команду в системе"
   _cmd_doc_terminate: "[-f to force kill] - Ответьте на сообщение, чтобы убить процесс"
 
-hikka_backup:
+heroku_backup:
   period: "⌚️ <b>Юнит «ALPHA»</b> создает регулярные резервные копии. Эти настройки можно изменить позже.\n\nПожалуйста, выберите периодичность резервного копирования"
   saved: "✅ Периодичность сохранена! Ее можно изменить с помощью .set_backup_period"
   never: "✅ Я не буду делать автоматические резервные копии. Можно отменить используя .set_backup_period"
@@ -266,7 +266,7 @@ settings:
   _cmd_doc_unblacklist: "[чат] - Включить бота где-либо"
   _cmd_doc_unblacklistuser: "[пользователь] - Разрешить пользователю выполнять команды"
 
-hikka_config:
+heroku_config:
   choose_core: "⚙️ <b>Выбери категорию</b>"
   configure: "⚙️ <b>Выбери модуль для настройки</b>"
   configure_lib: "📦 <b>Выбери библиотеку для настройки</b>"
@@ -334,40 +334,6 @@ test:
   logs_cleared: "🗑 <b>Логи очищены</b>"
   _cmd_doc_clearlogs: "Очистить логи"
 
-unit_heta:
-  "name": "UnitHeta"
-  no_query: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵    ❌ <b>𝚈𝚘𝚞 𝚖𝚞𝚜𝚝 𝚠𝚛𝚒𝚝𝚎 𝚚𝚞𝚎𝚛𝚢</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  no_results: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵    ❌<b> 𝙽𝚘 𝚛𝚎𝚜𝚞𝚕𝚝𝚜</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  api_error: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵   💤 <b>API 𝚒𝚜 𝚜𝚕𝚎𝚎𝚙𝚒𝚗𝚐</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  result: "🥰 <b>Результаты для</b> <code>{query}</code><b>:</b>\n\n🧳 <code>{name}</code> <b>от</b> <code>{dev}</code>\n👨‍🏫 <i>{cls_doc}</i>\n\n📚 <b>Команды:</b>\n{commands}\n\n🔗 <b>Установить:</b> <code>{prefix}dlh {mhash}</code>"
-  install: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵    💦 <b>𝙸𝚗𝚜𝚝𝚊𝚕𝚕</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  loaded: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵    ✅ <b>𝙸𝚗𝚜𝚝𝚊𝚕𝚕𝚎𝚍!</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  not_loaded: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵\n╵    ❌ <b>𝙽𝚘𝚝 𝚒𝚗𝚜𝚝𝚊𝚕𝚕𝚎𝚍! </b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯"
-  language: "ru"
-  _cls_doc: "Управляет вещами, связанными с @hikkamods_bot"
-  404: "<emoji document_id=5210952531676504517>❌</emoji> <b>Модуль не найден</b>"
-  args: "<emoji document_id=5210952531676504517>❌</emoji> <b>Вы должны указать аргументы</b>"
-  _cmd_doc_heta: "<запрос> - Ищет модули в репозитории Heta"
-  _cmd_doc_ml: "<имя модуля> - Отправить ссылку на модуль"
-  enter_search_query: "🔎 Введите поисковый запрос"
-  search_query_desc: "Команда, название модуля, описание, и т.д."
-  _ihandle_doc_heta: "Ищет модули в репозитории Heta"
-  enter_hash: "<emoji document_id=5210952531676504517>❌</emoji> <b>Вам нужно указать хэш</b>"
-  resolving_hash: "<emoji document_id=5325731315004218660>⏳</emoji> <b>Разрешаю хэш...</b>"
-  installing_from_hash: "<emoji document_id=5325731315004218660>⏳</emoji> <b>Устанавливаю модуль</b> <code>{}</code> <b>...</b>"
-  installed: "<emoji document_id=5398001711786762757>✅</emoji> <b>Модуль</b> <code>{}</code> <b>установлен</b>"
-  error: "<emoji document_id=5210952531676504517>❌</emoji> <b>Ошибка во время установки модуля</b>"
-  _cmd_doc_dlh: "<hash> - Установить модуль из хэша"
-
-update_notifier:
-  update_required: "🆕 <b>Доступно обновление Heroku!</b>\n\nОпубликована новая версия Heroku.\n🔮 <b>Heroku <s>{}</s> -> {}</b>\n\n{}"
-  more: "\n<i><b>🎥 И еще {}...</b></i>"
-  _cfg_doc_disable_notifications: "Отключить уведомления об обновлениях"
-  latest_disabled: "Уведомления о последнем обновлении были отключены"
-  update: "🔄 Обновить"
-  ignore: "🚫 Игнорировать"
-  changelog: '<emoji document_id=5434144690511290129>📰</emoji> <b>Список изменений последнего крупного обновления:</b><pre><code class="language-heroku">{}</code></pre>'
-
 updater:
   source: "<emoji document_id=5456255401194429832>📖</emoji> <b>Исходный код можно прочитать</b> <a href='{}'>здесь</a>"
   restarting_caption: "<emoji document_id=5328274090262275771>🕗</emoji> <b>Твоя {} перезагружается...</b>"
@@ -427,7 +393,7 @@ help:
   _cmd_doc_helphide: "<модуль или модули> - Спрятать модуль(-и) из помощи\n*Разделяй модули пробелами"
   _cmd_doc_support: "Показать ссылку на чат помощи Heroku"
 
-hikka_info:
+heroku_info:
   owner: "Владелец"
   version: "Версия"
   build: "Сборка"
