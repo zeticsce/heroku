@@ -71,8 +71,8 @@ class UpdateNotifier(loader.Module):
 
         self._markup = lambda: self.inline.generate_markup(
             [
-                {"text": self.strings("update"), "data": "hikka/update"},
-                {"text": self.strings("ignore"), "data": "hikka/ignore_upd"},
+                {"text": self.strings("update"), "data": "heroku/update"},
+                {"text": self.strings("ignore"), "data": "heroku/ignore_upd"},
             ]
         )
 
