@@ -1,4 +1,4 @@
-hikka_security:
+heroku_security:
   invalid_name: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Ungültiger Name</b>"
   no_command: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Befehl</b> <code>{}</code> <b>nicht gefunden!</b>"
   permissions: "🔐 <b>Hier können die Berechtigungen für den Befehl</b> <code>{}{}</code> <b>konfiguriert werden</b>"
