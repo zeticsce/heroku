@@ -974,7 +974,7 @@ def get_platform_emoji() -> str:
         return BASE.format(5395745114494624362)
 
     if main.IS_DJHOST:
-        return BASE.format(5352678227582152630)
+        return BASE.format(5116472489639150735)
 
     if main.IS_ORACLE:
         return BASE.format(5195381467047288408)
