@@ -34,11 +34,37 @@ class HerokuInfoMod(loader.Module):
             ),
 
             loader.ConfigValue(
+                "pp_to_banner",
+                False,
+                validator=loader.validators.Boolean(),
+            ),
+
+            loader.ConfigValue(
                 "show_heroku",
                 True,
                 validator=loader.validators.Boolean(),
             ),
         )
+
+    async def upload_pp_to_oxo(self, photo):
+        save_path = "profile_photo.jpg"
+        await self._client.download_media(photo, file=save_path)
+        try:
+            oxo = await utils.run_sync(
+                requests.post,
+                "https://0x0.st",
+                files={"file": open(save_path, 'rb')},
+                data={"secret": True},
+            )
+            return oxo.text.strip()
+        except Exception:
+            return ""
+
+    async def get_pp_for_banner(self):
+        photos = await self._client.get_profile_photos('me')
+        if photos:
+            return await self.upload_pp_to_oxo(photos[0])
+        return ""
 
     def _render_info(self, inline: bool) -> str:
         try:
@@ -154,6 +180,8 @@ class HerokuInfoMod(loader.Module):
 
     @loader.command()
     async def infocmd(self, message: Message):
+        if self.config['pp_to_banner']:
+            self.config['banner_url'] = await self.get_pp_for_banner()
         await utils.answer_file(
             message,
             self.config["banner_url"],
