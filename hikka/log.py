@@ -358,7 +358,7 @@ class TelegramLogsHandler(logging.Handler):
             }
 
             self._exc_queue = {
-                await client_id: [
+                client_id: [
                     self._mods[client_id].inline.bot.send_message(
                         self._mods[client_id].logchat,
                         item[0].message,
@@ -398,7 +398,7 @@ class TelegramLogsHandler(logging.Handler):
                     logfile = io.BytesIO(
                         "".join(self._queue[client_id]).encode("utf-8")
                     )
-                    logfile.name = "hikka-logs.txt"
+                    logfile.name = "heroku-logs.txt"
                     logfile.seek(0)
                     await self._mods[client_id].inline.bot.send_document(
                         self._mods[client_id].logchat,
@@ -506,7 +506,7 @@ _tg_formatter = logging.Formatter(
 )
 
 rotating_handler = RotatingFileHandler(
-    filename="hikka.log",
+    filename="heroku.log",
     mode="a",
     maxBytes=10 * 1024 * 1024,
     backupCount=1,
