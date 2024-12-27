@@ -136,7 +136,7 @@ class HerokuBackupMod(loader.Module):
                         [
                             {
                                 "text": "↪️ Restore this",
-                                "data": "heroku/backup/restore/confirm",
+                                "data": "hikka/backup/restore/confirm",
                             }
                         ]
                     ]
@@ -152,16 +152,16 @@ class HerokuBackupMod(loader.Module):
 
     @loader.callback_handler()
     async def restore(self, call: BotInlineCall):
-        if not call.data.startswith("heroku/backup/restore"):
+        if not call.data.startswith("hikka/backup/restore"):
             return
 
-        if call.data == "heroku/backup/restore/confirm":
+        if call.data == "hikka/backup/restore/confirm":
             await utils.answer(
                 call,
                 "❓ <b>Are you sure?</b>",
                 reply_markup={
                     "text": "✅ Yes",
-                    "data": "heroku/backup/restore",
+                    "data": "hikka/backup/restore",
                 },
             )
             return
