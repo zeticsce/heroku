@@ -33,7 +33,7 @@ class HerokuBackupMod(loader.Module):
         if not self.get("period"):
             await self.inline.bot.send_photo(
                 self.tg_id,
-                photo="https://github.com/coddrago/Heroku/raw/refs/heads/v1.6.8/assets/unit_alpha.png",
+                photo="https://imgur.com/a/wfiqkDa.png",
                 caption=self.strings("period"),
                 reply_markup=self.inline.generate_markup(
                     utils.chunks(
