@@ -330,7 +330,7 @@ class Module:
                 "✖️ <b>Declined joining <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
             ),
-            gif="https://data.whicdn.com/images/324445359/original.gif",
+            photo="https://imgur.com/a/gWKLn7h.png",
         )
 
     async def request_join(
