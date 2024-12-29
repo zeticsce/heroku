@@ -380,9 +380,9 @@ class Module:
         if not getattr(channel, "left", True):
             return True
 
-        await self.inline.bot.send_animation(
+        await self.inline.bot.send_photo(
             self.tg_id,
-            "https://i.gifer.com/SD5S.gif",
+            "https://imgur.com/a/XpwmHo6.png",
             caption=(
                 self._client.loader.lookup("translations")
                 .strings("requested_join")
