@@ -740,7 +740,7 @@ class HerokuSettingsMod(loader.Module):
                     "text": self.strings("web_btn"),
                     "url": await main.hikka.web.get_url(proxy_pass=False),
                 },
-                gif="https://t.me/hikari_assets/28",
+                photo="https://imgur.com/a/yOoHsa2.png",
             )
             return
 
@@ -761,7 +761,7 @@ class HerokuSettingsMod(loader.Module):
                         },
                         {"text": self.strings("btn_no"), "action": "close"},
                     ],
-                    gif="https://i.gifer.com/embedded/download/Z5tS.gif",
+                    photo="https://imgur.com/a/NumfPGa.png",
                 ):
                     raise Exception
             except Exception:
@@ -794,8 +794,8 @@ class HerokuSettingsMod(loader.Module):
             await form.edit(
                 self.strings("opening_tunnel"),
                 reply_markup={"text": "🕔 Wait...", "data": "empty"},
-                gif=(
-                    "https://i.gifer.com/origin/e4/e43e1b221fd960003dc27d2f2f1b8ce1.gif"
+                photo=(
+                    "https://imgur.com/a/MQJGI0w.png"
                 ),
             )
         else:
@@ -803,8 +803,8 @@ class HerokuSettingsMod(loader.Module):
                 self.strings("opening_tunnel"),
                 message=message,
                 reply_markup={"text": "🕔 Wait...", "data": "empty"},
-                gif=(
-                    "https://i.gifer.com/origin/e4/e43e1b221fd960003dc27d2f2f1b8ce1.gif"
+                photo=(
+                    "https://imgur.com/a/MQJGI0w.png"
                 ),
             )
 
@@ -813,7 +813,7 @@ class HerokuSettingsMod(loader.Module):
         await form.edit(
             self.strings("tunnel_opened"),
             reply_markup={"text": self.strings("web_btn"), "url": url},
-            gif="https://t.me/hikari_assets/48",
+            photo="https://imgur.com/a/lgmzCpj.png",
         )
 
     def _get_all_IDM(self, module: str):
