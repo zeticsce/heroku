@@ -206,7 +206,7 @@ class HerokuInfoMod(loader.Module):
         )
 
     @loader.command()
-    async def hikkainfo(self, message: Message):
+    async def herokuinfo(self, message: Message):
         await utils.answer(message, self.strings("desc"))
 
     @loader.command()
