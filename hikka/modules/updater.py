@@ -217,7 +217,7 @@ class UpdaterMod(loader.Module):
         except Exception:
             await self.inline_update(message)
 
-    async def close(self, msg_obj: typing.Union[InlineCall, Message], hard: bool = False,):
+    async def close(self, msg_obj: typing.Union[InlineCall, Message], hard: bool = False, call: InlineCall):
         
         await call.delete()
 
@@ -333,11 +333,11 @@ class UpdaterMod(loader.Module):
                             )
                             if dialog.name
                             in {
-                                "hikka-logs",
-                                "hikka-onload",
-                                "hikka-assets",
-                                "hikka-backups",
-                                "hikka-acc-switcher",
+                                "heroku-logs",
+                                "heroku-onload",
+                                "heroku-assets",
+                                "heroku-backups",
+                                "heroku-acc-switcher",
                                 "silent-tags",
                             }
                             and dialog.is_channel
@@ -374,7 +374,7 @@ class UpdaterMod(loader.Module):
             )
         except Exception:
             logger.critical(
-                "Can't create Hikka folder. Possible reasons are:\n"
+                "Can't create Heroku folder. Possible reasons are:\n"
                 "- User reached the limit of folders in Telegram\n"
                 "- User got floodwait\n"
                 "Ignoring error and adding folder addition to ignore list"
