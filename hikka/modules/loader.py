@@ -176,6 +176,10 @@ class LoaderMod(loader.Module):
         if args := utils.get_args(message):
             args = args[0]
 
+            await utils.answer(
+                message, self.strings("finding_module_in_repos")
+            )
+
             if (
                 await self.download_and_install(args, message, force_pm)
                 == MODULE_LOADING_FORBIDDEN
@@ -367,6 +371,10 @@ class LoaderMod(loader.Module):
         if msg is None or msg.media is None:
             await utils.answer(message, self.strings("provide_module"))
             return
+
+        await utils.answer(
+            message, self.strings("loading_module_via_file")
+        )
 
         path_ = None
         doc = await msg.download_media(bytes)
@@ -1215,6 +1223,10 @@ class LoaderMod(loader.Module):
         if not (args := utils.get_args_raw(message)):
             await utils.answer(message, self.strings("args"))
             return
+
+        await utils.answer(
+            message, self.strings("ml_load_module")
+        )
 
         exact = True
         if not (
