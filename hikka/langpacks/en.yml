@@ -420,10 +420,10 @@ help:
   no_mod: "🚫 <b>Specify module to hide</b>"
   hidden_shown: "<b>{} modules hidden, {} modules shown:</b>\n{}\n{}"
   support: "{} <b>Link to</b> <a href='https://t.me/heroku_talks'>support chat</a></b>"
-  partial_load: "<emoji document_id=5312383351217201533>☝️</emoji> <b>Userbot is not fully loaded, so not all modules are shown</b>"
-  not_exact: "<emoji document_id=5312383351217201533>☝️</emoji> <b>No exact match occured, so the closest result is shown instead</b>"
+  partial_load: "<emoji document_id=5355133243773435190>☝️</emoji> <b>Userbot is not fully loaded, so not all modules are shown</b>"
+  not_exact: "<emoji document_id=5355133243773435190>☝️</emoji> <b>No exact match occured, so the closest result is shown instead</b>"
   request_join: "You requested link for Heroku support chat"
-  core_notice: "<emoji document_id=5312383351217201533>☝️</emoji> <b>This is a core module. You can't unload it nor replace</b>"
+  core_notice: "<emoji document_id=5355133243773435190>☝️</emoji> <b>This is a core module. You can't unload it nor replace</b>"
 
 heroku_info:
   name: "HerokuInfo"
