@@ -209,13 +209,17 @@ class UpdaterMod(loader.Module):
                             "text": self.strings("btn_update"),
                             "callback": self.inline_update,
                         },
-                        {"text": self.strings("cancel"), "action": close},
+                        {"text": self.strings("cancel"), "callback": self.close},
                     ],
                 )
             ):
                 raise
         except Exception:
             await self.inline_update(message)
+
+    async def close(self, msg_obj: typing.Union[InlineCall, Message], hard: bool = False,):
+        
+        await message.delete()
 
     async def inline_update(
         self,
