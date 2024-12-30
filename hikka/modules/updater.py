@@ -217,7 +217,7 @@ class UpdaterMod(loader.Module):
         except Exception:
             await self.inline_update(message)
 
-    async def close(self, msg_obj: typing.Union[InlineCall, Message], hard: bool = False, call: InlineCall):
+    async def close(self, msg_obj: typing.Union[InlineCall, Message], hard: bool = False,):
         
         await call.delete()
 
