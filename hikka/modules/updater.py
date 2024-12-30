@@ -219,7 +219,7 @@ class UpdaterMod(loader.Module):
 
     async def close(self, msg_obj: typing.Union[InlineCall, Message], hard: bool = False,):
         
-        await message.delete()
+        await call.delete()
 
     async def inline_update(
         self,
