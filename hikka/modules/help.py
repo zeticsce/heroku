@@ -137,14 +137,15 @@ class Help(loader.Module):
         )
 
         reply = "{} <b>{}</b>:".format(
-            "<emoji document_id=5188377234380954537>🪐</emoji>",
+            "<blockquote><emoji document_id=5134452506935427991>🪐</emoji>",
             _name,
+            "</blockquote>"
         )
         if module.__doc__:
             reply += (
-                "<i>\n<emoji document_id=5787544344906959608>ℹ️</emoji> "
+                "\n<blockquote><emoji document_id=5879813604068298387>ℹ️</emoji> "
                 + utils.escape_html(inspect.getdoc(module))
-                + "\n</i>"
+                + "\n</blockquote>"
             )
 
         commands = {
@@ -169,8 +170,8 @@ class Help(loader.Module):
 
         for name, fun in commands.items():
             reply += (
-                "\n<emoji document_id=4971987363145188045>▫️</emoji>"
-                " <code>{}{}</code>{} {}".format(
+                "\n<blockquote><emoji document_id=5197195523794157505>▫️</emoji>"
+                " <code>{}{}</code>{} {}</blockquote>".format(
                     utils.escape_html(self.get_prefix()),
                     name,
                     (
