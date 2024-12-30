@@ -458,9 +458,9 @@ loader:
   loadmod_confirm_pm_message: "<emoji document_id=5451732530048802485>⏳</emoji> <i>Waiting for your confirmation...</i>"
   link: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵    <b><a href=\"{url}\">𝙻𝚒𝚗𝚔</a> 𝚘𝚗</b> <code>{class_name}</code>\n╵     ╴╴╴╴╴╴╴╴╴╴╴╴\n╵<b>𝚃𝚊𝚙 𝚝𝚘 𝚌𝚘𝚙𝚢 👇</b>\n╵\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯\n<code>{prefix}dlm {url}</code>"
   file: "╭╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╮\n╵             <code>{class_name}</code>\n╵     ╴╴╴╴╴╴╴╴╴╴╴╴\n╵\n╵  <code>{prefix}lm</code> 𝚘𝚗 𝚛𝚎𝚙𝚕𝚢 𝚝𝚘 𝚒𝚗𝚜𝚝𝚊𝚕𝚕\n╰╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╶╯\n\n{not_exact}"
-  finding_module_in_repos: "<emoji document_id=5873204392429096339>🔄</emoji> Looking for modules in repositories.
-  loading_module_via_file: "<emoji document_id=5873204392429096339>🔄</emoji> Loading the module.
-  ml_load_module: "<emoji document_id=5873204392429096339>🔄</emoji> I'm downloading the module as a file.
+  finding_module_in_repos: "<emoji document_id=5873204392429096339>🔄</emoji> Looking for modules in repositories."
+  loading_module_via_file: "<emoji document_id=5873204392429096339>🔄</emoji> Loading the module."
+  ml_load_module: "<emoji document_id=5873204392429096339>🔄</emoji> I'm downloading the module as a file."
   not_exact: "<emoji document_id=5312383351217201533>⚠️</emoji> <b>No exact match has been found, so the closest result is shown instead</b>"
   args: "<emoji document_id=5210952531676504517>❌</emoji> <b>You must specify arguments</b>"
   loadmod_cancelled: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Module loading cancelled</b>"
