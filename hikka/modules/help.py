@@ -27,12 +27,12 @@ class Help(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "core_emoji",
-                "<emoji document_id=4974681956907221809>🛑</emoji>",
+                "<emoji document_id=4974681956907221809>▪️</emoji>",
                 lambda: "Core module bullet",
             ),
             loader.ConfigValue(
                 "plain_emoji",
-                "<emoji document_id=4974508259839836856>🛑</emoji>",
+                "<emoji document_id=4974508259839836856>▪️</emoji>",
                 lambda: "Plain module bullet",
             ),
             loader.ConfigValue(
@@ -40,10 +40,16 @@ class Help(loader.Module):
                 "<emoji document_id=5100652175172830068>🟠</emoji>",
                 lambda: "Empty modules bullet",
             ),
+            loader.ConfigValue(
+                "desc_icon",
+                "<emoji document_id=5188377234380954537>🪐</emoji>",
+                lambda: "Desc emoji",
+            ),
         )
 
-    @loader.command()
+    @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module")
     async def helphide(self, message: Message):
+        """[args] | hide your modules"""
         if not (modules := utils.get_args(message)):
             await utils.answer(message, self.strings("no_mod"))
             return
@@ -131,14 +137,15 @@ class Help(loader.Module):
         )
 
         reply = "{} <b>{}</b>:".format(
-            "<emoji document_id=5188377234380954537>🌘</emoji>",
+            "<blockquote><emoji document_id=5134452506935427991>🪐</emoji>",
             _name,
+            "</blockquote>"
         )
         if module.__doc__:
             reply += (
-                "<i>\n<emoji document_id=5787544344906959608>ℹ️</emoji> "
+                "\n<blockquote><emoji document_id=5879813604068298387>ℹ️</emoji> "
                 + utils.escape_html(inspect.getdoc(module))
-                + "\n</i>"
+                + "\n</blockquote>"
             )
 
         commands = {
@@ -163,8 +170,8 @@ class Help(loader.Module):
 
         for name, fun in commands.items():
             reply += (
-                "\n<emoji document_id=4971987363145188045>▫️</emoji>"
-                " <code>{}{}</code>{} {}".format(
+                "\n<blockquote><emoji document_id=5197195523794157505>▫️</emoji>"
+                " <code>{}{}</code>{} {}</blockquote>".format(
                     utils.escape_html(self.get_prefix()),
                     name,
                     (
@@ -199,9 +206,9 @@ class Help(loader.Module):
             ),
         )
 
-    @loader.command()
+    @loader.command(ru_doc="[args] | Помощь с вашими модулями!", ua_doc="[args] | допоможіть з вашими модулями!", de_doc="[args] | Hilfe mit deinen Modulen!")
     async def help(self, message: Message):
-        """| help with your modules!"""
+        """[args] | help with your modules!"""
         args = utils.get_args_raw(message)
         force = False
         if "-f" in args:
@@ -315,7 +322,7 @@ class Help(loader.Module):
 
         await utils.answer(
             message,
-            "{}\n <blockquote expandable>{}</blockquote> <blockuote expandable>{}</blockquote>".format(
+            (self.config["desc_icon"] + " {}\n <blockquote>{}</blockquote><blockquote>{}</blockquote>").format(
                 reply,
                 "".join(core_ + plain_ + (no_commands_ if force else [])),
                 (
@@ -326,7 +333,7 @@ class Help(loader.Module):
             ),
         )
 
-    @loader.command()
+    @loader.command(ru_doc="| Ссылка на чат помощи", ua_doc="| посилання для чату служби підтримки", de_doc="| Link zum Support-Chat")
     async def support(self, message):
         """| link for support chat"""
        
@@ -336,7 +343,7 @@ class Help(loader.Module):
                 (
                     utils.get_platform_emoji()
                     if self._client.hikka_me.premium and CUSTOM_EMOJIS
-                    else "🌘"
+                    else "🪐"
                 )
             ),
         )

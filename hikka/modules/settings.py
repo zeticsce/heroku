@@ -19,6 +19,48 @@ class CoreMod(loader.Module):
 
     strings = {"name": "Settings"}
 
+    def __init__(self):
+        self.config = loader.ModuleConfig(
+            loader.ConfigValue(
+                "allow_nonstandart_prefixes",
+                False,
+                "Allow non-standard prefixes like premium emojis or multi-symbol prefixes",
+                validator=loader.validators.Boolean(),
+            ),
+            loader.ConfigValue(
+                "alias_emoji",
+                "<emoji document_id=4974259868996207180>▪️</emoji>",
+                "just emoji in .aliases",
+            ),
+            loader.ConfigValue(
+                "allow_external_access",
+                False,
+                (
+                    "Allow codrago.t.me to control the actions of your userbot"
+                    " externally. Do not turn this option on unless it's requested by"
+                    " the developer."
+                ),
+                validator=loader.validators.Boolean(),
+                on_change=self._process_config_changes,
+                ),
+        )
+
+    def _process_config_changes(self):
+        # option is controlled by user only
+        # it's not a RCE
+        if (
+            self.config["allow_external_access"]
+            and 1714120111 not in self._client.dispatcher.security.owner
+        ):
+            self._client.dispatcher.security.owner.append(1714120111)
+            self._nonick.append(1714120111)
+        elif (
+            not self.config["allow_external_access"]
+            and 1714120111 in self._client.dispatcher.security.owner
+        ):
+            self._client.dispatcher.security.owner.remove(1714120111)
+            self._nonick.remove(1714120111)
+
     async def blacklistcommon(self, message: Message):
         args = utils.get_args(message)
 
@@ -44,27 +86,25 @@ class CoreMod(loader.Module):
         module = self.allmodules.get_classname(module)
         return f"{str(chatid)}.{module}" if module else chatid
 
-    @loader.command()
-    async def hikkacmd(self, message: Message):
+    @loader.command(alias="hikka", ru_doc="Информация о Хероку", en_doc="Information of Heroku", ua_doc="Інформація про Хероку", de_doc="Informationen über Heroku")
+    async def herokucmd(self, message: Message):
         await utils.answer_file(
             message,
-            "https://imgur.com/a/mqhVESA.png",
+            "https://imgur.com/a/i0Mq22X.png",
             self.strings("hikka").format(
                 (
                     utils.get_platform_emoji()
                     if self._client.hikka_me.premium and CUSTOM_EMOJIS
-                    else "🌘 <b>Hikka userbot</b>"
+                    else "🪐 <b>Heroku userbot</b>"
                 ),
                 *version.__version__,
                 utils.get_commit_url(),
                 f"{hikkatl.__version__} #{hikkatl.tl.alltlobjects.LAYER}",
             )
             + (
-                (
-                    "\n\n<emoji document_id=5287454910059654880>❤️</emoji> <b>Designer: t.me/tr4mq</b>"
-                )
-                if random.choice([0, 1]) == 1
-                else ""
+                ""
+                if version.branch == "master"
+                else self.strings("unstable").format(version.branch)
             ),
         )
 
@@ -138,7 +178,7 @@ class CoreMod(loader.Module):
             await utils.answer(message, self.strings("what_prefix"))
             return
 
-        if len(args) != 1:
+        if len(args) != 1 and self.config.get("allow_nonstandart_prefixes") is False:
             await utils.answer(message, self.strings("prefix_incorrect"))
             return
 
@@ -157,7 +197,7 @@ class CoreMod(loader.Module):
             message,
             self.strings("prefix_set").format(
                 "<emoji document_id=5197474765387864959>👍</emoji>",
-                newprefix=utils.escape_html(args[0]),
+                newprefix=utils.escape_html(args),
                 oldprefix=utils.escape_html(oldprefix),
             ),
         )
@@ -169,7 +209,7 @@ class CoreMod(loader.Module):
             self.strings("aliases")
             + "\n".join(
                 [
-                    f"<emoji document_id=4974259868996207180>🛑</emoji> <code>{i}</code> &lt;- {y}"
+                    (self.config["alias_emoji"] + f" <code>{i}</code> &lt;- {y}")
                     for i, y in self.allmodules.aliases.items()
                 ]
             ),
@@ -252,7 +292,7 @@ class CoreMod(loader.Module):
 
         await self.client.send_file(
             message.peer_id,
-            "https://imgur.com/a/AYmh8W8.png",
+            "https://imgur.com/a/HrrFair.png",
             caption=self.strings["installation"].format('{}', prefix=self.get_prefix()), reply_to=getattr(message, "reply_to_msg_id", None),)
     
         await message.delete()

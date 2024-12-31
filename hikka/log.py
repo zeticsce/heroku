@@ -1,5 +1,6 @@
 """Main logging part"""
 
+# пасхалка номер 3
 # ©️ Dan Gazizullin, 2021-2023
 # This file is a part of Hikka Userbot
 # 🌐 https://github.com/hikariatama/Hikka
@@ -40,7 +41,7 @@ def getlines(filename: str, module_globals=None) -> str:
     Update the cache if it doesn't contain an entry for this file already.
 
     Modified version of original `linecache.getlines`, which returns the
-    source code of Hikka modules properly. This is needed for
+    source code of Heroku modules properly. This is needed for
     interactive line debugger in werkzeug web debugger.
     """
 
@@ -398,7 +399,7 @@ class TelegramLogsHandler(logging.Handler):
                     logfile = io.BytesIO(
                         "".join(self._queue[client_id]).encode("utf-8")
                     )
-                    logfile.name = "hikka-logs.txt"
+                    logfile.name = "heroku-logs.txt"
                     logfile.seek(0)
                     await self._mods[client_id].inline.bot.send_document(
                         self._mods[client_id].logchat,
@@ -506,7 +507,7 @@ _tg_formatter = logging.Formatter(
 )
 
 rotating_handler = RotatingFileHandler(
-    filename="hikka.log",
+    filename="heroku.log",
     mode="a",
     maxBytes=10 * 1024 * 1024,
     backupCount=1,

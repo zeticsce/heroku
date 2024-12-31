@@ -330,7 +330,7 @@ class Module:
                 "✖️ <b>Declined joining <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
             ),
-            gif="https://data.whicdn.com/images/324445359/original.gif",
+            photo="https://imgur.com/a/gWKLn7h.png",
         )
 
     async def request_join(
@@ -380,9 +380,9 @@ class Module:
         if not getattr(channel, "left", True):
             return True
 
-        await self.inline.bot.send_animation(
+        await self.inline.bot.send_photo(
             self.tg_id,
-            "https://i.gifer.com/SD5S.gif",
+            "https://imgur.com/a/XpwmHo6.png",
             caption=(
                 self._client.loader.lookup("translations")
                 .strings("requested_join")

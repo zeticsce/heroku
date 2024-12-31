@@ -19,16 +19,17 @@ if (
     and all(trigger not in os.environ for trigger in {"DOCKER", "GOORM", "NO_SUDO"})
 ):
     print("🚫" * 15)
-    print("You attempted to run Hikka on behalf of root user")
+    print("You attempted to run Heroku on behalf of root user")
     print("Please, create a new user and restart script")
     print("If this action was intentional, pass --root argument instead")
     print("🚫" * 15)
     print()
     print("Type force_insecure to ignore this warning")
     print("Type no_sudo if your system has no sudo (Debian vibes)")
-    if input("> ").lower() != "force_insecure":
+    inp = input('> ').lower()
+    if inp != "force_insecure":
         sys.exit(1)
-    elif input("> ").lower() != "no_sudo":
+    elif inp == "no_sudo":
         os.environ["NO_SUDO"] = "1"
         print("Added NO_SUDO in your environment variables")
         restart()

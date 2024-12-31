@@ -96,8 +96,9 @@ IS_HIKKAHOST = "HIKKAHOST" in os.environ
 IS_ORACLE = "ORACLE_OS" in os.environ
 IS_AWS = "AWS_OS" in os.environ
 IS_SERV00 = "serv00" in socket.gethostname()
-IS_TOTHOST = "tothost" in socket.gethostname()
+IS_TOTHOST = "TOTHOST" in os.environ
 IS_AEZA = "aeza" in socket.gethostname()
+IS_DJHOST = "IS_DJHOST" in os.environ
 IS_WSL = False
 with contextlib.suppress(Exception):
     from platform import uname
@@ -564,8 +565,8 @@ class Hikka:
 
     async def _web_banner(self):
         """Shows web banner"""
-        logging.info("✅ Web mode ready for configuration")
-        logging.info("🌐 Please visit %s", self.web.url)
+        logging.info("🔎 Web mode ready for configuration")
+        logging.info("🔗 Please visit %s", self.web.url)
 
     async def wait_for_web_auth(self, token: str) -> bool:
         """
@@ -751,7 +752,7 @@ class Hikka:
                     patcher.patch(client, session)
 
                 await client.connect()
-                client.phone = "ХАХАХАХАХХАХА, размечтался, иди нахуй!"
+                client.phone = "Why do you need your own phone number?"
 
                 self.clients += [client]
             except sqlite3.OperationalError:
@@ -806,8 +807,11 @@ class Hikka:
             upd = "Update required" if diff else "Up-to-date"
 
             logo = (
-                "█ █ █ █▄▀ █▄▀ ▄▀█\n"
-                "█▀█ █ █ █ █ █ █▀█\n\n"
+                "                          _           \n"
+                "  /\  /\ ___  _ __  ___  | | __ _   _ \n"
+                " / /_/ // _ \| '__|/ _ \ | |/ /| | | |\n"
+                "/ __  /|  __/| |  | (_) ||   < | |_| |\n"
+                "\/ /_/  \___||_|   \___/ |_|\_\ \__,_|\n\n"
                 f"• Build: {build[:7]}\n"
                 f"• Version: {'.'.join(list(map(str, list(__version__))))}\n"
                 f"• {upd}\n"
@@ -816,12 +820,12 @@ class Hikka:
             if not self.omit_log:
                 print(logo)
                 web_url = (
-                    f"🌐 Web url: {self.web.url}"
+                    f"🔗 Web url: {self.web.url}"
                     if self.web and hasattr(self.web, "url")
                     else ""
                 )
                 logging.debug(
-                    "\n🌘 Hikka %s #%s (%s) started\n%s",
+                    "\n🪐 Heroku %s #%s (%s) started\n%s",
                     ".".join(list(map(str, list(__version__)))),
                     build[:7],
                     upd,
@@ -829,12 +833,12 @@ class Hikka:
                 )
                 self.omit_log = True
 
-            await client.hikka_inline.bot.send_animation(
+            await client.hikka_inline.bot.send_photo(
                 logging.getLogger().handlers[0].get_logid_by_client(client.tg_id),
-                "https://x0.at/pYQV.mp4",
+                "https://imgur.com/a/uUF9zYL.png",
                 caption=(
-                    "🌘 <b>Hikka {} started!</b>\n\n🌳 <b>GitHub commit SHA: <a"
-                    ' href="https://github.com/coddrago/Hikka/commit/{}">{}</a></b>\n✊'
+                    "🪐 <b>Heroku {} started!</b>\n\n⚙ <b>GitHub commit SHA: <a"
+                    ' href="https://github.com/coddrago/Heroku/commit/{}">{}</a></b>\n🔎'
                     " <b>Update status: {}</b>\n<b>{}</b>".format(
                         ".".join(list(map(str, list(__version__)))),
                         build,

@@ -1,4 +1,27 @@
-# Hikka Changelog
+# Heroku Changelog
+## 🪐 Heroku 1.6.8
+
+- Finally renamed to Heroku and new Emoji
+- many changes and improvements
+- many bugs fixed, work sped up
+- replacing UpgradedEval with Executor
+- added non-standard prefixes
+- All banners, chats and avatars have been replaced.
+- fixed bug with disabling debugger
+- removed the button with info (hotfix for a bug where it was reinstalled)
+- added config for emoji in aliases (.cfg settings)
+- added config for the first emoji to help (.cfg help)
+- minor bug fixes
+- new design in some built-in elements
+- fixed links in /presets, now modules are installed without problems
+- added several variables to info and ping ({hostname}, {user})
+- added .presets command
+- fixed bug with "bot.inline.send.message is never awaited"
+- added DJHost in info
+- added config for profile picture in info
+- added config for show "Heroku" in info
+- removed UnitHeta
+
 ## 🌑 Hikka 1.6.7
 
 - new design

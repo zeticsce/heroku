@@ -111,7 +111,7 @@ class UpdaterMod(loader.Module):
                 if self._client.hikka_me.premium
                 and CUSTOM_EMOJIS
                 and isinstance(msg_obj, Message)
-                else "Hikka"
+                else "Heroku"
             ),
         )
 
@@ -209,13 +209,17 @@ class UpdaterMod(loader.Module):
                             "text": self.strings("btn_update"),
                             "callback": self.inline_update,
                         },
-                        {"text": self.strings("cancel"), "action": "close"},
+                        {"text": self.strings("cancel"), "callback": self.close},
                     ],
                 )
             ):
                 raise
         except Exception:
             await self.inline_update(message)
+
+    async def close(self, msg_obj: typing.Union[InlineCall, Message], hard: bool = False,):
+        
+        await call.delete()
 
     async def inline_update(
         self,
@@ -329,11 +333,11 @@ class UpdaterMod(loader.Module):
                             )
                             if dialog.name
                             in {
-                                "hikka-logs",
-                                "hikka-onload",
-                                "hikka-assets",
-                                "hikka-backups",
-                                "hikka-acc-switcher",
+                                "heroku-logs",
+                                "heroku-onload",
+                                "heroku-assets",
+                                "heroku-backups",
+                                "heroku-acc-switcher",
                                 "silent-tags",
                             }
                             and dialog.is_channel
@@ -352,7 +356,8 @@ class UpdaterMod(loader.Module):
                                 1554874075,
                                 1697279580,
                                 1679998924,
-                            ]  # official hikka chats
+                                2410964167,
+                            ]  # official heroku chats
                         ],
                         emoticon="🐱",
                         exclude_peers=[],
@@ -369,7 +374,7 @@ class UpdaterMod(loader.Module):
             )
         except Exception:
             logger.critical(
-                "Can't create Hikka folder. Possible reasons are:\n"
+                "Can't create Heroku folder. Possible reasons are:\n"
                 "- User reached the limit of folders in Telegram\n"
                 "- User got floodwait\n"
                 "Ignoring error and adding folder addition to ignore list"

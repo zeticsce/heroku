@@ -1,5 +1,6 @@
 """Utilities"""
 
+#    еще пасхалочка
 #    Friendly Telegram (telegram userbot)
 #    Copyright (C) 2018-2021 The Authors
 
@@ -712,7 +713,7 @@ async def invite_inline_bot(
                 channel=peer,
                 user_id=client.loader.inline.bot_username,
                 admin_rights=ChatAdminRights(ban_users=True),
-                rank="Hikka",
+                rank="Heroku",
             )
         )
 
@@ -753,6 +754,10 @@ async def asset_channel(
         and client._channels_cache[title]["exp"] > time.time()
     ):
         return client._channels_cache[title]["peer"], False
+
+    # legacy heroku / hikka chats conversion to heroku
+    if title.startswith("hikka-"):
+        title = title.replace("hikka-", "heroku-")
 
     async for d in client.iter_dialogs():
         if d.title == title:
@@ -908,6 +913,9 @@ def get_named_platform() -> str:
     if main.IS_WSL:
         return "🍀 WSL"
 
+    if main.IS_DJHOST:
+        return "🎡 DJHost"
+
     if main.IS_ORACLE:
         return "😶‍🌫️ Oracle"
 
@@ -953,14 +961,21 @@ def get_platform_emoji() -> str:
 
     BASE = "".join(
         (
-            "<emoji document_id={}>🌘</emoji>",
-            "<emoji document_id=5195311729663286630>🌘</emoji>",
-            "<emoji document_id=5195045669324201904>🌘</emoji>",
+            "<emoji document_id={}>🪐</emoji>",
+            "<emoji document_id=5352934134618549768>🪐</emoji>",
+            "<emoji document_id=5352663371290271790>🪐</emoji>",
+            "<emoji document_id=5350822883314655367>🪐</emoji>",
         )
     )
 
-    if main.IS_DOCKER:
-        return BASE.format(5298554256603752468)
+    if main.IS_TOTHOST:
+        return BASE.format(5372887118156683469)
+
+    if main.IS_HIKKAHOST:
+        return BASE.format(5395745114494624362)
+
+    if main.IS_DJHOST:
+        return BASE.format(5116472489639150735)
 
     if main.IS_ORACLE:
         return BASE.format(5195381467047288408)
@@ -972,42 +987,64 @@ def get_platform_emoji() -> str:
         return BASE.format(5192765204898783881)
 
     if main.IS_LAVHOST:
-        return BASE.format(5301078610747074753)
+        return BASE.format(5352753797531721191)
 
     if main.IS_GOORM:
         return BASE.format(5298947740032573902)
 
     if main.IS_CODESPACES:
-        return BASE.format(5194976881127989720)
+        return BASE.format(5350807743554937610)
 
     if main.IS_TERMUX:
-        return BASE.format(5193051778001673828)
+        return BASE.format(5350588498359377932)
 
     if main.IS_RAILWAY:
-        return BASE.format(5199607521593007466)
+        return BASE.format(5352539534498224966)
 
-    if main.IS_HIKKAHOST:
-        return BASE.format(5370731117588523522)
+    if main.IS_DOCKER:
+        return BASE.format(5352678227582152630)
 
-    return BASE.format(5192765204898783881)
+    return BASE.format(5393588431026674882)
 
 
 def uptime() -> int:
     """
     Returns userbot uptime in seconds
-    :return: Uptime in seconds
     """
-    return round(time.perf_counter() - init_ts)
+    current_uptime = round(time.perf_counter() - init_ts)
+    return current_uptime
 
 
 def formatted_uptime() -> str:
     """
-    Returnes formmated uptime
+    Returns formatted uptime including days if applicable.
     :return: Formatted uptime
     """
-    return str(timedelta(seconds=uptime()))
+    total_seconds = uptime()
+    days, remainder = divmod(total_seconds, 86400)
+    time_formatted = str(timedelta(seconds=remainder))
+    if days > 0:
+        return f"{days} day(s), {time_formatted}"
+    return time_formatted
 
+def add_uptime(minutes: int) -> None:
+    """
+    Adds a custom uptime in minutes to the current uptime.
+    :param minutes: The custom uptime in minutes to add
+    """
+    global init_ts
+    seconds = minutes * 60
+    init_ts -= seconds
 
+def set_uptime(minutes: int) -> None:
+    """
+    Sets a custom uptime in minutes. This will adjust the init_ts accordingly.
+    :param minutes: The custom uptime in minutes to set
+    """
+    global init_ts
+    seconds = minutes * 60 
+    init_ts = time.perf_counter() - seconds
+    
 def ascii_face() -> str:
     """
     Returnes cute ASCII-art face
@@ -1074,6 +1111,11 @@ def ascii_face() -> str:
                 "(・ε・`*) …",
                 "ʕっ•ᴥ•ʔっ",
                 "(*˘︶˘*)",
+                "ಥ_ಥ",
+                "･ﾟ･(｡>д<｡)･ﾟ･",
+                "(┬┬＿┬┬)",
+                "(◞‸◟ㆀ)",
+                " ˚‧º·(˚ ˃̣̣̥⌓˂̣̣̥ )‧º·˚",
             ]
         )
     )
@@ -1285,12 +1327,12 @@ def get_git_hash() -> typing.Union[str, bool]:
 
 def get_commit_url() -> str:
     """
-    Get current Hikka git commit url
+    Get current Heroku git commit url
     :return: Git commit url
     """
     try:
         hash_ = get_git_hash()
-        return f'<a href="https://github.com/coddrago/Hikka/commit/{hash_}">#{hash_[:7]}</a>'
+        return f'<a href="https://github.com/coddrago/Heroku/commit/{hash_}">#{hash_[:7]}</a>'
     except Exception:
         return "Unknown"
 
@@ -1580,7 +1622,7 @@ def get_git_info() -> typing.Tuple[str, str]:
     hash_ = get_git_hash()
     return (
         hash_,
-        f"https://github.com/coddrago/Hikka/commit/{hash_}" if hash_ else "",
+        f"https://github.com/coddrago/Heroku/commit/{hash_}" if hash_ else "",
     )
 
 

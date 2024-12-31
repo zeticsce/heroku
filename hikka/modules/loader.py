@@ -108,7 +108,6 @@ class LoaderMod(loader.Module):
         )
         logger.debug("Modules: %s", modules)
         asyncio.ensure_future(self._storage.preload(modules))
-        asyncio.ensure_future(self._storage.preload_main_repo())
 
     async def client_ready(self):
         while not (settings := self.lookup("settings")):
@@ -397,7 +396,7 @@ class LoaderMod(loader.Module):
         ):
             if message.file:
                 await message.edit("")
-                message = await message.respond("🌘", reply_to=utils.get_topic(message))
+                message = await message.respond("🪐", reply_to=utils.get_topic(message))
 
             if await self.inline.form(
                 self.strings("module_fs"),
@@ -473,7 +472,7 @@ class LoaderMod(loader.Module):
                 "💫 <b>Joined <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
             ),
-            gif="https://data.whicdn.com/images/324445359/original.gif",
+            photo="https://imgur.com/a/gWKLn7h.png",
         )
 
     async def load_module(
@@ -873,7 +872,7 @@ class LoaderMod(loader.Module):
 
         if instance.__doc__:
             modhelp += (
-                "<i>\n<emoji document_id=5787544344906959608>ℹ️</emoji>"
+                "<i>\n<emoji document_id=5879813604068298387>ℹ️</emoji>"
                 f" {utils.escape_html(inspect.getdoc(instance))}</i>\n"
             )
 
@@ -885,7 +884,7 @@ class LoaderMod(loader.Module):
             value = getattr(instance, key)
             if isinstance(value, loader.Library):
                 depends_from.append(
-                    "<emoji document_id=4971987363145188045>▫️</emoji>"
+                    "<emoji document_id=5197195523794157505>▫️</emoji>"
                     " <code>{}</code> <b>{}</b> <code>{}</code>".format(
                         value.__class__.__name__,
                         self.strings("by"),
@@ -982,7 +981,7 @@ class LoaderMod(loader.Module):
             key=lambda x: x[0],
         ):
             modhelp += "\n{} <code>{}{}</code> {}".format(
-                "<emoji document_id=4971987363145188045>▫️</emoji>",
+                "<emoji document_id=5197195523794157505>▫️</emoji>",
                 utils.escape_html(self.get_prefix()),
                 _name,
                 (
