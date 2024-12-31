@@ -884,8 +884,8 @@ class LoaderMod(loader.Module):
             value = getattr(instance, key)
             if isinstance(value, loader.Library):
                 depends_from.append(
-                    "<blockquote><emoji document_id=5197195523794157505>▫️</emoji>"
-                    " <code>{}</code> <b>{}</b> <code>{}</code></blockquote>".format(
+                    "<emoji document_id=5197195523794157505>▫️</emoji>"
+                    " <code>{}</code> <b>{}</b> <code>{}</code>".format(
                         value.__class__.__name__,
                         self.strings("by"),
                         (
