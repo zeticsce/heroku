@@ -429,7 +429,7 @@ heroku_info:
 loader:
   loadmod_pm_timeout: "Bitte warten Sie 10 Sekunden, bevor Sie diese Aktion bestätigen"
   loadmod_not_allowed_fresh_pm: "<emoji document_id=5447644880824181073>⚠️</emoji> <b><u>Lesen Sie dies sorgfältig!</u></b> <emoji document_id=5447644880824181073>⚠️</emoji>\n\n<b>Sie versuchen, ein Modul in privaten Nachrichten von einem Benutzer zu laden, den Sie nicht kennen.</b> Module, die nicht vom Entwickler bestätigt wurden, können viele Probleme verursachen, von <b>Manipulationen mit Ihrem Konto bis hin zu Kontoentfernung oder Sitzungsbeschädigung</b>. Wenn Sie diesen Benutzer kennen und ihm <b><u>100%</u></b> vertrauen, warten Sie ein paar Tage und versuchen Sie es erneut."
-  link: "<emoji document_id=5256113064821926998>📁</emoji> <b>Datei von</b> {class_name}\n\n<emoji document_id=5134452506935427991>🪐</emoji> <b>{prefix}lm als Antwort auf diese Nachricht installieren</b>\n\n<emoji document_id=5877465816030515018>🔗</emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
+  link: "<emoji document_id=5256113064821926998>📁</emoji> <b>Datei von</b> {class_name}\n\n<emoji document_id=5134452506935427991>🪐</emoji> <b>{prefix}lm als Antwort auf diese Nachricht installieren</b>\n\n<emoji document_id=4916086774649848789>🔗</emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
   file: "<emoji document_id=5256113064821926998>📁</emoji> <b>Datei von</b> {class_name}\n\n<emoji document_id=5134452506935427991>🪐</emoji> <b>{prefix}lm als Antwort auf diese Nachricht zum Installieren</b>\n\n{not_exact}"
   loading_module_via_file: "<emoji document_id=5873204392429096339>🔄</emoji> Das Modul wird geladen."
   ml_load_module: "<emoji document_id=5873204392429096339>🔄</emoji> Ich lade das Modul als Datei herunter."
