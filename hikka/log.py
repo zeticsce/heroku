@@ -1,5 +1,6 @@
 """Main logging part"""
 
+# пасхалка номер 3
 # ©️ Dan Gazizullin, 2021-2023
 # This file is a part of Hikka Userbot
 # 🌐 https://github.com/hikariatama/Hikka
