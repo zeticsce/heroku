@@ -1,5 +1,6 @@
 """Utilities"""
 
+#    еще пасхалочка
 #    Friendly Telegram (telegram userbot)
 #    Copyright (C) 2018-2021 The Authors
 
