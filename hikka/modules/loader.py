@@ -872,7 +872,7 @@ class LoaderMod(loader.Module):
 
         if instance.__doc__:
             modhelp += (
-                "<i>\n<emoji document_id=5787544344906959608>ℹ️</emoji>"
+                "<i>\n<emoji document_id=5879813604068298387>ℹ️</emoji>"
                 f" {utils.escape_html(inspect.getdoc(instance))}</i>\n"
             )
 
@@ -884,7 +884,7 @@ class LoaderMod(loader.Module):
             value = getattr(instance, key)
             if isinstance(value, loader.Library):
                 depends_from.append(
-                    "<emoji document_id=4971987363145188045>▫️</emoji>"
+                    "<emoji document_id=5197195523794157505>▫️</emoji>"
                     " <code>{}</code> <b>{}</b> <code>{}</code>".format(
                         value.__class__.__name__,
                         self.strings("by"),
@@ -981,7 +981,7 @@ class LoaderMod(loader.Module):
             key=lambda x: x[0],
         ):
             modhelp += "\n{} <code>{}{}</code> {}".format(
-                "<emoji document_id=4971987363145188045>▫️</emoji>",
+                "<emoji document_id=5197195523794157505>▫️</emoji>",
                 utils.escape_html(self.get_prefix()),
                 _name,
                 (
