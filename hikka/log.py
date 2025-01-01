@@ -359,7 +359,7 @@ class TelegramLogsHandler(logging.Handler):
             }
 
             self._exc_queue = {
-                await client_id: [
+                client_id: [
                     self._mods[client_id].inline.bot.send_message(
                         self._mods[client_id].logchat,
                         item[0].message,
