@@ -83,6 +83,7 @@ class HerokuInfoMod(loader.Module):
             ("💘", "<emoji document_id=5452140079495518256>💘</emoji>"),
             ("🌼", "<emoji document_id=5224219153077914783>❤️</emoji>"),
             ("🎡", "<emoji document_id=5226711870492126219>🎡</emoji>"),
+            ("🐧", "<emoji document_id=5361541227604878624>🐧</emoji>")
         ]:
             platform = platform.replace(emoji, icon)
         return (
