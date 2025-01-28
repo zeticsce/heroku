@@ -5,14 +5,14 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import git
-import time
 from hikkatl.tl.types import Message
 from hikkatl.utils import get_display_name
 import requests
 import os
 from .. import loader, utils, version
 from ..inline.types import InlineQuery
-import subprocess
+import platform as lib_platform
+import getpass
 
 @loader.tds
 class HerokuInfoMod(loader.Module):
@@ -103,8 +103,8 @@ class HerokuInfoMod(loader.Module):
                 cpu_usage=utils.get_cpu_usage(),
                 ram_usage=f"{utils.get_ram_usage()} MB",
                 branch=version.branch,
-                hostname=subprocess.run(['hostname'], stdout=subprocess.PIPE).stdout.decode().strip(),
-                user=subprocess.run(['whoami'], stdout=subprocess.PIPE).stdout.decode().strip(),
+                hostname=lib_platform.node(),
+                user=getpass.getuser(),
             )
             if self.config["custom_message"]
             else (
