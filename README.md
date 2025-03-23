@@ -131,7 +131,8 @@ Check out <a href="https://web.archive.org/dev.hikka.pw">dev.hikka.pw</a> for de
     <li><a href="https://t.me/lonami">Lonami</a> for Telethon, which is the base of Heroku-TL</li>
 </ul>
 
-<hr2>Sponsors: </hr2>
+<hr>
+<h2>Sponsors: </h2>
 <p align="center">
     <img src="assets/aeza.svg" width="300" height="60">
 </p>
