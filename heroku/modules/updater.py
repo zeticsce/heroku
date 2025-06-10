@@ -106,7 +106,7 @@ class UpdaterMod(loader.Module):
             return
 
         if self._pending not in {utils.get_git_hash(), self._notified}:
-            m = await self.inline.bot.send_animation(
+            m = await self.inline.bot.send_photo(
                 self.tg_id,
                 "https://envs.sh/ONx.png",
                 caption=self.strings("update_required").format(

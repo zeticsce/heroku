@@ -13,7 +13,7 @@
 - fixed bug with non-working .ping and .info on arch linux
 - updated .installation command
 - Telethon has been completely updated, moving to heroku-tl
-- update heroku-tl to 1.0.6
+- update heroku-tl to 1.1.0
 - added prefix to ping
 - removed official support serv00, tothost, goorm, railway, termux
 - rename folder "hikka" to "heroku"
