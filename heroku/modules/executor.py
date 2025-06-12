@@ -124,4 +124,4 @@ class Executor(loader.Module):
         if res or res == 0 or res == False and res is not None:
             result += self.strings["res_return"].format(res={res})
 
-        return await utils.answer(message, self.strings["result"].format(code={code}, result={result}, time=round({stop_time} - {start_time}, 5)))
+        return await utils.answer(message, self.strings["result"].format(code=code, result=result, time=round(stop_time - start_time, 5)))
