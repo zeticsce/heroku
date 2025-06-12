@@ -117,9 +117,9 @@ class Executor(loader.Module):
 
         if result:
             if not cerr:
-                result = self.strings["result_no_error"].format(result={result})
+                result = self.strings["result_no_error"].format(result=result)
             else:
-                result = self.strings["result_error"].format(result={result})
+                result = self.strings["result_error"].format(result=result)
 
         if res or res == 0 or res == False and res is not None:
             result += self.strings["res_return"].format(res={res})
