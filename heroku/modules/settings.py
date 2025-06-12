@@ -233,8 +233,8 @@ class CoreMod(loader.Module):
                     (self.config["alias_emoji"] + f" <code>{i}</code> &lt;- {y}")
                     for i, y in self.allmodules.aliases.items()
                 ]
-            ),
-            + "</blockquote>"
+            )
+            + "</blockquote>",
         )
 
     @loader.command()
