@@ -266,7 +266,7 @@ class HerokuInfoMod(loader.Module):
             return
         await utils.answer(
             message,
-            self.string["font_installed"]
+            self.strings["font_installed"]
         )
 
     @loader.command()
