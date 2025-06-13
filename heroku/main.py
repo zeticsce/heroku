@@ -98,11 +98,14 @@ IS_AEZA = "aeza" in socket.gethostname()
 IS_USERLAND = "userland" in os.environ.get("USER", "")
 IS_JAMHOST = "JAMHOST" in os.environ
 IS_WSL = False
+IS_WINDOWS = False
 with contextlib.suppress(Exception):
     from platform import uname
 
     if "microsoft-standard" in uname().release:
         IS_WSL = True
+    elif uname().system == "Windows":
+        IS_WINDOWS = True
 
 # fmt: off
 LATIN_MOCK = [
@@ -827,10 +830,10 @@ class Heroku:
 
             logo = (
                 "                          _           \n"
-                "  /\  /\ ___  _ __  ___  | | __ _   _ \n"
-                " / /_/ // _ \| '__|/ _ \ | |/ /| | | |\n"
+               r"  /\  /\ ___  _ __  ___  | | __ _   _ ""\n"
+               r" / /_/ // _ \| '__|/ _ \ | |/ /| | | |""\n"
                 "/ __  /|  __/| |  | (_) ||   < | |_| |\n"
-                "\/ /_/  \___||_|   \___/ |_|\_\ \__,_|\n\n"
+               r"\/ /_/  \___||_|   \___/ |_|\_\ \__,_|""\n\n"
                 f"• Build: {build[:7]}\n"
                 f"• Version: {'.'.join(list(map(str, list(__version__))))}\n"
                 f"• {upd}\n"
@@ -990,14 +993,24 @@ class Heroku:
 
     def main(self):
         """Main entrypoint"""
-        self.loop.add_signal_handler(
-            signal.SIGINT,
-            lambda: asyncio.create_task(self._shutdown_handler())
-        )
+        if sys.platform != "win32":
+            try:
+                self.loop.add_signal_handler(
+                    signal.SIGINT,
+                    lambda: asyncio.create_task(self._shutdown_handler())
+                )
+            except NotImplementedError:
+                logging.warning("Signal handlers not supported on this platform.")
+        else:
+            logging.info("Running on Windows — skipping signal handler.")
+
         try:
             self.loop.run_until_complete(self._main())
-        except:
-            pass
+        except KeyboardInterrupt:
+            logging.info("KeyboardInterrupt received.")
+            self.loop.run_until_complete(self._shutdown_handler())
+        except Exception as e:
+            logging.exception("Unexpected exception in main loop: %s", e)
         finally:
             logging.info("Bye!")
             self.loop.run_until_complete(self._shutdown_handler())
