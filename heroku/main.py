@@ -94,6 +94,7 @@ CONFIG_PATH = BASE_PATH / "config.json"
 IS_DOCKER = "DOCKER" in os.environ
 IS_LAVHOST = "LAVHOST" in os.environ
 IS_HIKKAHOST = "HIKKAHOST" in os.environ
+IS_MACOS = "com.apple" in os.environ.get("PATH", "")
 IS_AEZA = "aeza" in socket.gethostname()
 IS_USERLAND = "userland" in os.environ.get("USER", "")
 IS_JAMHOST = "JAMHOST" in os.environ
@@ -1013,8 +1014,10 @@ class Heroku:
             logging.exception("Unexpected exception in main loop: %s", e)
         finally:
             logging.info("Bye!")
-            self.loop.run_until_complete(self._shutdown_handler())
-
+            try:
+                self.loop.run_until_complete(self._shutdown_handler())
+            except:
+                pass
 
 herokutl.extensions.html.CUSTOM_EMOJIS = not get_config_key("disable_custom_emojis")
 
