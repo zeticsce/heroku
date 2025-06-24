@@ -764,8 +764,8 @@ async def asset_channel(
         return client._channels_cache[title]["peer"], False
 
     # legacy heroku / hikka chats conversion to heroku
-    if title.startswith("heroku-"):
-        title = title.replace("heroku-", "heroku-")
+    if title.startswith("hikka-"):
+        title = title.replace("hikka-", "heroku-")
 
     async for d in client.iter_dialogs():
         if d.title == title:
@@ -1543,19 +1543,17 @@ def get_topic(message: Message) -> typing.Optional[int]:
     )
 
 
+
 def get_ram_usage() -> float:
-    """Returns total memory usage of all processes in MB"""
+    """Returns current process tree memory usage in MB"""
     try:
         import psutil
 
-        total_mem = 0
-        for process in psutil.process_iter(['memory_info']):
-            try:
-                total_mem += process.memory_info()[0] / 2.0**20
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                continue
-
-        return round(total_mem, 1)
+        current_process = psutil.Process(os.getpid())
+        mem = current_process.memory_info()[0] / 2.0**20
+        for child in current_process.children(recursive=True):
+            mem += child.memory_info()[0] / 2.0**20
+        return round(mem, 1)
     except Exception:
         return 0
 

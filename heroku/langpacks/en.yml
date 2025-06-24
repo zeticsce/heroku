@@ -204,7 +204,9 @@ heroku_web:
 heroku_backup:
   period: "⌚️ <b>The unit «ALPHA»</b> creates regular backups. These settings can be changed later.\n\nPlease select the backup frequency\n\n<b>🚫 It is thus impossible to restore modules downloaded from files with the .lm command! Be careful and do .backupmods before restoring.</b>"
   saved: "✅ The periodicity is saved! It can be changed with <code>{prefix}set_backup_period</code>"
+  saved_bot: "✅ The periodicity is saved! It can be changed with {prefix}set_backup_period"
   never: "✅ I will not make automatic backups. Can be cancelled using <code>{prefix}set_backup_period</code>"
+  never_bot: "✅ I will not make automatic backups. Can be cancelled using {prefix}set_backup_period"
   invalid_args: "🚫 <b>Please specify the correct frequency in hours, or `0` to disable</b>"
   backup_caption: '<emoji document_id=5469718869536940860>👆</emoji> <b>This is your database backup. Do not share it with anyone, it contains personal information. If you need to restore it, use</b> <pre><code class="language-heroku">{prefix}restoredb</code></pre> <b>in response to this file.</b>'
   backupall_info: '<emoji document_id=5469718869536940860>👆</emoji> <b>This is your backup of the database and modules. Do not give it to anyone, it contains personal information. If you need to restore it, use</b> <pre><code class="language-heroku">{prefix}restoreall</code></pre> <b>in response to this file.</b>'
@@ -606,7 +608,7 @@ translate:
 
 quickstart:
   name: "Quickstart"
-  base: "🪐 <b>Hello.</b> Your <b>Heroku</b> userbot is now installed.\n\n❓ <b>Need help?</b> Join <a href=\"https://t.me/heroku_talks\">our support chat</a>. We help <b>everyone</b>.\n\n💁‍♀️ <b>Quick Guide:</b>\n\n1️⃣ <b>Write</b> <code>.help</code> <b>to see the list of modules</b>\n2️⃣ <b>Write</b> <code>.help &lt;Module name/command&gt;</code> <b>to see the description of the module</b>\n3️⃣ <b>Write</b> <code>.dlmod &lt;link&gt;</code> <b>to load a module from a link</b>\n4️⃣ <b>Write</b> <code>.loadmod</code> <b>in response to a file to load a module from it</b>\n5️⃣ <b>Write</b> <code>.unloadmod &lt;Module name&gt;</code> <b>to unload a module</b>\n\n💡 <b>Heroku supports modules from Heroku, Friendly-Telegram, and GeekTG, as well as its own.</b>\n"
+  base: "🪐 <b>Hello.</b> Your <b>Heroku</b> userbot is now installed.\n\n❓ <b>Need help?</b> Join <a href=\"https://t.me/heroku_talks\">our support chat</a>. We help <b>everyone</b>.\n\n💁‍♀️ <b>Quick Guide:</b>\n\n1️⃣ <b>Write</b> <code>.help</code> <b>to see the list of modules</b>\n2️⃣ <b>Write</b> <code>.help &lt;Module name/command&gt;</code> <b>to see the description of the module</b>\n3️⃣ <b>Write</b> <code>.dlmod &lt;link&gt;</code> <b>to load a module from a link</b>\n4️⃣ <b>Write</b> <code>.loadmod</code> <b>in response to a file to load a module from it</b>\n5️⃣ <b>Write</b> <code>.unloadmod &lt;Module name&gt;</code> <b>to unload a module</b>\n\n💡 <b>Heroku supports modules from Hikka, Friendly-Telegram, and GeekTG, as well as its own.</b>\n"
   lavhost: "✌️ <b>Your userbot is installed on lavHost</b>. Make sure to join @lavhost for important notifications and updates. All questions regarding the platform should be asked in @lavhostchat."
   language_saved: "🇬🇧 Language saved!"
   language: "🇬🇧 English"

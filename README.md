@@ -44,18 +44,18 @@
  <li>📼 Improved and new <b>core modules</b></li>
  <li>⏱ Quick <b>bug fixes</b> (compared to official FTG and GeekTG)</li>
  <li>▶️ <b>Inline forms, galleries and lists</b></li>
- <li>🔁 Full <b>backward compatibility</b> with FTG and GeekTG modules</li>
+ <li>🔁 Full <b>backward compatibility</b> with FTG, GeekTG and Hikka modules</li>
 </ul>
 <hr>
 <h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/1312-micro-sd-card-flat.webp" height="54" align="middle"> Requirements</h2>
 <ul>
- <li>Python 3.8-3.11</li>
+ <li>Python 3.9-3.13</li>
  <li>API_ID and HASH from <a href="https://my.telegram.org/apps" color="#2594cb">Telegram</a></li>
 </ul>
 <hr>
 <h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/680-it-developer-flat.webp" height="54" align="middle"> Documentation</h2>
 
-Check out <a href="https://heroku.codrago.top/">heroku.codrago.top</a> for users' documentation<br>
+Check out <a href="https://heroku-ub.xyz/">heroku-ub.xyz</a> for users' documentation<br>
 
 <hr>
 <h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/981-consultation-flat.webp" height="54" align="middle"> <a href="https://t.me/heroku_talks">Support</a></h2>
@@ -125,8 +125,6 @@ Check out <a href="https://heroku.codrago.top/">heroku.codrago.top</a> for users
 <b>Special thanks to:</b>
 
 <ul>
-    <li><a href="https://gitlab.com/hackintosh5">Hackintosh5</a> for FTG, which is the base of project</li>
-    <li><a href="https://t.me/GunyaKshin">Codwiz</a> for Ukrainian translation pack</li>
-    <li><a href="https://t.me/thisLyomi">Lyomi</a> for German translation pack</li>
+    <li><a href="https://gitlab.com/hikariatama">Hikari</a> for Hikka, which is the base of project</li>
     <li><a href="https://t.me/lonami">Lonami</a> for Telethon, which is the base of Heroku-TL</li>
 </ul>

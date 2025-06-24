@@ -80,14 +80,14 @@ class HerokuBackupMod(loader.Module):
     async def _set_backup_period(self, call: BotInlineCall, value: int):
         if not value:
             self.set("period", "disabled")
-            await self.inline.bot(call.answer(self.strings("never"), show_alert=True))
+            await self.inline.bot(call.answer(self.strings("never_bot").format(prefix=self.get_prefix()), show_alert=True))
             await call.delete()
             return
 
         self.set("period", value * 60 * 60)
         self.set("last_backup", round(time.time()))
 
-        await self.inline.bot(call.answer(self.strings("saved"), show_alert=True))
+        await self.inline.bot(call.answer(self.strings("saved_bot").format(prefix=self.get_prefix()), show_alert=True))
         await call.delete()
 
     @loader.command()
