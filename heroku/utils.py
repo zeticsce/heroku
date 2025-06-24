@@ -1544,34 +1544,35 @@ def get_topic(message: Message) -> typing.Optional[int]:
 
 
 def get_ram_usage() -> float:
-    """Returns current process tree memory usage in MB"""
+    """Returns total memory usage of all processes in MB"""
     try:
         import psutil
 
-        current_process = psutil.Process(os.getpid())
-        mem = current_process.memory_info()[0] / 2.0**20
-        for child in current_process.children(recursive=True):
-            mem += child.memory_info()[0] / 2.0**20
+        total_mem = 0
+        for process in psutil.process_iter(['memory_info']):
+            try:
+                total_mem += process.memory_info()[0] / 2.0**20
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                continue
 
-        return round(mem, 1)
+        return round(total_mem, 1)
     except Exception:
         return 0
 
-
-def get_cpu_usage() -> float:
-    """Returns current process tree CPU usage in %"""
+def get_cpu_usage():
     try:
         import psutil
-
-        current_process = psutil.Process(os.getpid())
-        cpu = current_process.cpu_percent()
-        for child in current_process.children(recursive=True):
-            cpu += child.cpu_percent()
-
-        return round(cpu, 1)
+        num_cores = psutil.cpu_count(logical=True)
+        cpu = 0.0
+        for proc in psutil.process_iter():
+            try:
+                cpu += proc.cpu_percent()
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                pass
+        normalized_cpu = cpu / num_cores
+        return f"{normalized_cpu:.2f}"
     except Exception:
-        return 0
-
+        return "0.00"
 
 init_ts = time.perf_counter()
 
