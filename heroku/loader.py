@@ -147,8 +147,8 @@ def patched_import(name: str, *args, **kwargs):
         return native_import("herokutl" + name[8:], *args, **kwargs)
     elif name.startswith("hikkatl"):
         return native_import("herokutl" + name[7:], *args, **kwargs)
-    elif name.startswith ("from hikka import"):
-        return native_import("from heroku import" + name[17:], *args, **kwargs)
+    elif name.startswith ("from hikka"):
+        return native_import("from heroku" + name[10:], *args, **kwargs)
 
     return native_import(name, *args, **kwargs)
 
