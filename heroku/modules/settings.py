@@ -110,7 +110,7 @@ class CoreMod(loader.Module):
     async def herokucmd(self, message: Message):
         await utils.answer_file(
             message,
-            "https://imgur.com/a/i0Mq22X.png",
+            "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_cmd.png",
             self.strings("heroku").format(
                 (
                     utils.get_platform_emoji()
@@ -319,14 +319,14 @@ class CoreMod(loader.Module):
                 self.strings("choose_installation"),
                 message,
                 reply_markup=self._markup,
-                photo="https://imgur.com/a/HrrFair.png",
+                photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_installation.png",
                 disable_security=True
         )
             ):
 
             await self.client.send_file(
                 message.peer_id,
-                "https://imgur.com/a/HrrFair.png",
+                "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_installation.png",
                 caption=self.strings["installation"], reply_to=getattr(message, "reply_to_msg_id", None),)
         elif "-v" in args:
             await utils.answer(message, self.strings["vds_install"])

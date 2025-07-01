@@ -129,6 +129,6 @@ class InlineStuff(loader.Module):
             return
 
         await message.answer_photo(
-            "https://imgur.com/a/0gmlFYI.png",
+            "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/start_cmd.png",
             caption=self.strings("this_is_heroku"),
         )

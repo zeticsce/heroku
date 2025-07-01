@@ -484,7 +484,7 @@ class LoaderMod(loader.Module):
                 "💫 <b>Joined <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
             ),
-            photo="https://imgur.com/a/XpwmHo6.png",
+            photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/joined_jr.png",
         )
 
     async def load_module(

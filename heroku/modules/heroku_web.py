@@ -68,7 +68,7 @@ class HerokuWebMod(loader.Module):
                         },
                         {"text": self.strings("btn_no"), "action": "close"},
                     ],
-                    photo="https://imgur.com/a/NumfPGa.png",
+                    photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/web_interface.png",
                 ):
                     raise Exception
             except Exception:
@@ -102,7 +102,7 @@ class HerokuWebMod(loader.Module):
                 self.strings("opening_tunnel"),
                 reply_markup={"text": "🕔 Wait...", "data": "empty"},
                 photo=(
-                    "https://imgur.com/a/MQJGI0w.png"
+                    "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/opening_tunnel.png"
                 ),
             )
         else:
@@ -111,7 +111,7 @@ class HerokuWebMod(loader.Module):
                 message=message,
                 reply_markup={"text": "🕔 Wait...", "data": "empty"},
                 photo=(
-                    "https://imgur.com/a/MQJGI0w.png"
+                    "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/opening_tunnel.png"
                 ),
             )
 
@@ -120,5 +120,5 @@ class HerokuWebMod(loader.Module):
         await form.edit(
             self.strings("tunnel_opened"),
             reply_markup={"text": self.strings("web_btn"), "url": url},
-            photo="https://imgur.com/a/lgmzCpj.png",
+            photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/tunnel_opened.png",
         )
