@@ -336,7 +336,7 @@ class Module:
                 "✖️ <b>Declined joining <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
             ),
-            photo="https://imgur.com/a/XpwmHo6.png", #for codrago: edit this
+            photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/declined_jr.png",
         )
 
     async def request_join(
