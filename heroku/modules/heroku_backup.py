@@ -40,7 +40,7 @@ class HerokuBackupMod(loader.Module):
         if not self.get("period"):
             await self.inline.bot.send_photo(
                 self.tg_id,
-                photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
+                photo="hhttps://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
                 caption=self.strings("period"),
                 reply_markup=self.inline.generate_markup(
                     utils.chunks(
@@ -72,7 +72,7 @@ class HerokuBackupMod(loader.Module):
             "📼 Your database backups will appear here",
             silent=True,
             archive=True,
-            avatar="https://raw.githubusercontent.com/coddrago/Heroku/dev-test/assets/heroku-backups.png",
+            avatar="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_backups.png",
             _folder="heroku",
             invite_bot=True,
         )

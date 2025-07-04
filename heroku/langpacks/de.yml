@@ -334,7 +334,7 @@ test:
   configping: "Ihr benutzerdefinierter Text. Platzhalter können verwendet werden: {ping} - Ihr Ping, {uptime} - Ihre Uptime, {ping_hint} - Hinweis. Sie können den Platzhaltername {hostname} verwenden, wenn Sie den Hostname Ihres Servers benötigen"
   hint: "Geben Sie einen Hinweis an"
   ping_emoji: "Emoji, das bei einer leichten Ping-Erhöhung angezeigt wird."
-  banner_url: "Bild für Ihren Ping, zum Beispiel: https://imgur.com/a/dsh7Fvb.png"
+  banner_url: "Bild für Ihren Ping, zum Beispiel: https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/ping_cmd.png"
   logs_caption: "<emoji document_id=5350594756126721186>🪐</emoji> <b>Heroku-Logs des Levels</b> <code>{}</code>\n\n<emoji document_id=5228879218363872764>⚪️</emoji> <b>Version: {}.{}.{}</b>{}"
   debugging_enabled: "<emoji document_id=5332533929020761310>✅</emoji> <b>Der Entwicklermodus wurde für das Modul</b> <code>{0}</code> <b>aktiviert</b>\n<i>Gehe zum Ordner `debug_modules`, ändere die Datei `{0}.py` und beobachte die Änderungen in Echtzeit</i>"
   debugging_disabled: "<emoji document_id=5332533929020761310>✅</emoji> <b>Der Entwicklermodus wurde deaktiviert</b>"

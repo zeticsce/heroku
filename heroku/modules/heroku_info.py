@@ -46,7 +46,7 @@ class HerokuInfoMod(loader.Module):
 
             loader.ConfigValue(
                 "banner_url",
-                "https://imgur.com/a/7LBPJiq.png",
+                "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_info.png",
                 lambda: self.strings("_cfg_banner"),
             ),
 
