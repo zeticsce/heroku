@@ -47,7 +47,6 @@ RUN git clone https://github.com/coddrago/Heroku /data/Heroku
 WORKDIR /data/Heroku
 
 RUN pip install --no-warn-script-location --no-cache-dir -U -r requirements.txt
-RUN pip install --no-warn-script-location --no-cache-dir -U -r optional_requirements.txt
 
 RUN git reset --hard
 

@@ -132,3 +132,9 @@ class InlineStuff(loader.Module):
             "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/start_cmd.png",
             caption=self.strings("this_is_heroku"),
         )
+
+    async def aiogram_watcher(self, message: BotInlineMessage):
+        if message.text != "/profile":
+            return
+
+        await message.answer("test")
