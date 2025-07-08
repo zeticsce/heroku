@@ -137,4 +137,4 @@ class InlineStuff(loader.Module):
         if message.text != "/profile":
             return
 
-        await message.answer("Your information about userbot:\n<blockquote>prefix: {prefix}\nRAM: {ram_usage} MB\nCPU: {cpu_usage}\nHosting: {host}</blockquote>\n\nThis Beta!".format(prefix=self.get_prefix(),ram_usage=utils.get_ram_usage(),cpu_usage=utils.get_cpu_usage(),host=utils.get_named_plarform()))
+        await message.answer("Your information about userbot:\n<blockquote>prefix: {prefix}\nRAM: {ram_usage} MB\nCPU: {cpu_usage}\nHosting: {host}</blockquote>\n\nThis Beta!".format(prefix=self.get_prefix(),ram_usage=utils.get_ram_usage(),cpu_usage=utils.get_cpu_usage(),host=utils.get_named_platform()))
