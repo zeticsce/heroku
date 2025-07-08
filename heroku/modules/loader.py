@@ -574,9 +574,9 @@ class LoaderMod(loader.Module):
         module_name = f"heroku.modules.{uid}"
         doc = geek.compat(doc)
         
-        async def restart_inline(self, call: InlineCall):
+        async def restart_inline(call: InlineCall):
             await call.edit(self.strings["requirements_restarted"])
-            self.invoke("restart", "-f", message=message)
+            await self.invoke("restart", "-f", message=message)
 
         async def core_overwrite(e: CoreOverwriteError):
             nonlocal message
