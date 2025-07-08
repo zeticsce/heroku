@@ -481,7 +481,7 @@ loader:
   unloaded: "{} <b>Modul {} wurde entladen.</b>"
   not_unloaded: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Modul wurde nicht entladen.</b>"
   requirements_failed: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Fehler bei der Installation der Abhängigkeiten</b>"
-  requirements_failed_termux: "<emoji document_id=5407025283456835913>🕶</emoji> <b>Fehler bei der Installation der Abhängigkeiten</b>\n<b>Dies tritt häufig auf, weil Termux viele Bibliotheken nicht unterstützt. Melden Sie dies nicht als Fehler, es kann nicht behoben werden.</b>"
+  requirements_restarted: "🚀 <b>Dein Userbot wird neu gestartet, nach dem Neustart installiere das Modul erneut.</b>"
   requirements_installing: "<emoji document_id=5328311576736833844>🚀</emoji> <b>Installiere Abhängigkeiten:\n\n{}</b>"
   requirements_restart: "<emoji document_id=5875145601682771643>🚀</emoji> <b>Abhängigkeiten installiert, aber ein Neustart ist erforderlich, um sie anzuwenden</b> <code>{}</code>"
   all_modules_deleted: "<emoji document_id=5784993237412351403>✅</emoji> <b>Module wurden gelöscht</b>"

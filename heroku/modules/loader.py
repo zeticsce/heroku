@@ -573,6 +573,10 @@ class LoaderMod(loader.Module):
 
         module_name = f"heroku.modules.{uid}"
         doc = geek.compat(doc)
+        
+        async def restart_inline(self, call: InlineCall):
+            await call.edit(self.strings["requirements_restarted"])
+            self.invoke("restart", "-f", message=message)
 
         async def core_overwrite(e: CoreOverwriteError):
             nonlocal message
@@ -643,9 +647,14 @@ class LoaderMod(loader.Module):
 
                 if did_requirements:
                     if message is not None:
-                        await utils.answer(
-                            message,
-                            self.strings("requirements_restart").format(e.name),
+                        await self.inline.form(
+                            message=message,
+                            text = self.strings("requirements_restart").format(e.name),
+                            reply_markup = [
+                                {
+                                    "text": "🚀 restart", "callback": restart_inline
+                                }
+                            ]
                         )
 
                     return
@@ -682,16 +691,10 @@ class LoaderMod(loader.Module):
 
                 if rc != 0:
                     if message is not None:
-                        if "com.termux" in os.environ.get("PREFIX", ""):
-                            await utils.answer(
-                                message,
-                                self.strings("requirements_failed_termux"),
-                            )
-                        else:
-                            await utils.answer(
-                                message,
-                                self.strings("requirements_failed"),
-                            )
+                        await utils.answer(
+                            message,
+                            self.strings("requirements_failed")
+                        )
 
                     return
 
