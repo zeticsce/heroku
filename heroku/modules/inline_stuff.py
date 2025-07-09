@@ -18,7 +18,7 @@ from herokutl.tl.functions.contacts import UnblockRequest
 from herokutl.tl.types import Message
 
 from .. import loader, utils
-from ..inline.types import BotInlineMessage
+from ..inline.types import BotInlineMessage, InlineCall
 
 
 @loader.tds
