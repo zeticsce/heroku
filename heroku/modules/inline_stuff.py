@@ -125,18 +125,18 @@ class InlineStuff(loader.Module):
         await utils.answer(message, self.strings("bot_updated"))
 
     async def aiogram_watcher(self, message: BotInlineMessage):
-        if message.text != "/start":
+        if message.text != "/start" and message.text != "/profile":
             return
 
-        await message.answer_photo(
-            "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/start_cmd.png",
-            caption=self.strings("this_is_heroku"),
-        )
+        if message.text == "/start"
+            await message.answer_photo(
+                "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/start_cmd.png",
+                caption=self.strings("this_is_heroku"),
+            )
 
-        if message.text != "/profile":
-            return
+        if message.text == "/profile":
             
-        if message.from_user.id != self.client.tg_id:
-            await message.answer("You are not allowed to use this")
-
-        await message.answer("Your information about userbot:\n<blockquote>prefix: {prefix}\nRAM: {ram_usage} MB\nCPU: {cpu_usage}\nHosting: {host}</blockquote>\n\nThis Beta!".format(prefix=self.get_prefix(),ram_usage=utils.get_ram_usage(),cpu_usage=utils.get_cpu_usage(),host=utils.get_named_platform()))
+            if message.from_user.id != self.client.tg_id:
+                await message.answer("You are not allowed to use this")
+            else:
+                await message.answer("Your information about userbot:\n<blockquote>prefix: {prefix}\nRAM: {ram_usage} MB\nCPU: {cpu_usage}\nHosting: {host}</blockquote>\n\nThis Beta!".format(prefix=self.get_prefix(),ram_usage=utils.get_ram_usage(),cpu_usage=utils.get_cpu_usage(),host=utils.get_named_platform()))
