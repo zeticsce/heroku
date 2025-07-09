@@ -136,5 +136,7 @@ class InlineStuff(loader.Module):
     async def aiogram_watcher(self, message: BotInlineMessage):
         if message.text != "/profile":
             return
+            if message.sender.id != self.client.tg_id
+                await message.answer("You are not allowed to use this")
 
         await message.answer("Your information about userbot:\n<blockquote>prefix: {prefix}\nRAM: {ram_usage} MB\nCPU: {cpu_usage}\nHosting: {host}</blockquote>\n\nThis Beta!".format(prefix=self.get_prefix(),ram_usage=utils.get_ram_usage(),cpu_usage=utils.get_cpu_usage(),host=utils.get_named_platform()))
