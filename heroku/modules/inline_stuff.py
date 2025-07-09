@@ -128,7 +128,7 @@ class InlineStuff(loader.Module):
         if message.text != "/start" and message.text != "/profile":
             return
 
-        if message.text == "/start"
+        if message.text == "/start":
             await message.answer_photo(
                 "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/start_cmd.png",
                 caption=self.strings("this_is_heroku"),
