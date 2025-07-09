@@ -139,7 +139,7 @@ class InlineStuff(loader.Module):
             if message.from_user.id != self.client.tg_id:
                 await message.answer("You are not allowed to use this")
             else:
-                await message.answer("Your information about userbot:\n<blockquote>prefix: {prefix}\nRAM: {ram_usage} MB\nCPU: {cpu_usage}\nHosting: {host}</blockquote>\n\nThis Beta!".format(prefix=self.get_prefix(),ram_usage=utils.get_ram_usage(),cpu_usage=utils.get_cpu_usage(),host=utils.get_named_platform()), reply_markup[{"text": "Restart", "callback": self.restart}])
+                await message.answer("Your information about userbot:\n<blockquote>prefix: {prefix}\nRAM: {ram_usage} MB\nCPU: {cpu_usage}\nHosting: {host}</blockquote>\n\nThis Beta!".format(prefix=self.get_prefix(),ram_usage=utils.get_ram_usage(),cpu_usage=utils.get_cpu_usage(),host=utils.get_named_platform()), reply_markup=[{"text": "Restart", "callback": self.restart}])
 
     async def restart(self, call: InlineCall):
         await call.edit("just test restarta")
