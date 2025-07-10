@@ -136,15 +136,10 @@ class InlineStuff(loader.Module):
         if message.text == "/profile":
             
             if message.from_user.id != self.client.tg_id:
-                await message.answer("You are not allowed to use this")
+                await message.answer("❌ You are not allowed to use this")
             else:
                 await message.answer(
-                    "Your information about userbot:"
-                    "\n<blockquote>prefix: {prefix}"
-                    "\nRAM: {ram_usage} MB"
-                    "\nCPU: {cpu_usage}"
-                    "\nHosting: {host}</blockquote>"
-                    "\n\nThis Beta!".format(prefix=self.get_prefix(),ram_usage=utils.get_ram_usage(),cpu_usage=utils.get_cpu_usage(),host=utils.get_named_platform()), 
+                    self.strings["profile_cmd"].format(prefix=self.get_prefix(),ram_usage=utils.get_ram_usage(),cpu_usage=utils.get_cpu_usage(),host=utils.get_named_platform()), 
                     reply_markup = self.inline.generate_markup(
                         markup_obj=[
                             [
@@ -165,9 +160,9 @@ class InlineStuff(loader.Module):
                 )
 
     async def restart(self, call: InlineCall, message):
-        await call.edit("just test restarta")
+        await call.edit(self.strings["restart"])
         await self.invoke("restart", "-f", message=message, peer=self.inline.bot.id)
 
     async def reset_prefix(self, call: InlineCall):
-        await query.answer("Prefix reset!")
+        await message.answer(self.strings["prefix_reset"])
         self.db.set("heroku.main", "command_prefix", ".")

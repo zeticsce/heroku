@@ -351,6 +351,9 @@ inline_stuff:
   bot_username_occupied: "<emoji document_id=5210952531676504517>🚫</emoji> <b>This username is already occupied</b>"
   bot_updated: "<emoji document_id=6318792204118656433>🎉</emoji> <b>Config successfully saved. Restart userbot to apply changes</b>"
   this_is_heroku: "🪐 <b>Hi! This is Heroku — powerful modular Telegram userbot. You can install it to your account!</b>\n\n<b>🌍 <a href=\"https://github.com/coddrago/Heroku\">GitHub</a></b>\n<b>👥 <a href=\"https://t.me/heroku_talks\">Support chat</a></b>"
+  profile_cmd: "ℹ️ Userbot Main Information\n\n<blockquote>• Prefix: {prefix}\n• RAM Usage: {ram_usage} MB\n• CPU Usage: {cpu_usage}%\n• Hosting: {host}<blockquote>"
+  restart: "🔄 Your Heroku is being restarted.."
+  prefix_reset: "🔀 Prefix reset!"
   _cmd_doc_ch_heroku_bot: "<username> - Change your Heroku inline bot username"
   _cls_doc: "Provides support for inline stuff"
 
