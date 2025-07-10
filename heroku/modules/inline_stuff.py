@@ -138,8 +138,9 @@ class InlineStuff(loader.Module):
             if message.from_user.id != self.client.tg_id:
                 await message.answer("❌ You are not allowed to use this")
             else:
-                await message.answer(
-                    self.strings["profile_cmd"].format(prefix=self.get_prefix(),ram_usage=utils.get_ram_usage(),cpu_usage=utils.get_cpu_usage(),host=utils.get_named_platform()), 
+                await message.answer_photo(
+                    "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/start_cmd.png",
+                    caption = self.strings["profile_cmd"].format(prefix=self.get_prefix(),ram_usage=utils.get_ram_usage(),cpu_usage=utils.get_cpu_usage(),host=utils.get_named_platform()), 
                     reply_markup = self.inline.generate_markup(
                         markup_obj=[
                             [
