@@ -152,7 +152,8 @@ class InlineStuff(loader.Module):
                             [
                                 {
                                     "text": "Reset prefix", 
-                                    "callback": self.reset_prefix
+                                    "callback": self.reset_prefix,
+                                    "args": (message,)
                                 }
                             ]
                         ]
@@ -163,6 +164,6 @@ class InlineStuff(loader.Module):
         await call.edit(self.strings["restart"])
         await self.invoke("restart", "-f", message=message, peer=self.inline.bot.id)
 
-    async def reset_prefix(self, call: InlineCall):
+    async def reset_prefix(self, call: InlineCall, message):
         await message.answer(self.strings["prefix_reset"])
         self.db.set("heroku.main", "command_prefix", ".")
