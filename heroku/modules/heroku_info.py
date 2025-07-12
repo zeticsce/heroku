@@ -289,14 +289,16 @@ class HerokuInfoMod(loader.Module):
                 reply_to=getattr(message, "reply_to_msg_id", None),
             )
         elif self.config["custom_message"] is None:
-            await message.edit(
+            await utils.answer(
+                message,
                 self._render_info(start),
                 file = self.config["banner_url"],
             )
         else:
             if '{ping}' in self.config["custom_message"]:
                 message = await utils.answer(message, self.config["ping_emoji"])
-            await message.edit(
+            await utils.answer(
+                message,
                 self._render_info(start),
                 file = self.config["banner_url"],
             )
