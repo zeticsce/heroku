@@ -108,9 +108,7 @@ class CoreMod(loader.Module):
 
     @loader.command(ru_doc="Информация о Хероку", en_doc="Information of Heroku", ua_doc="Інформація про Хероку", de_doc="Informationen über Heroku")
     async def herokucmd(self, message: Message):
-        await utils.answer_file(
-            message,
-            "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_cmd.png",
+        await message.edit(
             self.strings("heroku").format(
                 (
                     utils.get_platform_emoji()
@@ -126,6 +124,7 @@ class CoreMod(loader.Module):
                 if version.branch == "master"
                 else self.strings("unstable").format(version.branch)
             ),
+            file= "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_cmd.png",
         )
 
     @loader.command()
