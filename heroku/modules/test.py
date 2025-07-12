@@ -65,7 +65,7 @@ class TestMod(loader.Module):
             ),
             loader.ConfigValue(
                 "tglog_level",
-                "INFO",
+                "ERROR",
                 (
                     "⚠️ Do not touch, if you don't know what it does!\n"
                     "Minimal loglevel for records to be sent in Telegram."

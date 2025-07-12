@@ -145,14 +145,14 @@ class InlineStuff(loader.Module):
                         markup_obj=[
                             [
                                 {
-                                    "text": "Restart", 
+                                    "text": "🚀 Restart", 
                                     "callback": self.restart, 
                                     "args": (message,)
                                 }
                             ],
                             [
                                 {
-                                    "text": "Reset prefix", 
+                                    "text": "⚠️ Reset prefix", 
                                     "callback": self.reset_prefix,
                                     "args": (message,)
                                 }

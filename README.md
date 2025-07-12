@@ -56,6 +56,7 @@
 <h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/680-it-developer-flat.webp" height="54" align="middle"> Documentation</h2>
 
 Check out <a href="https://heroku-ub.xyz/">heroku-ub.xyz</a> for users' documentation<br>
+And <a href="https://dev.heroku-ub.xyz/">dev.heroku-ub.xyz</a> for developers documentation
 
 <hr>
 <h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/981-consultation-flat.webp" height="54" align="middle"> <a href="https://t.me/heroku_talks">Support</a></h2>
