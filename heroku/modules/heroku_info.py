@@ -288,10 +288,9 @@ class HerokuInfoMod(loader.Module):
                 reply_to=getattr(message, "reply_to_msg_id", None),
             )
         elif self.config["custom_message"] is None:
-            await utils.answer_file(
-                message,
-                self.config["banner_url"],
+            await message.edit(
                 self._render_info(start),
+                file = self.config["banner_url"],
                 reply_to=getattr(message, "reply_to_msg_id", None),
             )
         else:
