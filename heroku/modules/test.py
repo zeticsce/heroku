@@ -378,7 +378,6 @@ class TestMod(loader.Module):
         banner = self.config["banner_url"]
         
         if self.config["banner_url"]:
-            await message.delete()
             await utils.answer(
                 message,
                 self.config["Text_Of_Ping"].format(
