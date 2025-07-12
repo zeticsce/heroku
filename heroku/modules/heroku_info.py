@@ -293,6 +293,7 @@ class HerokuInfoMod(loader.Module):
                 message,
                 self._render_info(start),
                 file = self.config["banner_url"],
+                reply_to=getattr(message, "reply_to_msg_id", None),
             )
         else:
             if '{ping}' in self.config["custom_message"]:
@@ -301,6 +302,7 @@ class HerokuInfoMod(loader.Module):
                 message,
                 self._render_info(start),
                 file = self.config["banner_url"],
+                reply_to=getattr(message, "reply_to_msg_id", None),
             )
 
     @loader.command()
