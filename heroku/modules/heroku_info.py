@@ -285,7 +285,6 @@ class HerokuInfoMod(loader.Module):
             await utils.answer_file(
                 message,
                 self._get_info_photo(start),
-                self.config["banner_url"],
                 reply_to=getattr(message, "reply_to_msg_id", None),
             )
         elif self.config["custom_message"] is None:
