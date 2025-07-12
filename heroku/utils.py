@@ -764,8 +764,8 @@ async def asset_channel(
         return client._channels_cache[title]["peer"], False
 
     # legacy heroku / hikka chats conversion to heroku
-    if title.startswith("heroku-"):
-        title = title.replace("heroku-", "heroku-")
+    if title.startswith("hikka-"):
+        title = title.replace("hikka-", "heroku-")
 
     async for d in client.iter_dialogs():
         if d.title == title:
@@ -1543,6 +1543,7 @@ def get_topic(message: Message) -> typing.Optional[int]:
     )
 
 
+
 def get_ram_usage() -> float:
     """Returns current process tree memory usage in MB"""
     try:
@@ -1552,26 +1553,24 @@ def get_ram_usage() -> float:
         mem = current_process.memory_info()[0] / 2.0**20
         for child in current_process.children(recursive=True):
             mem += child.memory_info()[0] / 2.0**20
-
         return round(mem, 1)
     except Exception:
         return 0
 
-
-def get_cpu_usage() -> float:
-    """Returns current process tree CPU usage in %"""
+def get_cpu_usage():
     try:
         import psutil
-
-        current_process = psutil.Process(os.getpid())
-        cpu = current_process.cpu_percent()
-        for child in current_process.children(recursive=True):
-            cpu += child.cpu_percent()
-
-        return round(cpu, 1)
+        num_cores = psutil.cpu_count(logical=True)
+        cpu = 0.0
+        for proc in psutil.process_iter():
+            try:
+                cpu += proc.cpu_percent()
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                pass
+        normalized_cpu = cpu / num_cores
+        return f"{normalized_cpu:.2f}"
     except Exception:
-        return 0
-
+        return "0.00"
 
 init_ts = time.perf_counter()
 

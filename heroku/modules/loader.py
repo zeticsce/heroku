@@ -15,9 +15,9 @@
 import ast
 import asyncio
 import contextlib
+import difflib
 import functools
 import importlib
-import difflib
 import inspect
 import io
 import logging
@@ -33,10 +33,10 @@ from importlib.machinery import ModuleSpec
 from urllib.parse import urlparse
 
 import requests
+from herokutl.errors.common import ScamDetectionError
 from herokutl.errors.rpcerrorlist import MediaCaptionTooLongError
 from herokutl.tl.functions.channels import JoinChannelRequest
 from herokutl.tl.types import Channel, Message, PeerUser
-from herokutl.errors.common import ScamDetectionError
 
 from .. import loader, main, utils
 from .._local_storage import RemoteStorage
@@ -484,7 +484,7 @@ class LoaderMod(loader.Module):
                 "💫 <b>Joined <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
             ),
-            photo="https://imgur.com/a/XpwmHo6.png",
+            photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/joined_jr.png",
         )
 
     async def load_module(
@@ -573,6 +573,10 @@ class LoaderMod(loader.Module):
 
         module_name = f"heroku.modules.{uid}"
         doc = geek.compat(doc)
+        
+        async def restart_inline(call: InlineCall):
+            await call.edit(self.strings["requirements_restarted"])
+            await self.invoke("restart", "-f", message=message)
 
         async def core_overwrite(e: CoreOverwriteError):
             nonlocal message
@@ -643,9 +647,14 @@ class LoaderMod(loader.Module):
 
                 if did_requirements:
                     if message is not None:
-                        await utils.answer(
-                            message,
-                            self.strings("requirements_restart").format(e.name),
+                        await self.inline.form(
+                            message=message,
+                            text = self.strings("requirements_restart").format(e.name),
+                            reply_markup = [
+                                {
+                                    "text": "🚀 restart", "callback": restart_inline
+                                }
+                            ]
                         )
 
                     return
@@ -662,6 +671,9 @@ class LoaderMod(loader.Module):
                         ),
                     )
 
+                is_venv = hasattr(sys, 'real_prefix') or sys.prefix != getattr(sys, 'base_prefix', sys.prefix)
+                need_user_flag = loader.USER_INSTALL and not is_venv
+
                 pip = await asyncio.create_subprocess_exec(
                     sys.executable,
                     "-m",
@@ -671,7 +683,7 @@ class LoaderMod(loader.Module):
                     "-q",
                     "--disable-pip-version-check",
                     "--no-warn-script-location",
-                    *["--user"] if loader.USER_INSTALL else [],
+                    *["--user"] if need_user_flag else [],
                     *requirements,
                 )
 
@@ -679,16 +691,10 @@ class LoaderMod(loader.Module):
 
                 if rc != 0:
                     if message is not None:
-                        if "com.termux" in os.environ.get("PREFIX", ""):
-                            await utils.answer(
-                                message,
-                                self.strings("requirements_failed_termux"),
-                            )
-                        else:
-                            await utils.answer(
-                                message,
-                                self.strings("requirements_failed"),
-                            )
+                        await utils.answer(
+                            message,
+                            self.strings("requirements_failed")
+                        )
 
                     return
 

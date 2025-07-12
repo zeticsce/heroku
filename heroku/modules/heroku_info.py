@@ -46,7 +46,7 @@ class HerokuInfoMod(loader.Module):
 
             loader.ConfigValue(
                 "banner_url",
-                "https://imgur.com/a/7LBPJiq.png",
+                "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_info.png",
                 lambda: self.strings("_cfg_banner"),
             ),
 
@@ -94,7 +94,7 @@ class HerokuInfoMod(loader.Module):
         clean_text = ''.join([str for str in text if not any(i in str for i in emoji_list)])
         return clean_text
     
-    def imgurpidor(self, url: str) -> str:
+    def imgur(self, url: str) -> str:
         page = requests.get(url, stream=True, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"})
         soup = BeautifulSoup(page.text, 'html.parser')
         metatag = soup.find("meta", property="og:image")
@@ -200,7 +200,7 @@ class HerokuInfoMod(loader.Module):
         imgform = self.config['banner_url'].split('.')[-1]
         imgset = self.config['imgSettings']
         if imgform in ['jpg', 'jpeg', 'png', 'bmp', 'webp']:
-            response = requests.get(self.config['banner_url'] if not self.config['banner_url'].startswith('https://imgur') else self.imgurpidor(self.config['banner_url']), stream=True, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"})
+            response = requests.get(self.config['banner_url'] if not self.config['banner_url'].startswith('https://imgur') else self.imgur(self.config['banner_url']), stream=True, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"})
             img = Image.open(BytesIO(response.content))
             font = ImageFont.truetype(
                 glob.glob(f'{os.getcwd()}/assets/font.*')[0], 
@@ -288,19 +288,19 @@ class HerokuInfoMod(loader.Module):
                 reply_to=getattr(message, "reply_to_msg_id", None),
             )
         elif self.config["custom_message"] is None:
-            await utils.answer_file(
+            await utils.answer(
                 message,
-                self.config["banner_url"],
                 self._render_info(start),
+                file = self.config["banner_url"],
                 reply_to=getattr(message, "reply_to_msg_id", None),
             )
         else:
             if '{ping}' in self.config["custom_message"]:
                 message = await utils.answer(message, self.config["ping_emoji"])
-            await utils.answer_file(
+            await utils.answer(
                 message,
-                self.config["banner_url"],
                 self._render_info(start),
+                file = self.config["banner_url"],
                 reply_to=getattr(message, "reply_to_msg_id", None),
             )
 

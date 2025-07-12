@@ -40,7 +40,7 @@ class HerokuBackupMod(loader.Module):
         if not self.get("period"):
             await self.inline.bot.send_photo(
                 self.tg_id,
-                photo="https://imgur.com/a/wfiqkDa.png",
+                photo="hhttps://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
                 caption=self.strings("period"),
                 reply_markup=self.inline.generate_markup(
                     utils.chunks(
@@ -72,7 +72,7 @@ class HerokuBackupMod(loader.Module):
             "📼 Your database backups will appear here",
             silent=True,
             archive=True,
-            avatar="https://raw.githubusercontent.com/coddrago/Heroku/dev-test/assets/heroku-backups.png",
+            avatar="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_backups.png",
             _folder="heroku",
             invite_bot=True,
         )
@@ -80,14 +80,14 @@ class HerokuBackupMod(loader.Module):
     async def _set_backup_period(self, call: BotInlineCall, value: int):
         if not value:
             self.set("period", "disabled")
-            await self.inline.bot(call.answer(self.strings("never"), show_alert=True))
+            await self.inline.bot(call.answer(self.strings("never_bot").format(prefix=self.get_prefix()), show_alert=True))
             await call.delete()
             return
 
         self.set("period", value * 60 * 60)
         self.set("last_backup", round(time.time()))
 
-        await self.inline.bot(call.answer(self.strings("saved"), show_alert=True))
+        await self.inline.bot(call.answer(self.strings("saved_bot").format(prefix=self.get_prefix()), show_alert=True))
         await call.delete()
 
     @loader.command()
@@ -227,11 +227,11 @@ class HerokuBackupMod(loader.Module):
                             with modzip.open(name, "r") as module:
                                 path.write_bytes(module.read())
 
-            await call.answer(self.strings("all_restored"), show_alert=True)
+            await self.inline.bot(call.answer(self.strings("all_restored"), show_alert=True))
             await self.invoke("restart", "-f", peer=call.message.peer_id)
         except Exception:
             logger.exception("Restore from backupall failed")
-            await call.answer(self.strings("reply_to_file"), show_alert=True)
+            await self.inline.bot(call.answer(self.strings("reply_to_file"), show_alert=True))
 
     def _convert(self, backup):
         fixed = re.sub(r'(hikka\.)(\S+\":)', lambda m: 'heroku.' + m.group(2), backup)

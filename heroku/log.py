@@ -332,13 +332,13 @@ class TelegramLogsHandler(logging.Handler):
             reply_markup=self._gen_web_debug_button(item),
         )
 
-        await call.answer(
+        self.inline.bot(await call.answer(
             (
                 "Web debugger started. You can get PIN using .debugger command. \n⚠️"
                 " !DO NOT GIVE IT TO ANYONE! ⚠️"
             ),
             show_alert=True,
-        )
+        ))
 
     def get_logid_by_client(self, client_id: int) -> int:
         return self._mods[client_id].logchat
@@ -530,7 +530,7 @@ def init():
     class NoFetchUpdatesFilter(logging.Filter):
         def filter(self, record: logging.LogRecord) -> bool:
             msg = record.getMessage()
-            return "Failed to fetch updates" not in msg
+            return "Failed to fetch updates" not in msg or "Sleep" not in msg
     
     logging.getLogger("aiogram.dispatcher").addFilter(NoFetchUpdatesFilter())
     handler = logging.StreamHandler()
