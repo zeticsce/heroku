@@ -215,7 +215,7 @@ class Presets(loader.Module):
         """| Packs of modules to load"""
         await self.inline.form(
             message=message,
-            photo='https://imgur.com/a/SF0MPmQ.png',
+            photo='https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/presets_cmd.png',
             text=self.strings('welcome').replace('/presets', self.get_prefix() + 'presets'),
             reply_markup=self._markup,
         )
