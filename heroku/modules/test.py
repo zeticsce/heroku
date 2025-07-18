@@ -111,6 +111,7 @@ class TestMod(loader.Module):
     def _pass_config_to_logger(self):
         logging.getLogger().handlers[0].force_send_all = self.config["force_send_all"]
         logging.getLogger().handlers[0].tg_level = {
+            "DEBUG": 0,
             "INFO": 20,
             "WARNING": 30,
             "ERROR": 40,
