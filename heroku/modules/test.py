@@ -71,7 +71,7 @@ class TestMod(loader.Module):
                     "Minimal loglevel for records to be sent in Telegram."
                 ),
                 validator=loader.validators.Choice(
-                    ["INFO", "WARNING", "ERROR", "CRITICAL"]
+                    ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
                 ),
                 on_change=self._pass_config_to_logger,
             ),
