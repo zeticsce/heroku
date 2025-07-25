@@ -1349,8 +1349,8 @@ class LoaderMod(loader.Module):
 
         await utils.answer(
             message,
+            text,
             file=file,
-            caption=text,
             reply_to=getattr(message, "reply_to_msg_id", None),
         )
 
