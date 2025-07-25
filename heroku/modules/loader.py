@@ -1347,9 +1347,9 @@ class LoaderMod(loader.Module):
         file.name = f"{class_name}.py"
         file.seek(0)
 
-        await utils.answer_file(
+        await utils.answer(
             message,
-            file,
+            file=file,
             caption=text,
             reply_to=getattr(message, "reply_to_msg_id", None),
         )
