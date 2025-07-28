@@ -1,4 +1,8 @@
 # Heroku Changelog
+## 🪐 Heroku 1.7.2
+- added autoupdate
+- updated heroku-tl to 1.2.0
+
 ## 🪐 Heroku 1.7.1
 - fixed bug with web 
 - fixed bug with executor
@@ -14,7 +18,6 @@
 - update heroku-tl to 1.1.3
 - fixed error with "method not mounted"
 - added log "aiogram sleep" to ignore filter
-- 
 
 ## 🪐 Heroku 1.7.0
 
