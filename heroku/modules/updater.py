@@ -474,7 +474,7 @@ class UpdaterMod(loader.Module):
 
         self.set("do_not_create", True)
 
-        if not isinstance(self.config["autoupdate"], bool):
+        if self.config["autoupdate"] == None:
             await self.inline.bot.send_photo(
                 self.tg_id,
                 photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
