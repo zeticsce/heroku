@@ -169,7 +169,7 @@ class UpdaterMod(loader.Module):
                 m = await self.inline.bot.send_photo(
                     self.tg_id,
                     "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/updated.png",
-                    caption=self.strings("autoupdate_notification").format(
+                    caption=self.strings("autoupdate_notifier").format(
                         utils.get_git_hash()[:6],
                         '<a href="https://github.com/coddrago/Heroku/compare/{}...{}">{}</a>'.format(
                             utils.get_git_hash()[:12],
