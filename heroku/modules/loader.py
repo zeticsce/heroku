@@ -576,7 +576,7 @@ class LoaderMod(loader.Module):
         
         async def restart_inline(call: InlineCall):
             await call.edit(self.strings["requirements_restarted"])
-            await self.invoke("restart", "-f", message=message)
+            await self.invoke("restart@me", "-f", message=message)
 
         async def core_overwrite(e: CoreOverwriteError):
             nonlocal message
