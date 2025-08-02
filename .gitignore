@@ -153,6 +153,7 @@ config.ini
 config-*.json
 config.json
 *cache*.json
+*.png
 *.webp
 *.webm
 *.tgs

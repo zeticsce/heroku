@@ -1019,18 +1019,12 @@ class HerokuSecurityMod(loader.Module):
 
     @loader.command()
     async def tsecrm(self, message: Message):
-        if (
-            not self._client.dispatcher.security.tsec_chat
-            and not self._client.dispatcher.security.tsec_user
-        ):
-            await utils.answer(message, self.strings("no_rules"))
-            return
 
-        if not (args := utils.get_args(message)) or args[0] not in {
+        if not (args := utils.get_args(message)) or args[0] not in [
             "user",
             "chat",
             "sgroup",
-        }:
+        ]:
             await utils.answer(message, self.strings("no_target"))
             return
 
@@ -1071,10 +1065,11 @@ class HerokuSecurityMod(loader.Module):
                 return
 
             group = self._sgroups[args[1]]
+            permissions = group.permissions
             _any = False
-            for rule in group.permissions:
+            for rule in permissions:
                 if rule["rule"] == args[2]:
-                    group.permissions.remove(rule)
+                    permissions.remove(rule)
                     _any = True
 
             if not _any:
@@ -1114,12 +1109,6 @@ class HerokuSecurityMod(loader.Module):
 
     @loader.command()
     async def tsecclr(self, message: Message):
-        if (
-            not self._client.dispatcher.security.tsec_chat
-            and not self._client.dispatcher.security.tsec_user
-        ):
-            await utils.answer(message, self.strings("no_rules"))
-            return
 
         if (
             not (args := utils.get_args(message))
@@ -1195,12 +1184,6 @@ class HerokuSecurityMod(loader.Module):
     @loader.command()
     async def tsec(self, message: Message):
         if not (args := utils.get_args(message)):
-            if (
-                not self._client.dispatcher.security.tsec_chat
-                and not self._client.dispatcher.security.tsec_user
-            ):
-                await utils.answer(message, self.strings("no_rules"))
-                return
 
             await utils.answer(
                 message,
