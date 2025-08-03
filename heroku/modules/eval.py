@@ -202,10 +202,11 @@ class Evaluator(loader.Module):
                     utils.escape_html(utils.get_args_raw(message)),
                     "python",
                     utils.escape_html(self.censor(str(result))),
-                ) + (utils.escape_html(self.strings["print_outp"].format(
+                ) + (self.strings["print_outp"].format(
                     "python",
                     print_output,
-                )) if print_output else ""),
+                    utils.escape_html(self.censor(print_output))
+                    ) if print_output else ""),
             )
 
     @loader.command()
