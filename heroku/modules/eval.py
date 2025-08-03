@@ -158,7 +158,7 @@ class Evaluator(loader.Module):
     async def e(self, message: Message):
         try:
             output_print = StringIO()
-            with contextliv.redirect_stdout(output_print):
+            with contextlib.redirect_stdout(output_print):
                 result = await meval(
                     utils.get_args_raw(message),
                     globals(),
