@@ -1,67 +1,134 @@
-<a href="https://www.codacy.com/gh/coddrago/Heroku/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=coddrago/Heroku&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/97e3ea868f9344a5aa6e4d874f83db14"/></a>
-<a href="#"><img src="https://img.shields.io/github/languages/code-size/coddrago/Heroku"/></a>
-<a href="#"><img src="https://img.shields.io/github/issues-raw/coddrago/Heroku"/></a>
-<a href="#"><img src="https://img.shields.io/github/license/coddrago/Heroku"/></a>
-<a href="#"><img src="https://img.shields.io/github/commit-activity/m/coddrago/Heroku"/></a><br>
-<a href="#"><img src="https://img.shields.io/github/forks/coddrago/Heroku?style=flat"/></a>
-<a href="#"><img src="https://img.shields.io/github/stars/coddrago/Heroku"/></a>&nbsp;<a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black"></a><br>
+<div align="center">
+  <img src="https://github.com/hikariatama/assets/raw/master/1326-command-window-line-flat.webp" height="80">
+  <h1>Heroku Userbot</h1>
+  <p>Advanced Telegram userbot with enhanced security and modern features</p>
+  
+  <p>
+    <a href="https://www.codacy.com/gh/coddrago/Heroku/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=coddrago/Heroku&amp;utm_campaign=Badge_Grade">
+      <img src="https://app.codacy.com/project/badge/Grade/97e3ea868f9344a5aa6e4d874f83db14" alt="Codacy Grade">
+    </a>
+    <a href="#">
+      <img src="https://img.shields.io/github/languages/code-size/coddrago/Heroku" alt="Code Size">
+    </a>
+    <a href="#">
+      <img src="https://img.shields.io/github/issues-raw/coddrago/Heroku" alt="Open Issues">
+    </a>
+    <a href="#">
+      <img src="https://img.shields.io/github/license/coddrago/Heroku" alt="License">
+    </a>
+    <a href="#">
+      <img src="https://img.shields.io/github/commit-activity/m/coddrago/Heroku" alt="Commit Activity">
+    </a>
+    <br>
+    <a href="#">
+      <img src="https://img.shields.io/github/forks/coddrago/Heroku?style=flat" alt="Forks">
+    </a>
+    <a href="#">
+      <img src="https://img.shields.io/github/stars/coddrago/Heroku" alt="Stars">
+    </a>
+    <a href="https://github.com/psf/black">
+      <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code Style: Black">
+    </a>
+  </p>
+</div>
 
-### Disclaimer
+---
 
-> Even though Heroku has extended security measures for scam-modules protection, flood-based account restrictions protection and others, it still may cause damage to server / account if you install module from untrusted developer. Please, consider downloading modules exceptionally from official repository or from trusted developers. If you are not sure about whether module is safe or not, please, DO NOT INSTALL IT. Same goes for unknown commands (.terminal, .e, .eval, .ec, .ecpp, etc.). You have been warned.
+## ⚠️ Security Notice
 
-<hr>
-<h2><img src="https://github.com/hikariatama/assets/raw/master/1326-command-window-line-flat.webp" height="54" align="middle"> Installation</h2>
+> **Important Security Advisory**  
+> While Heroku implements extended security measures, installing modules from untrusted developers may still cause damage to your server/account.
+> 
+> **Recommendations:**
+> - ✅ Download modules exclusively from official repositories or trusted developers
+> - ❌ Do NOT install modules if unsure about their safety
+> - ⚠️ Exercise caution with unknown commands (`.terminal`, `.eval`, `.ecpp`, etc.)
 
-<b>Manual installation (for VDS/VPS server):</b><br>
-<code>apt update && apt install git python3 -y && git clone https://github.com/coddrago/Heroku && cd Heroku && pip install -r requirements.txt && python3 -m heroku</code><br>
-<i>If you are on VPS\VDS, type <code>--proxy-pass</code> in the end of command to open SSH tunnel to your Heroku web interface, or use <code>--no-web</code> to complete setup in console</i><br>
-<br>
-<b>Some further details:</b>
+---
+
+## 🚀 Installation
+
+### Manual Installation (VPS/VDS Server)
+
+```bash
+apt update && apt install git python3 -y && \
+git clone https://github.com/coddrago/Heroku && \
+cd Heroku && \
+pip install -r requirements.txt && \
+python3 -m heroku
+```
+
+> **Note for VPS/VDS Users:**  
+> Add `--proxy-pass` to enable SSH tunneling  
+> Add `--no-web` for console-only setup
+
+### Additional Features
 
 <details>
- <summary>Pre-installed automatic database backuper</summary>
- <img src="https://user-images.githubusercontent.com/36935426/202905566-964d2904-f3ce-4a14-8f05-0e7840e1b306.png" width="300">
+  <summary><b>🔒 Automatic Database Backuper</b></summary>
+  <img src="https://user-images.githubusercontent.com/36935426/202905566-964d2904-f3ce-4a14-8f05-0e7840e1b306.png" width="400">
 </details>
+
 <details>
- <summary>Welcome installation info</summary>
- <img src="https://user-images.githubusercontent.com/36935426/202905720-6319993b-697c-4b09-a194-209c110c79fd.png" width="300">
- <img src="https://user-images.githubusercontent.com/36935426/202905746-2a511129-0208-4581-bb27-7539bd7b53c9.png" width="300">
+  <summary><b>👋 Welcome Installation Screens</b></summary>
+  <img src="https://user-images.githubusercontent.com/36935426/202905720-6319993b-697c-4b09-a194-209c110c79fd.png" width="300">
+  <img src="https://user-images.githubusercontent.com/36935426/202905746-2a511129-0208-4581-bb27-7539bd7b53c9.png" width="300">
 </details>
 
-<hr>
-<h2><img src="https://github.com/hikariatama/assets/raw/master/35-edit-flat.webp" height="54" align="middle"> Changes</h2>
+---
 
-<ul>
- <li>🆕 <b>Latest Telegram layer</b> with forums and other stuff</li>
- <li>🔓 <b>Security</b> improvements, including <b>native entity caching</b> and <b>targeted security rules</b></li>
- <li>🎨 <b>UI/UX</b> improvements</li>
- <li>📼 Improved and new <b>core modules</b></li>
- <li>⏱ Quick <b>bug fixes</b> (compared to official FTG and GeekTG)</li>
- <li>▶️ <b>Inline forms, galleries and lists</b></li>
- <li>🔁 <b>Backward compatibility</b> with FTG, GeekTG and Hikka modules</li>
-</ul>
-<hr>
-<h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/1312-micro-sd-card-flat.webp" height="54" align="middle"> Requirements</h2>
-<ul>
- <li>Python 3.9-3.13</li>
- <li>API_ID and HASH from <a href="https://my.telegram.org/apps" color="#2594cb">Telegram</a></li>
-</ul>
-<hr>
-<h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/680-it-developer-flat.webp" height="54" align="middle"> Documentation</h2>
+## ✨ Key Features & Improvements
 
-Check out <a href="https://heroku-ub.xyz/">heroku-ub.xyz</a> for users' documentation<br>
-And <a href="https://dev.heroku-ub.xyz/">dev.heroku-ub.xyz</a> for developers documentation
+| Feature | Description |
+|---------|-------------|
+| 🆕 **Latest Telegram Layer** | Support for forums and newest Telegram features |
+| 🔒 **Enhanced Security** | Native entity caching and targeted security rules |
+| 🎨 **UI/UX Improvements** | Modern interface and user experience |
+| 📦 **Core Modules** | Improved and new core functionality |
+| ⏱ **Rapid Bug Fixes** | Faster resolution than FTG/GeekTG |
+| 🔄 **Backward Compatibility** | Works with FTG, GeekTG and Hikka modules |
+| ▶️ **Inline Elements** | Forms, galleries and lists support |
 
-<hr>
-<h2 border="none"><img src="https://github.com/hikariatama/assets/raw/master/981-consultation-flat.webp" height="54" align="middle"> <a href="https://t.me/heroku_talks">Support</a></h2>
+---
 
-<hr>
-<i>⚠️ This project is provided as-is. Developer doesn't take ANY responsibility over any problems, caused by userbot. By installing Heroku you take all risks on you. This is but not limited to account bans, deleted (by Telegram algorithms) messages, SCAM-modules, leaked sessions (due to SCAM-modules). It is <b>highly</b> recommended to enable the API Flood protection (.api_fw_protection) and not to install many modules at once. By using Heroku you give your consent to any actions made by your account in background in purposes of automatization. Please, consider reading https://core.telegram.org/api/terms for more information.</i>
+## 📋 Requirements
 
-<b>Special thanks to:</b>
+- **Python 3.9-3.13**
+- **API Credentials** from [Telegram Apps](https://my.telegram.org/apps)
 
-<ul>
-    <li><a href="https://gitlab.com/hikariatama">Hikari</a> for Hikka, which is the base of project</li>
-    <li><a href="https://t.me/lonami">Lonami</a> for Telethon, which is the base of Heroku-TL</li>
-</ul>
+---
+
+## 📚 Documentation
+
+| Type | Link |
+|------|------|
+| **User Documentation** | [heroku-ub.xyz](https://heroku-ub.xyz/) |
+| **Developer Docs** | [dev.heroku-ub.xyz](https://dev.heroku-ub.xyz/) |
+
+---
+
+## 💬 Support
+
+[![Telegram Support](https://img.shields.io/badge/Telegram-Support_Group-2594cb?logo=telegram)](https://t.me/heroku_talks)
+
+---
+
+## ⚠️ Usage Disclaimer
+
+> This project is provided as-is. The developer takes **NO responsibility** for:
+> - Account bans or restrictions
+> - Message deletions by Telegram
+> - Security issues from scam modules
+> - Session leaks from malicious modules
+>
+> **Security Recommendations:**
+> - Enable `.api_fw_protection`
+> - Avoid installing many modules at once
+> - Review [Telegram's Terms](https://core.telegram.org/api/terms)
+
+---
+
+## 🙏 Acknowledgements
+
+- [**Hikari**](https://gitlab.com/hikariatama) for Hikka (project foundation)
+- [**Lonami**](https://t.me/lonami) for Telethon (Heroku-TL backbone)
