@@ -556,7 +556,7 @@ eval:
   _cls_doc: "Выполняет код на различных языках программирования"
   compiling: "<emoji document_id=5325787248363314644>🫥</emoji> <b>Компиляция кода...</b>"
   no_compiler: "<emoji document_id={}>💻</emoji> <b>Компилятор {} не установлен на системе.</b>"
-  print_outp: "<emoji document_id=5118861066981344121>✅</emoji> Print Result\n<pre><code class=\"language-{}\">{}</code></pre>"
+  print_outp: "\n<emoji document_id=5118861066981344121>✅</emoji> Print Result\n<pre><code class=\"language-{}\">{}</code></pre>"
   _cmd_doc_e: "Выполняет Python код"
   _cmd_doc_ebf: "Выполняет Brainf*ck код"
   _cmd_doc_ec: "Выполняет C код"

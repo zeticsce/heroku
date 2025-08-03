@@ -562,7 +562,7 @@ eval:
   _cls_doc: "Führt Code in verschiedenen Programmiersprachen aus"
   compiling: "<emoji document_id=5325787248363314644>🫥</emoji> <b>Code wird kompiliert...</b>"
   no_compiler: "<emoji document_id={}>💻</emoji> <b>Compiler {} ist auf dem System nicht installiert.</b>"
-  print_outp: "<emoji document_id=5118861066981344121>✅</emoji> Ergebnis drucken\n<pre><code class=\"language-{}\">{}</code></pre>"
+  print_outp: "\n<emoji document_id=5118861066981344121>✅</emoji> Ergebnis drucken\n<pre><code class=\"language-{}\">{}</code></pre>"
   _cmd_doc_e: "Führt Python-Code aus"
   _cmd_doc_ebf: "Führt Brainf*ck-Code aus"
   _cmd_doc_ec: "Führt C-Code aus"
