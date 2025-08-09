@@ -11,11 +11,12 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 
+import aiohttp
+import ast
 import asyncio
 import contextlib
 import logging
 import os
-import requests
 import subprocess
 import sys
 import time
@@ -72,7 +73,6 @@ class UpdaterMod(loader.Module):
             return
         
         self.config["autoupdate"] = True
-
         await self.inline.bot(call.answer(self.strings("autoupdate_on").format(prefix=self.get_prefix()), show_alert=True))
         await call.delete()
 
@@ -127,20 +127,25 @@ class UpdaterMod(loader.Module):
             if not self.config["autoupdate"]: manual_update = True
             else:
                 try:
-                    ver = f"https://api.github.com/repos/coddrago/Heroku/contents/heroku/version.py?ref={version.branch}"
-                    text = requests.get(ver, headers={"Accept": "application/vnd.github.v3.raw"}).text
+                    async with aiohttp.ClientSession() as session:
+                        r = await session.get(
+                            url=f"https://api.github.com/repos/coddrago/Heroku/contents/heroku/version.py?ref={version.branch}",
+                            headers={"Accept": "application/vnd.github.v3.raw"}
+                        )
+                        text = r.text
+                    
                     new_version = ""
                     for line in text.splitlines():
                         if line.strip().startswith("__version__"):
-                            new_version = line.split("=", 1)[1] .strip(" ()") .split(",")[0]
+                            new_version = ast.literal_eval(line.split("=")[1])
 
-                    if (str(version.__version__[0]) == new_version):
+                    if version.__version__[0] == new_version[0]:
                         manual_update = False
                     else:
                         logger.info("Got a major update, updating manually")
                         manual_update = True
                 except:
-                    manual_update = False
+                    manual_update = True
 
             if manual_update:
                 m = await self.inline.bot.send_photo(
@@ -465,16 +470,16 @@ class UpdaterMod(loader.Module):
                 logger.exception("Failed to complete update!")
 
         if self.get("do_not_create", False):
-            return
+            pass
+        else:
+            try:
+                await self._add_folder()
+            except Exception:
+                logger.exception("Failed to add folder!")
 
-        try:
-            await self._add_folder()
-        except Exception:
-            logger.exception("Failed to add folder!")
+            self.set("do_not_create", True)
 
-        self.set("do_not_create", True)
-
-        if self.config["autoupdate"] == None:
+        if self.config["autoupdate"] is None:
             await self.inline.bot.send_photo(
                 self.tg_id,
                 photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
@@ -578,12 +583,13 @@ class UpdaterMod(loader.Module):
                     ),
                 )
             )
-        except Exception:
+        except Exception as e:
             logger.critical(
                 "Can't create Heroku folder. Possible reasons are:\n"
                 "- User reached the limit of folders in Telegram\n"
                 "- User got floodwait\n"
-                "Ignoring error and adding folder addition to ignore list"
+                "Ignoring error and adding folder addition to ignore list\n"
+                f"[for debug: {e}]"
             )
 
     async def update_complete(self):
