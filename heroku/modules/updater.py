@@ -60,12 +60,14 @@ class UpdaterMod(loader.Module):
             ),
             loader.ConfigValue(
                 "autoupdate",
+                False,
                 doc=lambda: self.strings("_cfg_doc_autoupdate"),
                 validator=loader.validators.Boolean(),
             ),
         )
 
     async def _set_autoupdate_state(self, call: BotInlineCall, state: bool):
+        self.set("autoupdate", True)
         if not state:
             self.config["autoupdate"] = False
             await self.inline.bot(call.answer(self.strings("autoupdate_off").format(prefix=self.get_prefix()), show_alert=True)) # "Автоматическое обновление выключено. Используйте {prefix}(команда), чтобы включить его."
@@ -132,7 +134,7 @@ class UpdaterMod(loader.Module):
                             url=f"https://api.github.com/repos/coddrago/Heroku/contents/heroku/version.py?ref={version.branch}",
                             headers={"Accept": "application/vnd.github.v3.raw"}
                         )
-                        text = r.text
+                        text = await r.text()
                     
                     new_version = ""
                     for line in text.splitlines():
@@ -479,7 +481,7 @@ class UpdaterMod(loader.Module):
 
             self.set("do_not_create", True)
 
-        if self.config["autoupdate"] is None:
+        if not self.config["autoupdate"] and not self.get("autoupdate", False):
             await self.inline.bot.send_photo(
                 self.tg_id,
                 photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
