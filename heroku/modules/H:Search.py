@@ -190,7 +190,7 @@ class HSearch(loader.Module):
 
         os.makedirs("h_search", exist_ok=True)
         self.ix = (
-            create_in("limoka_search", self.schema)
+            create_in("h_search", self.schema)
             if not os.path.isdir("h_search/index")
             else open_dir("h_search")
         )
