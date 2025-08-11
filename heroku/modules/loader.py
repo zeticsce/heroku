@@ -1072,20 +1072,40 @@ class LoaderMod(loader.Module):
             await utils.answer(message, self.strings("no_class"))
             return
 
-        instance = self.lookup(args)
+        if len(args.split("\n")) == 1:
+            msg = self.unload_module(args)
+
+        else:
+            modules = [m for m in args.split("\n") if m]
+            errors = []
+            for module in modules:
+                status = self.unload_module(module)
+                if "🚫" in status or "😖" in status:
+                    if "💡" in status:
+                        status = status.split("<code>")[0]
+
+                    errors.append(
+                        f"{module} — {status}\n"
+                    )
+
+            msg = self.strings["modules_unloaded"].format(
+                unloaded = len(args.split("\n")) - len(errors),
+                not_unloaded = len(errors),
+                errors="".join(errors) if errors else "",
+            )
+
+        await utils.answer(message, msg)
+
+    async def unload_module(self, module: str) -> str:
+        instance = self.lookup(module)
 
         if issubclass(instance.__class__, loader.Library):
-            await utils.answer(message, self.strings("cannot_unload_lib"))
-            return
+            return self.strings("cannot_unload_lib")
 
         try:
-            worked = await self.allmodules.unload_module(args)
+            worked = await self.allmodules.unload_module(module)
         except CoreUnloadError as e:
-            await utils.answer(
-                message,
-                self.strings("unload_core").format(e.module),
-            )
-            return
+            return self.strings("unload_core").format(module)
 
         if not self.allmodules.secure_boot:
             self.set(
@@ -1107,8 +1127,8 @@ class LoaderMod(loader.Module):
             if worked
             else self.strings("not_unloaded")
         )
+        return msg
 
-        await utils.answer(message, msg)
 
     @loader.command()
     async def clearmodules(self, message: Message):

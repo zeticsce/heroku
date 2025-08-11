@@ -520,6 +520,7 @@ loader:
   loaded: "<emoji document_id=5134452506935427991>🪐</emoji> <b>Module</b> <code>{}</code>{} <b>loaded {}</b>{}{}{}{}{}{}"
   no_class: "<b>What class needs to be unloaded?</b>"
   unloaded: "{} <b>Module {} unloaded.</b>"
+  modules_unloaded: "<b> Unloaded {unloaded} modules. Failed to unload {not_unloaded} modules.</b>\n<blockquote expandable>\n<code>{errors}</code>\n</blockquote>"
   not_unloaded: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Module not unloaded.</b>"
   requirements_failed: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Requirements installation failed</b>"
   requirements_restarted: "🚀 <b>Your userbot is restarted, after restart, install the module again.</b>"
