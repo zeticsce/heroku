@@ -1077,7 +1077,9 @@ class LoaderMod(loader.Module):
 
         else:
             modules = [m for m in args.split("\n") if m]
+            success = []
             errors = []
+            msg = ""
             for module in modules:
                 status = await self.unload_module(module)
                 if "🚫" in status or "😖" in status:
@@ -1085,14 +1087,20 @@ class LoaderMod(loader.Module):
                         status = status.split("<code>")[0]
 
                     errors.append(
-                        f"{module} — {status}\n"
+                        f"<code>{module}</code> — {status}"
                     )
+                else: success.append(f"<code>{module}</code>")
 
-            msg = self.strings["modules_unloaded"].format(
-                unloaded = len(args.split("\n")) - len(errors),
-                not_unloaded = len(errors),
-                errors="".join(errors) if errors else "",
-            )
+            if success:
+                msg += self.strings["modules_unloaded"].format(
+                    unloaded_num = len(success),
+                    unloaded=", ".join(success)
+                )
+            if errors:
+                msg += ("\n" + self.strings["modules_not_unloaded"].format(
+                    not_unloaded = len(errors),
+                    errors="\n".join(errors),
+                ))
 
         await utils.answer(message, msg)
 
