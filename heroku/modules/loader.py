@@ -1073,13 +1073,13 @@ class LoaderMod(loader.Module):
             return
 
         if len(args.split("\n")) == 1:
-            msg = self.unload_module(args)
+            msg = await self.unload_module(args)
 
         else:
             modules = [m for m in args.split("\n") if m]
             errors = []
             for module in modules:
-                status = self.unload_module(module)
+                status = await self.unload_module(module)
                 if "🚫" in status or "😖" in status:
                     if "💡" in status:
                         status = status.split("<code>")[0]
