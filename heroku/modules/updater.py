@@ -177,13 +177,13 @@ class UpdaterMod(loader.Module):
                     self.tg_id,
                     "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/updated.png",
                     caption=self.strings("autoupdate_notifier").format(
-                        utils.get_git_hash()[:6],
+                        self.get_latest()[:6],
+                        self.get_changelog(),
                         '<a href="https://github.com/coddrago/Heroku/compare/{}...{}">{}</a>'.format(
                             utils.get_git_hash()[:12],
                             self.get_latest()[:12],
-                            self.get_latest()[:6],
+                            "diff",
                         ),
-                        self.get_changelog(),
                     ),
                 )
                 await self.invoke("update", "-f", peer=self.inline.bot_username)
