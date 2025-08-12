@@ -14,7 +14,7 @@ import asyncio
 import collections
 import json
 import logging
-import os
+# import os
 import re
 import time
 import typing
@@ -59,53 +59,53 @@ class Database(dict):
         self._revisions: typing.List[dict] = []
         self._assets: int = None
         self._me: User = None
-        self._redis: redis.Redis = None
+        # self._redis: redis.Redis = None
         self._saving_task: asyncio.Future = None
 
     def __repr__(self):
         return object.__repr__(self)
 
-    def _redis_save_sync(self):
-        with self._redis.pipeline() as pipe:
-            pipe.set(
-                str(self._client.tg_id),
-                json.dumps(self, ensure_ascii=True),
-            )
-            pipe.execute()
+    # def _redis_save_sync(self):
+    #     with self._redis.pipeline() as pipe:
+    #         pipe.set(
+    #             str(self._client.tg_id),
+    #             json.dumps(self, ensure_ascii=True),
+    #         )
+    #         pipe.execute()
 
-    async def remote_force_save(self) -> bool:
-        """Force save database to remote endpoint without waiting"""
-        if not self._redis:
-            return False
+    # async def remote_force_save(self) -> bool:
+    #     """Force save database to remote endpoint without waiting"""
+    #     if not self._redis:
+    #         return False
 
-        await utils.run_sync(self._redis_save_sync)
-        logger.debug("Published db to Redis")
-        return True
+    #     await utils.run_sync(self._redis_save_sync)
+    #     logger.debug("Published db to Redis")
+    #     return True
 
-    async def _redis_save(self) -> bool:
-        """Save database to redis"""
-        if not self._redis:
-            return False
+    # async def _redis_save(self) -> bool:
+    #     """Save database to redis"""
+    #     if not self._redis:
+    #         return False
 
-        await asyncio.sleep(5)
-        await utils.run_sync(self._redis_save_sync)
-        logger.debug("Published db to Redis")
-        self._saving_task = None
-        return True
+    #     await asyncio.sleep(5)
+    #     await utils.run_sync(self._redis_save_sync)
+    #     logger.debug("Published db to Redis")
+    #     self._saving_task = None
+    #     return True
 
-    async def redis_init(self) -> bool:
-        """Init redis database"""
-        if REDIS_URI := (
-            os.environ.get("REDIS_URL") or main.get_config_key("redis_uri")
-        ):
-            self._redis = redis.Redis.from_url(REDIS_URI)
-        else:
-            return False
+    # async def redis_init(self) -> bool:
+    #     """Init redis database"""
+    #     if REDIS_URI := (
+    #         os.environ.get("REDIS_URL") or main.get_config_key("redis_uri")
+    #     ):
+    #         self._redis = redis.Redis.from_url(REDIS_URI)
+    #     else:
+    #         return False
 
     async def init(self):
         """Asynchronous initialization unit"""
-        if os.environ.get("REDIS_URL") or main.get_config_key("redis_uri"):
-            await self.redis_init()
+        # if os.environ.get("REDIS_URL") or main.get_config_key("redis_uri"):
+        #     await self.redis_init()
 
         self._db_file = main.BASE_PATH / f"config-{self._client.tg_id}.json"
         self.read()
@@ -130,18 +130,18 @@ class Database(dict):
 
     def read(self):
         """Read database and stores it in self"""
-        if self._redis:
-            try:
-                self.update(
-                    **json.loads(
-                        self._redis.get(
-                            str(self._client.tg_id),
-                        ).decode(),
-                    )
-                )
-            except Exception:
-                logger.exception("Error reading redis database")
-            return
+        # if self._redis:
+        #     try:
+        #         self.update(
+        #             **json.loads(
+        #                 self._redis.get(
+        #                     str(self._client.tg_id),
+        #                 ).decode(),
+        #             )
+        #         )
+        #     except Exception:
+        #         logger.exception("Error reading redis database")
+        #     return
 
         try:
             db = self._db_file.read_text()
@@ -220,10 +220,10 @@ class Database(dict):
         while len(self._revisions) > 15:
             self._revisions.pop()
 
-        if self._redis:
-            if not self._saving_task:
-                self._saving_task = asyncio.ensure_future(self._redis_save())
-            return True
+        # if self._redis:
+        #     if not self._saving_task:
+        #         self._saving_task = asyncio.ensure_future(self._redis_save())
+        #     return True
 
         try:
             self._db_file.write_text(json.dumps(self, indent=4))

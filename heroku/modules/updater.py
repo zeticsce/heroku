@@ -182,7 +182,7 @@ class UpdaterMod(loader.Module):
                         '<a href="https://github.com/coddrago/Heroku/compare/{}...{}">{}</a>'.format(
                             utils.get_git_hash()[:12],
                             self.get_latest()[:12],
-                            "diff",
+                            "🔎 diff",
                         ),
                     ),
                 )
@@ -298,7 +298,7 @@ class UpdaterMod(loader.Module):
 
         self.set("restart_ts", time.time())
 
-        await self._db.remote_force_save()
+        # await self._db.remote_force_save()
 
         if "LAVHOST" in os.environ:
             os.system("lavhost restart")
