@@ -395,9 +395,6 @@ class SecurityManager:
         except:
             pass
 
-        if not user_id:
-            user_id = message.peer_id
-
         is_channel = False
 
         if (
