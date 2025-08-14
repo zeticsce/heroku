@@ -393,8 +393,8 @@ class SecurityManager:
             if not user_id:
                 user_id = message.sender_id
         except:
-            user_id = message.peer_id
-            
+            user_id = message.peer_id.channel_id
+
         if not user_id:
             user_id = message.peer_id
 
