@@ -393,7 +393,7 @@ class SecurityManager:
             if not user_id:
                 user_id = message.sender_id
         except:
-            user_id = message.peer_id.channel_id
+            pass
 
         if not user_id:
             user_id = message.peer_id
@@ -403,7 +403,6 @@ class SecurityManager:
         if (
             message
             and message.is_channel
-            and not message.is_group
             and message.edit_date
         ):
             async for event in self._client.iter_admin_log(
