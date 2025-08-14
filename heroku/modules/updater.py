@@ -29,7 +29,7 @@ from herokutl.tl.functions.messages import (
     GetDialogFiltersRequest,
     UpdateDialogFilterRequest,
 )
-from herokutl.tl.types import DialogFilter, Message
+from herokutl.tl.types import DialogFilter, TextWithEntities, Message
 
 from .. import loader, main, utils, version
 from .._internal import restart
@@ -529,7 +529,10 @@ class UpdaterMod(loader.Module):
                     folder_id,
                     DialogFilter(
                         folder_id,
-                        title="heroku",
+                        title=TextWithEntities(
+                            text='some string here',
+                            entities=[]
+                        ),
                         pinned_peers=(
                             [
                                 await self._client.get_input_entity(
