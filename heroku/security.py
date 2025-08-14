@@ -389,9 +389,12 @@ class SecurityManager:
         if not (config := self.get_flags(func)):
             return False
 
-        if not user_id:
-            user_id = message.sender_id
-
+        try:
+            if not user_id:
+                user_id = message.sender_id
+        except:
+            user_id = message.peer_id
+            
         if not user_id:
             user_id = message.peer_id
 
