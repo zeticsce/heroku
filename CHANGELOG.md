@@ -1,7 +1,13 @@
 # Heroku Changelog
 ## 🪐 Heroku 1.7.2
 - added autoupdate
-- updated heroku-tl to 1.2.0
+- updated heroku-tl to 1.3.0
+- fix folder bug
+- removed redis from database
+- added HSearch
+- fixed hikkalls
+- added multiunload (ulm atoll, help)
+- fixed command for anonimous user 
 
 ## 🪐 Heroku 1.7.1
 - fixed bug with web 
