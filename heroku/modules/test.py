@@ -378,37 +378,19 @@ class TestMod(loader.Module):
         message = await utils.answer(message, self.config["ping_emoji"])
         banner = self.config["banner_url"]
         
-        if self.config["banner_url"]:
-            await utils.answer(
-                message,
-                self.config["Text_Of_Ping"].format(
-                    ping=round((time.perf_counter_ns() - start) / 10**6, 3),
-                    uptime=utils.formatted_uptime(),
-                    ping_hint=(
-                        (self.config["hint"]) if random.choice([0, 0, 1]) == 1 else ""
-                    ),
-                    hostname=lib_platform.node(),
-                    user=getpass.getuser(),
-                    prefix=self.get_prefix(),
-                    
-        ),
-                file = banner,
-                reply_to=getattr(message, "reply_to_msg_id", None),
-            )
-
-        else:
-            await utils.answer(
-                message,
-                self.config["Text_Of_Ping"].format(
-                    ping=round((time.perf_counter_ns() - start) / 10**6, 3),
-                    uptime=utils.formatted_uptime(),
-                    ping_hint=(
-                        (self.config["hint"]) if random.choice([0, 0, 1]) == 1 else ""
-                    ),
-                    hostname=lib_platform.node(),
-                    user=getpass.getuser(),
-        ),
-            )
+        await utils.answer(
+            message,
+            self.config["Text_Of_Ping"].format(
+                ping=round((time.perf_counter_ns() - start) / 10**6, 3),
+                uptime=utils.formatted_uptime(),
+                ping_hint=(
+                    (self.config["hint"]) if random.choice([0, 0, 1]) == 1 else ""
+                ),
+                hostname=lib_platform.node(),
+                user=getpass.getuser(),
+            ),
+            file = banner
+        )
 
 
     async def client_ready(self):
