@@ -605,10 +605,20 @@ class Heroku:
 
         await client.start(phone)
 
+        me = await client.get_me()
+        telegram_id = me.id
+        client._tg_id = telegram_id
+        client.tg_id = telegram_id
+        client.hikka_me = me
+        client.heroku_me = me
+
+        db = database.Database(client)
+        await db.init()
+
         while (bot := input("You can enter a custom bot username or leave it empty and Heroku will generate a random one")):
             try:
-                if await self._check_bot(bot):
-                    self._db.set("heroku.inline", "custom_bot", bot)
+                if await self._check_bot(client, bot):
+                    db.set("heroku.inline", "custom_bot", bot)
                     print("Bot username saved!")
                     break
                 else:
@@ -847,6 +857,7 @@ class Heroku:
             me = await client.get_me()
             client._tg_id = me.id
             client.tg_id = me.id
+            client.hikka_me = me
             client.heroku_me = me
 
             async with aiohttp.ClientSession() as session:
