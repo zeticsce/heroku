@@ -228,12 +228,15 @@ class TestMod(loader.Module):
     ):
         if not isinstance(lvl, int):
             args = utils.get_args_raw(message)
-            try:
+            if args:
                 try:
-                    lvl = int(args.split()[0])
-                except ValueError:
-                    lvl = getattr(logging, args.split()[0].upper(), None)
-            except IndexError:
+                    try:
+                        lvl = int(args.split()[0])
+                    except ValueError:
+                        lvl = getattr(logging, args.split()[0].upper(), None)
+                except IndexError:
+                    lvl = None
+            else:
                 lvl = None
 
         if not isinstance(lvl, int):
