@@ -319,7 +319,7 @@ class TestMod(loader.Module):
             return
 
         if len(logs) <= 2:
-            back_button = {"text": self.strings["back"], "callback": self.logs, "args": (False, False)}
+            back_button = {"text": self.strings["back"], "callback": self.logs}
             await utils.answer(message, self.strings("no_logs").format(named_lvl), reply_markup=back_button)
             return
 
