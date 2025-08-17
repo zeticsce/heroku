@@ -263,8 +263,8 @@ class TestMod(loader.Module):
                     + [[{"text": self.strings("cancel"), "action": "close"}]],
                 ):
                     raise
-            except Exception:
-                await utils.answer(message, self.strings("set_loglevel"))
+            except Exception as e:
+                await utils.answer(message, self.strings("set_loglevel") + f"\n{e}")
 
             return
 
