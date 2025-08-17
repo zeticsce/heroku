@@ -241,27 +241,29 @@ class TestMod(loader.Module):
 
         if not isinstance(lvl, int):
             try:
-                if not self.inline.init_complete or not await utils.answer(
-                    message,
-                    self.strings("choose_loglevel"),
-                    reply_markup=utils.chunks(
-                        [
-                            {
-                                "text": name,
+                if self.inline.init_complete:
+                    await utils.answer(
+                        message,
+                        self.strings("choose_loglevel"),
+                        reply_markup=utils.chunks(
+                            [
+                                {
+                                    "text": name,
                                 "callback": self.logs,
-                                "args": (False, level),
-                            }
-                            for name, level in [
-                                ("🚫 Error", 40),
-                                ("⚠️ Warning", 30),
-                                ("ℹ️ Info", 20),
-                                ("🧑‍💻 All", 0),
-                            ]
-                        ],
-                        2,
-                    )
-                    + [[{"text": self.strings("cancel"), "action": "close"}]],
-                ):
+                                    "args": (False, level),
+                                }
+                                for name, level in [
+                                    ("🚫 Error", 40),
+                                    ("⚠️ Warning", 30),
+                                    ("ℹ️ Info", 20),
+                                    ("🧑‍💻 All", 0),
+                                ]
+                            ],
+                            2,
+                        )
+                        + [[{"text": self.strings("cancel"), "action": "close"}]],
+                )
+                else: 
                     raise
             except Exception as e:
                 await utils.answer(message, self.strings("set_loglevel") + f"\n{e}")
