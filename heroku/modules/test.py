@@ -226,7 +226,7 @@ class TestMod(loader.Module):
         force: bool = False,
         lvl: typing.Union[int, None] = None,
     ):
-        if not isinstance(lvl, (int, bool)):
+        if not isinstance(lvl, int):
             args = utils.get_args_raw(message)
             try:
                 try:
