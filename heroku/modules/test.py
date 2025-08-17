@@ -224,7 +224,7 @@ class TestMod(loader.Module):
         force: bool = False,
         lvl: typing.Union[int, None] = None,
     ):
-        if not isinstance(lvl, int):
+        if not isinstance(lvl, (int, bool)):
             args = utils.get_args_raw(message)
             try:
                 try:
@@ -236,7 +236,7 @@ class TestMod(loader.Module):
 
         if not isinstance(lvl, int):
             try:
-                if not self.inline.init_complete or not await self.inline.form(
+                if not self.inline.init_complete or not await utils.answer(
                     text=self.strings("choose_loglevel"),
                     reply_markup=utils.chunks(
                         [
@@ -317,12 +317,8 @@ class TestMod(loader.Module):
             return
 
         if len(logs) <= 2:
-            if isinstance(message, Message):
-                await utils.answer(message, self.strings("no_logs").format(named_lvl))
-            else:
-                await message.edit(self.strings("no_logs").format(named_lvl))
-                await message.unload()
-
+            back_button = {"text": self.strings["back"], "callback": self.logs, "args": (False, False)}
+            await utils.answer(message, self.strings("no_logs").format(named_lvl), reply_markup=back_button)
             return
 
         logs = self.lookup("evaluator").censor(logs)

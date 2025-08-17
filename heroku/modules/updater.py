@@ -530,7 +530,7 @@ class UpdaterMod(loader.Module):
                     DialogFilter(
                         folder_id,
                         title=TextWithEntities(
-                            text='some string here',
+                            text='Heroku',
                             entities=[]
                         ),
                         pinned_peers=(
@@ -588,13 +588,12 @@ class UpdaterMod(loader.Module):
                     ),
                 )
             )
-        except Exception as e:
+        except Exception:
             logger.critical(
                 "Can't create Heroku folder. Possible reasons are:\n"
                 "- User reached the limit of folders in Telegram\n"
                 "- User got floodwait\n"
                 "Ignoring error and adding folder addition to ignore list\n"
-                f"[for debug: {e}]"
             )
 
     async def update_complete(self):
