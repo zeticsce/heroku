@@ -258,7 +258,6 @@ class TestMod(loader.Module):
                         2,
                     )
                     + [[{"text": self.strings("cancel"), "action": "close"}]],
-                    message=message,
                 ):
                     raise
             except Exception:
