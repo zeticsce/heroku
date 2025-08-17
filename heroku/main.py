@@ -55,6 +55,7 @@ from herokutl.errors import (
     PasswordHashInvalidError,
     PhoneNumberInvalidError,
     SessionPasswordNeededError,
+    YouBlockedUserError,
 )
 from herokutl.network.connection import (
     ConnectionTcpFull,
@@ -64,6 +65,7 @@ from herokutl.password import compute_check
 from herokutl.sessions import MemorySession, SQLiteSession
 from herokutl.tl.functions.account import GetPasswordRequest
 from herokutl.tl.functions.auth import CheckPasswordRequest
+from herokutl.tl.functions.contacts import UnblockRequest
 
 from . import database, loader, utils, version
 from ._internal import print_banner, restart
@@ -203,12 +205,9 @@ def generate_random_system_version():
     return version
 
 
-try:
-    import uvloop
+import uvloop
 
-    uvloop.install()
-except Exception:
-    pass
+uvloop.install()
 
 
 def run_config():
@@ -541,6 +540,7 @@ class Heroku:
             telegram_id = me.id
             client._tg_id = telegram_id
             client.tg_id = telegram_id
+            client.hikka_me = me
             client.heroku_me = me
 
         session = SQLiteSession(
@@ -605,9 +605,64 @@ class Heroku:
 
         await client.start(phone)
 
+        me = await client.get_me()
+        telegram_id = me.id
+        client._tg_id = telegram_id
+        client.tg_id = telegram_id
+        client.hikka_me = me
+        client.heroku_me = me
+
+        db = database.Database(client)
+        await db.init()
+
+        while (bot := input("You can enter a custom bot username or leave it empty and Heroku will generate a random one")):
+            try:
+                if await self._check_bot(client, bot):
+                    db.set("heroku.inline", "custom_bot", bot)
+                    print("Bot username saved!")
+                    break
+                else:
+                    print("Bot username is occupied. Try again or leave it empty")
+                    continue
+            except Exception:
+                print("Something went wrong")
+
         await self.save_client_session(client)
         self.clients += [client]
         return True
+
+    async def _check_bot(
+        self,
+        client: CustomTelegramClient,
+        username: str,
+    ) -> bool:
+        async with client.conversation("@BotFather", exclusive=False) as conv:
+            try:
+                m = await conv.send_message("/token")
+            except YouBlockedUserError:
+                await client(UnblockRequest(id="@BotFather"))
+                m = await conv.send_message("/token")
+
+            r = await conv.get_response()
+
+            await m.delete()
+            await r.delete()
+
+            if not hasattr(r, "reply_markup") or not hasattr(r.reply_markup, "rows"):
+                return False
+
+            for row in r.reply_markup.rows:
+                for button in row.buttons:
+                    if username != button.text.strip("@"):
+                        continue
+
+                    m = await conv.send_message("/cancel")
+                    r = await conv.get_response()
+
+                    await m.delete()
+                    await r.delete()
+
+                    return True
 
     async def _initial_setup(self) -> bool:
         """Responsible for first start"""
@@ -802,6 +857,7 @@ class Heroku:
             me = await client.get_me()
             client._tg_id = me.id
             client.tg_id = me.id
+            client.hikka_me = me
             client.heroku_me = me
 
             async with aiohttp.ClientSession() as session:
