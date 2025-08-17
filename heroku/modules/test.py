@@ -71,7 +71,7 @@ class TestMod(loader.Module):
                     "Minimal loglevel for records to be sent in Telegram."
                 ),
                 validator=loader.validators.Choice(
-                    ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+                    ["ALL", "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "DISABLE"]
                 ),
                 on_change=self._pass_config_to_logger,
             ),
@@ -111,11 +111,13 @@ class TestMod(loader.Module):
     def _pass_config_to_logger(self):
         logging.getLogger().handlers[0].force_send_all = self.config["force_send_all"]
         logging.getLogger().handlers[0].tg_level = {
-            "DEBUG": 0,
+            "ALL": 0,
+            "DEBUG": 10,
             "INFO": 20,
             "WARNING": 30,
             "ERROR": 40,
             "CRITICAL": 50,
+            "DISABLE": 50000,
         }[self.config["tglog_level"]]
         logging.getLogger().handlers[0].ignore_common = self.config["ignore_common"]
 
