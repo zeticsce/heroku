@@ -239,7 +239,8 @@ class TestMod(loader.Module):
         if not isinstance(lvl, int):
             try:
                 if not self.inline.init_complete or not await utils.answer(
-                    text=self.strings("choose_loglevel"),
+                    message,
+                    self.strings("choose_loglevel"),
                     reply_markup=utils.chunks(
                         [
                             {
