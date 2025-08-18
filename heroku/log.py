@@ -456,10 +456,18 @@ class TelegramLogsHandler(logging.Handler):
 
         if record.levelno >= self.tg_level:
             if record.exc_info:
+                try:
+                    if record.args:
+                        comment = record.msg % record.args
+                    else:
+                        comment = str(record.msg)
+                except Exception:
+                    comment = f"{record.msg} {record.args}"
+
                 exc = HerokuException.from_exc_info(
                     *record.exc_info,
                     stack=record.__dict__.get("stack", None),
-                    comment=record.msg % record.args,
+                    comment=comment,
                 )
 
                 if not self.ignore_common or all(
