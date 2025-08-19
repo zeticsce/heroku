@@ -38,9 +38,15 @@ def die():
     if "DOCKER" in os.environ:
         sys.exit(0)
     else:
-        # This one is actually better, because it kills all subprocesses
-        # but it can't be used inside the Docker
-        os.killpg(os.getpgid(os.getpid()), signal.SIGTERM)
+        if sys.platform == 'win32':
+            # Windows implementation
+            os.kill(os.getpid(), signal.SIGTERM)
+        else:
+            # Unix implementation
+            # This one is actually better, because it kills all subprocesses
+            # but it can't be used inside the Docker and Windows
+            os.killpg(os.getpgid(os.getpid()), signal.SIGTERM)
+
 
 
 def restart():

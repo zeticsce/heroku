@@ -205,9 +205,10 @@ def generate_random_system_version():
     return version
 
 
-import uvloop
+if not IS_WINDOWS:
+    import uvloop
 
-uvloop.install()
+    uvloop.install()
 
 
 def run_config():
