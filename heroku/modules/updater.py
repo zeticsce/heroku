@@ -397,6 +397,15 @@ class UpdaterMod(loader.Module):
                 raise
         except Exception:
             await self.inline_update(message)
+
+    @loader.command()
+    async def autoupdate(self, message: Message):
+        """Switch autoupdate state"""
+        self.config["autoupdate"] = not self.config["autoupdate"]
+        if self.config["autoupdate"]:
+            await utils.answer(message, "Autoupdate on")
+        else:
+            await utils.answer(message, "Autoupdate off")
             
     async def inline_update(
         self,
