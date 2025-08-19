@@ -319,7 +319,7 @@ class HerokuInfoMod(loader.Module):
     @loader.command()
     async def autoupdate(self, message: Message):
         
-        if self.config["autoupdate"] == False
+        if self.config["autoupdate"] == False:
             self.db.set("Updater", "autoupdate", True)
             await utils.answer(message, "Autoupdate on")
         else:
