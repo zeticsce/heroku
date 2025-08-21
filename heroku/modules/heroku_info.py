@@ -315,14 +315,3 @@ class HerokuInfoMod(loader.Module):
 
         self.config["custom_message"] = args
         await utils.answer(message, self.strings("setinfo_success"))
-    
-    @loader.command()
-    async def autoupdate(self, message: Message):
-        
-        if self.config["autoupdate"] == False:
-            self.db.set("Updater", "autoupdate", True)
-            await utils.answer(message, "Autoupdate on")
-        else:
-            self.db.set("Updater", "autoupdate", False)
-            await utils.answer(message, "Autoupdate off")
-
