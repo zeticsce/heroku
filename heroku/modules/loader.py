@@ -183,8 +183,8 @@ class LoaderMod(loader.Module):
             },
         )
 
-    @loader.command(alias="dlm")
-    async def dlmod(self, message: Message, force_pm: bool = False):
+    @loader.command()
+    async def dlm(self, message: Message, force_pm: bool = False):
         if args := utils.get_args(message):
             args = args[0]
 
@@ -1066,17 +1066,17 @@ class LoaderMod(loader.Module):
         await utils.answer(call, msg())
         await call.answer(self.strings("subscribed"))
 
-    @loader.command(alias="ulm")
-    async def unloadmod(self, message: Message):
+    @loader.command()
+    async def ulm(self, message: Message):
         if not (args := utils.get_args_raw(message)):
             await utils.answer(message, self.strings("no_class"))
             return
 
-        if len(args.split("\n")) == 1:
+        if len(args.split(",")) == 1:
             msg = await self.unload_module(args)
 
         else:
-            modules = [m for m in args.split("\n") if m]
+            modules = [m for m in args.split(",") if m]
             success = []
             errors = []
             msg = ""
