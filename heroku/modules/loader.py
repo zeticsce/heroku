@@ -1072,11 +1072,11 @@ class LoaderMod(loader.Module):
             await utils.answer(message, self.strings("no_class"))
             return
 
-        if len(args.split(",")) == 1:
+        if len(args.split(" ")) == 1:
             msg = await self.unload_module(args)
 
         else:
-            modules = [m for m in args.split(",") if m]
+            modules = [m for m in args.split(" ") if m]
             success = []
             errors = []
             msg = ""
