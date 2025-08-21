@@ -229,15 +229,6 @@ heroku_backup:
   _cmd_doc_backupall: "Creates a general backup copy (modules + database)"
   _cmd_doc_restoreall: "Restores a common backup (base + modules)"
 
-executor:  
-  no_code: "<emoji document_id=5854929766146118183>❌</emoji> <b>Should be </b><code>{}exec [python code]</code>"  
-  executing: "<b><emoji document_id=5332600281970517875>🔄</emoji> Executing code...</b>"  
-  no_phone: "Hides your phone number in the output"  
-  result: "<b>\n<emoji document_id=5431376038628171216>💻</emoji> Code:\n<pre><code class=\"language-python\">{code}</code></pre>\n{result}\n<emoji document_id=5451732530048802485>⏳</emoji> Executed in {time} seconds</b>"  
-  result_no_error: "<emoji document_id=6334758581832779720>✅</emoji> Result\n<pre><code class=\"language-python\">{result}</code></pre>"  
-  result_error: "<emoji document_id=5440381017384822513>🚫</emoji> Error\n<pre><code class=\"language-python\">{result}</code></pre>"  
-  res_return: "<emoji document_id=6334778871258286021>💾</emoji> Code returned:\n<pre><code class=\"language-python\">{res}</code></pre>"
-
 presets:
   name: "Presets"
   _fun_title: "🪩 Entertainment modules"
@@ -364,6 +355,7 @@ test:
   configping: "Your custom text. You can use placeholders: {ping} - That's your ping. {uptime} - It's your uptime. {ping_hint} - This is the same hint as in the heroku module, it is chosen with random chance, also you can specify this hint in the config. You can use the {hostname} placeholder if you need the hostname of your server"
   hint: "Set a hint"
   ping_emoji: "Emoji that appears when ping does not increase significantly"
+  back: "↩️ Back"
   banner_url: "Image for your ping, for example: https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/ping_cmd.png"
   logs_caption: "<emoji document_id=5350594756126721186>🪐</emoji> <b>Heroku logs with verbosity</b> <code>{}</code>\n\n<emoji document_id=5228879218363872764>⚪️</emoji> <b>Version: {}.{}.{}</b>{}"
   suspend_invalid_time: "<emoji document_id=5210952531676504517>🚫</emoji> <b>Invalid time to suspend</b>"
@@ -456,7 +448,7 @@ help:
   all_header: "<b>{} mods available, {} hidden:</b>"
   no_mod: "🚫 <b>Specify module to hide</b>"
   hidden_shown: "<b>{} modules hidden, {} modules shown:</b>\n{}\n{}"
-  support: "{} <b>Link to</b> <a href='https://t.me/heroku_talks'>support chat</a></b>"
+  offchats: "<emoji document_id=6019130940012370273>❔</emoji> <a href=\"https://t.me/heroku_talks\"><b>Support chat</b></a>\n\n<emoji document_id=6019151079114021083>💬</emoji> <a href=\"https://t.me/heroku_offtop\"><b>Offtop chat</b></a>\n\n<emoji document_id=6019094432790354513>📢</emoji> <a href=\"https://t.me/heroku_ub\"><b>Official channel</b></a>"
   partial_load: "<emoji document_id=5355133243773435190>☝️</emoji> <b>Userbot is not fully loaded, so not all modules are shown</b>"
   not_exact: "<emoji document_id=5355133243773435190>☝️</emoji> <b>No exact match occured, so the closest result is shown instead</b>"
   request_join: "You requested link for Heroku support chat"
@@ -480,6 +472,8 @@ heroku_info:
   update_required: "<emoji document_id=5424728541650494040>😕</emoji> <b>Update required</b> <code>{prefix}update</code>"
   setinfo_no_args: "<emoji document_id=5370881342659631698>😢</emoji> <b>You need to specify text to change info to</b>"
   setinfo_success: "<emoji document_id=5436040291507247633>🎉</emoji> <b>Info changed successfully</b>"
+  switchinfo_on: "<emoji document_id=5118861066981344121>✅</emoji> Image Info turned on successfully"
+  swithcinfo_off: "<emoji document_id=5118861066981344121>✅</emoji> Image Info turned off successfully"
   _cfg_cst_msg: "Custom message for info. May contain {me}, {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch}, {hostname}, {user}, {os}, {kernel}, {cpu}, {ping} keywords"
   _cfg_cst_btn: "Custom button for info. Leave empty to remove button"
   _cfg_banner: "URL to image banner"

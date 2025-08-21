@@ -400,12 +400,12 @@ class UpdaterMod(loader.Module):
 
     @loader.command()
     async def autoupdate(self, message: Message):
-        """Switch autoupdate state"""
+        """| switch autoupdate state"""
         self.config["autoupdate"] = not self.config["autoupdate"]
         if self.config["autoupdate"]:
-            await utils.answer(message, "Autoupdate on")
+            await utils.answer(message, self.strings["autoupdate_on"])
         else:
-            await utils.answer(message, "Autoupdate off")
+            await utils.answer(message, self.strings["autoupdate_off"])
             
     async def inline_update(
         self,
