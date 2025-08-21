@@ -357,11 +357,5 @@ class Help(loader.Module):
        
         await utils.answer(
             message,
-            self.strings("support").format(
-                (
-                    utils.get_platform_emoji()
-                    if self._client.heroku_me.premium and CUSTOM_EMOJIS
-                    else "🪐"
-                )
-            ),
+            self.strings("offchats"),
         )

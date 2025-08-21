@@ -215,15 +215,6 @@ heroku_backup:
   _cmd_doc_backupall: "Erstellt eine allgemeine Sicherungskopie (Module + Datenbank)"
   _cmd_doc_restoreall: "Stellt ein gemeinsames Backup wieder her (Basis + Module)"
 
-executor:
-  no_code: "<emoji document_id=5854929766146118183>❌</emoji> <b>Es sollte </b><code>{}exec [Python-Code]</code><b> sein</b>"
-  executing: "<b><emoji document_id=5332600281970517875>🔄</emoji> Code wird ausgeführt...</b>"
-  no_phone: "Versteckt deine Telefonnummer in der Ausgabe"
-  result: "<b>\n<emoji document_id=5431376038628171216>💻</emoji> Code:\n<pre><code class=\"language-python\">{code}</code></pre>\n{result}\n<emoji document_id=5451732530048802485>⏳</emoji> Ausgeführt in {time} Sekunden</b>"
-  result_no_error: "<emoji document_id=6334758581832779720>✅</emoji> Ergebnis\n<pre><code class=\"language-python\">{result}</code></pre>"
-  result_error: "<emoji document_id=5440381017384822513>🚫</emoji> Fehler\n<pre><code class=\"language-python\">{result}</code></pre>"
-  res_return: "<emoji document_id=6334778871258286021>💾</emoji> Code hat zurückgegeben:\n<pre><code class=\"language-python\">{res}</code></pre>"
-
 presets:
   _fun_title: "🪩 Unterhaltsame Module"
   _fun_desc: "Lustige Module – Animationen, Spam, Spiele und mehr."
@@ -337,6 +328,7 @@ test:
   configping: "Ihr benutzerdefinierter Text. Platzhalter können verwendet werden: {ping} - Ihr Ping, {uptime} - Ihre Uptime, {ping_hint} - Hinweis. Sie können den Platzhaltername {hostname} verwenden, wenn Sie den Hostname Ihres Servers benötigen"
   hint: "Geben Sie einen Hinweis an"
   ping_emoji: "Emoji, das bei einer leichten Ping-Erhöhung angezeigt wird."
+  back: "↩️ Zurück"
   banner_url: "Bild für Ihren Ping, zum Beispiel: https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/ping_cmd.png"
   logs_caption: "<emoji document_id=5350594756126721186>🪐</emoji> <b>Heroku-Logs des Levels</b> <code>{}</code>\n\n<emoji document_id=5228879218363872764>⚪️</emoji> <b>Version: {}.{}.{}</b>{}"
   debugging_enabled: "<emoji document_id=5332533929020761310>✅</emoji> <b>Der Entwicklermodus wurde für das Modul</b> <code>{0}</code> <b>aktiviert</b>\n<i>Gehe zum Ordner `debug_modules`, ändere die Datei `{0}.py` und beobachte die Änderungen in Echtzeit</i>"
@@ -422,7 +414,7 @@ help:
   all_header: "<b>{} Module verfügbar, {} verborgen:</b>"
   no_mod: "🚫 <b>Gib das Modul(-e) an, das(-e) versteckt werden soll(en)</b>"
   hidden_shown: "<b>{} Module verborgen, {} Module angezeigt:</b>\n{}\n{}"
-  support: "{} <b>Link zum</b> <a href='https://t.me/heroku_talks'>Hilfe-Chat</a></b>"
+  offchats: "<emoji document_id=6019130940012370273>❔</emoji> <a href=\"https://t.me/heroku_talks\"><b>Support-Chat</b></a>\n\n<emoji document_id=6019151079114021083>💬</emoji> <a href=\"https://t.me/heroku_offtop\"><b>Offtopic-Chat</b></a>\n\n<emoji document_id=6019094432790354513>📢</emoji> <a href=\"https://t.me/heroku_ub\"><b>Offizieller Kanal</b></a>"
   _cls_doc: "Zeigt Hilfe zu Modulen an"
   partial_load: "<emoji document_id=5355133243773435190>☝️</emoji> <b>Der Userbot ist noch nicht vollständig geladen, daher werden nicht alle Module angezeigt</b>"
   not_exact: "<emoji document_id=5355133243773435190>☝️</emoji> <b>Es wurde keine exakte Übereinstimmung gefunden, daher wurde die passendste Auswahl getroffen</b>"
@@ -453,6 +445,8 @@ heroku_info:
   _cfg_banner: "Link zum Banner-Bild"
   setinfo_no_args: "<emoji document_id=5370881342659631698>😢</emoji> <b>Du musst den Text für benutzerdefiniertes Info angeben</b>"
   setinfo_success: "<emoji document_id=5436040291507247633>🎉</emoji> <b>Der Info-Text wurde erfolgreich geändert</b>"
+  switchinfo_on: "<emoji id=\"1\">✅</emoji> Bildinfo erfolgreich aktiviert"
+  switchinfo_off: "<emoji id=\"2\">✅</emoji> Bildinfo erfolgreich deaktiviert"
   desc: "Userbots können verwendet werden, um verschiedene Aufgaben zu automatisieren, wie <b>Nachrichten senden, Kanälen beitreten, Mediendateien hochladen und vieles mehr</b>.\n\n<emoji document_id=5474667187258006816>😎</emoji> Userbots unterscheiden sich von normalen Telegram-Bots, da <b>sie auf dem Benutzerkonto</b> und nicht auf einem Bot-Konto arbeiten. Das bedeutet, dass sie auf mehr Funktionen zugreifen können und eine größere Flexibilität bei der Ausführung von Aktionen bieten.\n\n<emoji document_id=5472267631979405211>🚫</emoji> Es ist jedoch wichtig zu beachten, dass <b>Userbots offiziell von Telegram nicht unterstützt werden</b> und ihre Nutzung gegen die Nutzungsbedingungen der Plattform verstoßen kann. Daher <b>sollten Benutzer vorsichtig sein</b> und sicherstellen, dass auf ihrem Konto kein schadhafter Code ausgeführt wird.\n\n"
   no_font: "<emoji document_id=5465665476971471368>❌</emoji> Wo ist der Link oder die Antwort mit der Schriftart?"  
   font_installed: "<emoji document_id=5436040291507247633>🎉</emoji> <b>Schriftart erfolgreich installiert!</b>\n<emoji document_id=5436040291507247633>🎉</emoji> <i>Du kannst sie jetzt nutzen.</i>"  

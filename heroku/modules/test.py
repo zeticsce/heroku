@@ -253,9 +253,11 @@ class TestMod(loader.Module):
                                     "args": (False, level),
                                 }
                                 for name, level in [
+                                    ("🚫 Critical", 60),
                                     ("🚫 Error", 40),
                                     ("⚠️ Warning", 30),
                                     ("ℹ️ Info", 20),
+                                    ("⚠️ Debug", 10),
                                     ("🧑‍💻 All", 0),
                                 ]
                             ],

@@ -183,8 +183,8 @@ class LoaderMod(loader.Module):
             },
         )
 
-    @loader.command(alias="dlm")
-    async def dlmod(self, message: Message, force_pm: bool = False):
+    @loader.command()
+    async def dlm(self, message: Message, force_pm: bool = False):
         if args := utils.get_args(message):
             args = args[0]
 
@@ -576,7 +576,7 @@ class LoaderMod(loader.Module):
         
         async def restart_inline(call: InlineCall):
             await call.edit(self.strings["requirements_restarted"])
-            await self.invoke("restart@me", "-f", message=message)
+            await self.lookup("Updater").restart(await utils.answer(message, "{prefix}restart@me -f").format(prefix = self.get_prefix()))
 
         async def core_overwrite(e: CoreOverwriteError):
             nonlocal message
