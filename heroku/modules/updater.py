@@ -301,7 +301,7 @@ class UpdaterMod(loader.Module):
         # await self._db.remote_force_save()
 
         if "LAVHOST" in os.environ:
-            os.system("lavhost restart")
+            await self.client.send_message("lavhostbot", "🔄 Restart")
             return
 
         with contextlib.suppress(Exception):
@@ -692,4 +692,16 @@ class UpdaterMod(loader.Module):
         await utils.answer(call, self.strings('rollback_process').format(num=number))
         await asyncio.create_subprocess_shell(f'git reset --hard HEAD~{number}', stdout=asyncio.subprocess.PIPE)
         await self.restart_common(call)
+
+    @loader.command()
+    async def stop(self, message: Message):
+        """| stops your userbot"""
+
+        if "LAVHOST" in os.environ:
+            await utils.answer(message, self.strings[" lavhost_stop"]
+            await self.client.send.message("lavhostbot", "⏹ Stop")
+ 
+        else:
+            await utils.answer(message, self.strings[" ub_stop"]
+            exit()
 
