@@ -300,7 +300,9 @@ class UpdaterMod(loader.Module):
 
         # await self._db.remote_force_save()
 
-
+        if "LAVHOST" in os.environ:
+            await self.client.send_message("lavhostbot", "🔄 Restart")
+            return
 
         with contextlib.suppress(Exception):
             await main.heroku.web.stop()
