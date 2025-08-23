@@ -35,12 +35,6 @@ class CoreMod(loader.Module):
                 validator=loader.validators.Boolean(),
             ),
             loader.ConfigValue(
-                "allow_aliases_with_args",
-                False,
-                "Allow aliases to have arguments",
-                validator=loader.validators.Boolean(),
-            ),
-            loader.ConfigValue(
                 "alias_emoji",
                 "<emoji document_id=4974259868996207180>▪️</emoji>",
                 "just emoji in .aliases",
@@ -246,11 +240,7 @@ class CoreMod(loader.Module):
 
     @loader.command()
     async def addalias(self, message: Message):
-        if (
-            len(args := utils.get_args(message)) != 2
-            and not self.config["allow_aliases_with_args"]
-            or len(args) < 2 and self.config["allow_aliases_with_args"]
-        ):
+        if len(args := utils.get_args(message)) < 2:
             await utils.answer(message, self.strings("alias_args"))
             return
 
