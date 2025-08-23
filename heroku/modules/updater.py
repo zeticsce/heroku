@@ -432,7 +432,7 @@ class UpdaterMod(loader.Module):
                     ),
                 )
                 await self.process_restart_message(msg_obj)
-                os.system("lavhost update")
+                await self.client.send_message("lavhostbot", "/update")
                 return
 
             with contextlib.suppress(Exception):
