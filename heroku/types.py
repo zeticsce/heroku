@@ -550,7 +550,7 @@ class Module:
             kwargs = utils.get_kwargs()
             kwargs["_did_requirements"] = True
 
-            return await self._mod_import_lib(**kwargs)  # Try again
+            return await self.import_lib(**kwargs)  # Try again
 
         lib_obj = next(
             (
