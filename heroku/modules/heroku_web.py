@@ -240,10 +240,14 @@ class HerokuWebMod(loader.Module):
             system_lang_code="en-US",
         )
     
-    async def schedule_restart(self,One=None):
+    async def schedule_restart(self, call, client):
+        await utils.answer(
+            call,
+            "🎉 Успешный вход!",
+        )
         # Yeah-yeah, ikr, but it's the only way to restart
         await asyncio.sleep(1)
-        await main.heroku.save_client_session(self._pending_client, delay_restart=False)
+        await main.heroku.save_client_session(client, delay_restart=False)
         restart()
 
     async def inline_phone_handler(self, call, data, user):
@@ -337,7 +341,7 @@ class HerokuWebMod(loader.Module):
             )
             return
         
-        asyncio.ensure_future(self.schedule_restart(self))
+        asyncio.ensure_future(self.schedule_restart(self, call, client))
 
 
     async def inline_2fa_handler(self, call, data, client, phone, user):
@@ -368,4 +372,4 @@ class HerokuWebMod(loader.Module):
             )
             return
         
-        asyncio.ensure_future(self.schedule_restart(self))
+        asyncio.ensure_future(self.schedule_restart(self, call, client))
