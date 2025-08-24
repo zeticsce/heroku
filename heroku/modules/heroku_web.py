@@ -268,9 +268,7 @@ class HerokuWebMod(loader.Module):
             )
             return
         
-        reply_markup = [
-            {"text": self.strings("enter_code"), "input": self.strings("login_code"), "handler": self.inline_code_handler, "args": (client, phone, user,)},
-        ]
+        reply_markup = {"text": self.strings("enter_code"), "input": self.strings("login_code"), "handler": self.inline_code_handler, "args": (client, phone, user,)}
         
         await utils.answer(
             call,
@@ -280,11 +278,12 @@ class HerokuWebMod(loader.Module):
         )
         
     async def inline_code_handler(self, call, data, client, phone, user):
+        _code_markup = {"text": self.strings("enter_code"), "input": self.strings("login_code"), "handler": self.inline_code_handler, "args": (client, phone, user,)}
         if not data or len(data) != 5:
             await utils.answer(
                 call,
                 self.strings("invalid_code"),
-                reply_markup={"text": self.strings("enter_code"), "input": self.strings("login_code"), "handler": self.inline_code_handler, "args": (client, phone, user,)},
+                reply_markup=_code_markup,
                 always_allow=[user.id]
             )
             return
@@ -293,7 +292,7 @@ class HerokuWebMod(loader.Module):
             await utils.answer(
                 call,
                 "Код должен состоять только из цифр. Повторите попытку.",
-                reply_markup={"text": self.strings("enter_code"), "input": self.strings("login_code"), "handler": self.inline_code_handler, "args": (client, phone, user,)},
+                reply_markup=_code_markup,
                 always_allow=[user.id]
             )
             return
@@ -323,13 +322,10 @@ class HerokuWebMod(loader.Module):
             )
             return 
         except PhoneCodeInvalidError:
-            reply_markup = [
-                {"text": self.strings("enter_code"), "input": self.strings("login_code"), "handler": self.inline_code_handler, "args": (client, phone, user,)},
-            ]
             await utils.answer(
                 call,
                 self.strings("invalid_code"),
-                reply_markup=reply_markup,
+                reply_markup=_code_markup,
                 always_allow=[user.id]
             )
             return 
@@ -345,11 +341,12 @@ class HerokuWebMod(loader.Module):
 
 
     async def inline_2fa_handler(self, call, data, client, phone, user):
+        _2fa_markup = {"text": self.strings("enter_2fa"), "input": self.strings("your_2fa"), "handler": self.inline_2fa_handler, "args": (client, phone, user,)}
         if not data:
             await utils.answer(
                 call,
                 self.strings("invalid_password"),
-                reply_markup={"text": self.strings("enter_2fa"), "input": self.strings("your_2fa"), "handler": self.inline_2fa_handler, "args": (client, phone, user,)},
+                reply_markup=_2fa_markup,
                 always_allow=[user.id]
             )
             return
@@ -360,7 +357,7 @@ class HerokuWebMod(loader.Module):
             await utils.answer(
                 call,
                 self.strings("invalid_password"),
-                reply_markup={"text": self.strings("enter_2fa"), "input": self.strings("your_2fa"), "handler": self.inline_2fa_handler, "args": (client, phone, user,)},
+                reply_markup=_2fa_markup,
                 always_allow=[user.id]
             )
             return 
