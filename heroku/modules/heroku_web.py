@@ -10,22 +10,35 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
+import asyncio
 import logging
 import os
 import random
+import string
 import typing
 
 import herokutl
+from herokutl.errors import (
+    FloodWaitError,
+    PasswordHashInvalidError,
+    PhoneCodeExpiredError,
+    PhoneCodeInvalidError,
+    SessionPasswordNeededError,
+    YouBlockedUserError,
+)
+from herokutl.sessions import MemorySession
+from herokutl.utils import get_display_name, parse_phone
 from herokutl.tl.functions.messages import (
     GetDialogFiltersRequest,
     UpdateDialogFilterRequest,
 )
 from herokutl.tl.types import Message, User
-from herokutl.utils import get_display_name
 
 from .. import loader, log, main, utils
 from .._internal import fw_protect, restart
 from ..inline.types import InlineCall
+from ..tl_cache import CustomTelegramClient
+from ..version import __version__
 from ..web import core
 
 logger = logging.getLogger(__name__)
@@ -138,29 +151,29 @@ class HerokuWebMod(loader.Module):
         else:
             id = id[0]
         
-        try:
-            id = int(id)
-        except ValueError:
-            pass
+        user = None
+        if id:
+            try:
+                id = int(id)
+            except ValueError:
+                pass
 
-        try:
-            user = await self._client.get_entity(id)
-        except Exception as e:
-            logger.error(f"Error while fetching user: {e}")
-            user = None
-            
-        
-        if user.id == self._client.tg_id:
-            await utils.answer(
-                message,
-                "Вы не можете добавить самого себя же."
-            )
-            return
+            try:
+                user = await self._client.get_entity(id)
+            except Exception as e:
+                logger.error(f"Error while fetching user: {e}")
 
         if not user or not isinstance(user, User) or user.bot:
             await utils.answer(
                 message,
                 "Ответьте на сообщение человека, которого хотите добавить, или укажите его корректный @username/id."
+            )
+            return
+        
+        if user.id == self._client.tg_id:
+            await utils.answer(
+                message,
+                "Вы не можете добавить самого себя же."
             )
             return
         
@@ -197,20 +210,162 @@ class HerokuWebMod(loader.Module):
             )
         return
         
-    async def _inline_login(self, call: typing.Union[Message, InlineCall], user: User):
+    async def _inline_login(self, call: typing.Union[Message, InlineCall], user: User, after_fail: bool = False):
         reply_markup = [
             {"text": "Ввести номер", "input":"Ваш номер телефона", "handler":self.inline_phone_handler, "args":(user,)}
         ]
+
+        fail = "Вы ввели неверный номер телефона.\n\n" if after_fail else ""
+
         await utils.answer(
             call,
-            "Введите свой номер телефона в международном формате (например, +79212345678):",
+            fail + "Введите свой номер телефона в международном формате (например, +79212345678):",
             reply_markup=reply_markup,
             always_allow=[user.id]
         )
 
 
-    async def inline_phone_handler(self, call, data, user): pass
-        
-    async def inline_code_handler(self, call, data, user): pass
+    def _get_client(self) -> CustomTelegramClient:
+        return CustomTelegramClient(
+            MemorySession(),
+            main.heroku.api_token.ID,
+            main.heroku.api_token.HASH,
+            connection=main.heroku.conn,
+            proxy=main.heroku.prox,
+            connection_retries=None,
+            device_model=main.get_app_name(),
+            system_version="Windows 10",
+            app_version=".".join(map(str, __version__)) + " x64",
+            lang_code="en",
+            system_lang_code="en-US",
+        )
+    
+    async def schedule_restart(self,One=None):
+        # Yeah-yeah, ikr, but it's the only way to restart
+        await asyncio.sleep(1)
+        await main.heroku.save_client_session(self._pending_client, delay_restart=False)
+        restart()
 
-    async def inline_2fa_handler(self, call, data, user): pass
+    async def inline_phone_handler(self, call, data, user):
+        if not (phone := parse_phone(data)):
+            await self._inline_login(call, user)
+            return
+        
+        client = self._get_client()
+
+        await client.connect()
+        try:
+            await client.send_code_request(phone)
+        except FloodWaitError as e:
+            await utils.answer(
+                call,
+                "Слишком много попыток. Попробуйте снова через {} секунд.".format(e.seconds),
+                reply_markup={"text": "Закрыть", "action": "close"},
+            )
+            return
+        
+        reply_markup = [
+            {"text": "Ввести код", "input":"Ваш код для входа", "handler":self.inline_code_handler, "args":(client, phone, user,)},
+        ]
+        
+        await utils.answer(
+            call,
+            "Код был отправлен. Введите его",
+            reply_markup=reply_markup,
+            always_allow=[user.id]
+        )
+        
+    async def inline_code_handler(self, call, data, client, phone, user):
+        if not data or len(data) != 5:
+            await utils.answer(
+                call,
+                "Невалидный код. Повторите попытку.",
+                reply_markup={"text": "Ввести код", "input":"Ваш код для входа", "handler":self.inline_code_handler, "args":(client, phone, user,)},
+                always_allow=[user.id]
+            )
+            return
+        
+        if any(c not in string.digits for c in data):
+            await utils.answer(
+                call,
+                "Код должен состоять только из цифр. Повторите попытку.",
+                reply_markup={"text": "Ввести код", "input":"Ваш код для входа", "handler":self.inline_code_handler, "args":(client, phone, user,)},
+                always_allow=[user.id]
+            )
+            return
+        
+        try:
+            await client.sign_in(phone, code=data)
+        except SessionPasswordNeededError:
+            reply_markup = [
+                {"text": "Ввести 2FA пароль", "input":"Ваш пароль", "handler":self.inline_2fa_handler, "args":(client, phone, user,)},
+            ]
+            await utils.answer(
+                call,
+                "У вас включена двухфакторная аутентификация. Введите пароль.",
+                reply_markup=reply_markup,
+                always_allow=[user.id]
+            )
+            return 
+        except PhoneCodeExpiredError:
+            reply_markup = [
+                {"text": "🔃 Запросить код снова", "callback": self.inline_phone_handler, "args": (phone, user)}
+            ]
+            await utils.answer(
+                call,
+                "Срок действия кода истек.",
+                reply_markup=reply_markup,
+                always_allow=[user.id],
+            )
+            return 
+        except PhoneCodeInvalidError:
+            reply_markup = [
+                {"text": "Ввести код", "input":"Ваш код для входа", "handler":self.inline_code_handler, "args":(client, phone, user,)},
+            ]
+            await utils.answer(
+                call,
+                "Неверный код. Повторите попытку.",
+                reply_markup=reply_markup,
+                always_allow=[user.id]
+            )
+            return 
+        except FloodWaitError as e:
+            await utils.answer(
+                call,
+                "Слишком много попыток. Попробуйте снова через {} секунд.".format(e.seconds),
+                reply_markup={"text": "Закрыть", "action": "close"},
+            )
+            return
+        
+        asyncio.ensure_future(self.schedule_restart(self))
+
+
+    async def inline_2fa_handler(self, call, data, client, phone, user):
+        if not data:
+            await utils.answer(
+                call,
+                "Невалидный пароль. Повторите попытку.",
+                reply_markup={"text": "Ввести 2FA пароль", "input":"Ваш пароль", "handler":self.inline_2fa_handler, "args":(client, phone, user,)},
+                always_allow=[user.id]
+            )
+            return
+        
+        try:
+            await client.sign_in(phone, password=data)
+        except PasswordHashInvalidError:
+            await utils.answer(
+                call,
+                "Неверный пароль. Повторите попытку.",
+                reply_markup={"text": "Ввести 2FA пароль", "input":"Ваш пароль", "handler":self.inline_2fa_handler, "args":(client, phone, user,)},
+                always_allow=[user.id]
+            )
+            return 
+        except FloodWaitError as e:
+            await utils.answer(
+                call,
+                "Слишком много попыток. Попробуйте снова через {} секунд.".format(e.seconds),
+                reply_markup={"text": "Закрыть", "action": "close"},
+            )
+            return
+        
+        asyncio.ensure_future(self.schedule_restart(self))
