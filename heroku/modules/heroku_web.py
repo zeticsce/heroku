@@ -166,14 +166,14 @@ class HerokuWebMod(loader.Module):
         if not user or not isinstance(user, User) or user.bot:
             await utils.answer(
                 message,
-                "Ответьте на сообщение человека, которого хотите добавить, или укажите его корректный @username/id."
+                self.strings("invalid_target")
             )
             return
         
         if user.id == self._client.tg_id:
             await utils.answer(
                 message,
-                "Вы не можете добавить самого себя же."
+                self.strings("cant_add_self")
             )
             return
         
@@ -182,7 +182,7 @@ class HerokuWebMod(loader.Module):
         
         try:
             if not await self.inline.form(
-                    "Вы действительно хотите добавить аккаунт {} ({})?".format(
+                    self.strings("add_user_confirm").format(
                         utils.escape_html(user.first_name),
                         user.id,
                     ),
@@ -201,7 +201,7 @@ class HerokuWebMod(loader.Module):
         except Exception:
             await utils.answer(
                 message,
-                "Вы действительно хотите добавить аккаунт {} ({})? Используйте команду <code>{}addacc {} force_insecure</code> для подтверждения.".format(
+                self.strings("add_user_insecure").format(
                     utils.escape_html(user.first_name),
                     user.id,
                     utils.escape_html(self.get_prefix()),
@@ -212,14 +212,14 @@ class HerokuWebMod(loader.Module):
         
     async def _inline_login(self, call: typing.Union[Message, InlineCall], user: User, after_fail: bool = False):
         reply_markup = [
-            {"text": "Ввести номер", "input":"Ваш номер телефона", "handler":self.inline_phone_handler, "args":(user,)}
+            {"text": self.strings("enter_number"), "input": self.strings("your_phone_number"), "handler": self.inline_phone_handler, "args": (user,)}
         ]
 
-        fail = "Вы ввели неверный номер телефона.\n\n" if after_fail else ""
+        fail = self.strings("incorrect_number") if after_fail else ""
 
         await utils.answer(
             call,
-            fail + "Введите свой номер телефона в международном формате (например, +79212345678):",
+            fail + self.strings("enter_number_format"),
             reply_markup=reply_markup,
             always_allow=[user.id]
         )
@@ -243,7 +243,7 @@ class HerokuWebMod(loader.Module):
     async def schedule_restart(self, call, client):
         await utils.answer(
             call,
-            "🎉 Успешный вход!",
+            self.strings("login_successful")
         )
         # Yeah-yeah, ikr, but it's the only way to restart
         await asyncio.sleep(1)
@@ -263,18 +263,18 @@ class HerokuWebMod(loader.Module):
         except FloodWaitError as e:
             await utils.answer(
                 call,
-                "Слишком много попыток. Попробуйте снова через {} секунд.".format(e.seconds),
-                reply_markup={"text": "Закрыть", "action": "close"},
+                self.strings("floodwait_error").format(e.seconds),
+                reply_markup={"text": self.strings("btn_no"), "action": "close"},
             )
             return
         
         reply_markup = [
-            {"text": "Ввести код", "input":"Ваш код для входа", "handler":self.inline_code_handler, "args":(client, phone, user,)},
+            {"text": self.strings("enter_code"), "input": self.strings("login_code"), "handler": self.inline_code_handler, "args": (client, phone, user,)},
         ]
         
         await utils.answer(
             call,
-            "Код был отправлен. Введите его",
+            self.strings("code_sent"),
             reply_markup=reply_markup,
             always_allow=[user.id]
         )
@@ -283,8 +283,8 @@ class HerokuWebMod(loader.Module):
         if not data or len(data) != 5:
             await utils.answer(
                 call,
-                "Невалидный код. Повторите попытку.",
-                reply_markup={"text": "Ввести код", "input":"Ваш код для входа", "handler":self.inline_code_handler, "args":(client, phone, user,)},
+                self.strings("invalid_code"),
+                reply_markup={"text": self.strings("enter_code"), "input": self.strings("login_code"), "handler": self.inline_code_handler, "args": (client, phone, user,)},
                 always_allow=[user.id]
             )
             return
@@ -293,7 +293,7 @@ class HerokuWebMod(loader.Module):
             await utils.answer(
                 call,
                 "Код должен состоять только из цифр. Повторите попытку.",
-                reply_markup={"text": "Ввести код", "input":"Ваш код для входа", "handler":self.inline_code_handler, "args":(client, phone, user,)},
+                reply_markup={"text": self.strings("enter_code"), "input": self.strings("login_code"), "handler": self.inline_code_handler, "args": (client, phone, user,)},
                 always_allow=[user.id]
             )
             return
@@ -302,33 +302,33 @@ class HerokuWebMod(loader.Module):
             await client.sign_in(phone, code=data)
         except SessionPasswordNeededError:
             reply_markup = [
-                {"text": "Ввести 2FA пароль", "input":"Ваш пароль", "handler":self.inline_2fa_handler, "args":(client, phone, user,)},
+                {"text": self.strings("enter_2fa"), "input": self.strings("your_2fa"), "handler": self.inline_2fa_handler, "args": (client, phone, user,)},
             ]
             await utils.answer(
                 call,
-                "У вас включена двухфакторная аутентификация. Введите пароль.",
+                self.strings("2fa_enabled"),
                 reply_markup=reply_markup,
                 always_allow=[user.id]
             )
             return 
         except PhoneCodeExpiredError:
             reply_markup = [
-                {"text": "🔃 Запросить код снова", "callback": self.inline_phone_handler, "args": (phone, user)}
+                {"text": self.strings("request_code"), "callback": self.inline_phone_handler, "args": (phone, user)}
             ]
             await utils.answer(
                 call,
-                "Срок действия кода истек.",
+                self.strings("code_expired"),
                 reply_markup=reply_markup,
                 always_allow=[user.id],
             )
             return 
         except PhoneCodeInvalidError:
             reply_markup = [
-                {"text": "Ввести код", "input":"Ваш код для входа", "handler":self.inline_code_handler, "args":(client, phone, user,)},
+                {"text": self.strings("enter_code"), "input": self.strings("login_code"), "handler": self.inline_code_handler, "args": (client, phone, user,)},
             ]
             await utils.answer(
                 call,
-                "Неверный код. Повторите попытку.",
+                self.strings("invalid_code"),
                 reply_markup=reply_markup,
                 always_allow=[user.id]
             )
@@ -336,8 +336,8 @@ class HerokuWebMod(loader.Module):
         except FloodWaitError as e:
             await utils.answer(
                 call,
-                "Слишком много попыток. Попробуйте снова через {} секунд.".format(e.seconds),
-                reply_markup={"text": "Закрыть", "action": "close"},
+                self.strings("floodwait_error").format(e.seconds),
+                reply_markup={"text": self.strings("btn_no"), "action": "close"},
             )
             return
         
@@ -348,8 +348,8 @@ class HerokuWebMod(loader.Module):
         if not data:
             await utils.answer(
                 call,
-                "Невалидный пароль. Повторите попытку.",
-                reply_markup={"text": "Ввести 2FA пароль", "input":"Ваш пароль", "handler":self.inline_2fa_handler, "args":(client, phone, user,)},
+                self.strings("invalid_password"),
+                reply_markup={"text": self.strings("enter_2fa"), "input": self.strings("your_2fa"), "handler": self.inline_2fa_handler, "args": (client, phone, user,)},
                 always_allow=[user.id]
             )
             return
@@ -359,16 +359,16 @@ class HerokuWebMod(loader.Module):
         except PasswordHashInvalidError:
             await utils.answer(
                 call,
-                "Неверный пароль. Повторите попытку.",
-                reply_markup={"text": "Ввести 2FA пароль", "input":"Ваш пароль", "handler":self.inline_2fa_handler, "args":(client, phone, user,)},
+                self.strings("invalid_password"),
+                reply_markup={"text": self.strings("enter_2fa"), "input": self.strings("your_2fa"), "handler": self.inline_2fa_handler, "args": (client, phone, user,)},
                 always_allow=[user.id]
             )
             return 
         except FloodWaitError as e:
             await utils.answer(
                 call,
-                "Слишком много попыток. Попробуйте снова через {} секунд.".format(e.seconds),
-                reply_markup={"text": "Закрыть", "action": "close"},
+                self.strings("floodwait_error").format(e.seconds),
+                reply_markup={"text": self.strings("btn_no"), "action": "close"},
             )
             return
         
