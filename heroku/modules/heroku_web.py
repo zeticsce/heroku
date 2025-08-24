@@ -337,7 +337,7 @@ class HerokuWebMod(loader.Module):
             )
             return
         
-        asyncio.ensure_future(self.schedule_restart(self, call, client))
+        asyncio.ensure_future(self.schedule_restart(call, client))
 
 
     async def inline_2fa_handler(self, call, data, client, phone, user):
@@ -369,4 +369,4 @@ class HerokuWebMod(loader.Module):
             )
             return
         
-        asyncio.ensure_future(self.schedule_restart(self, call, client))
+        asyncio.ensure_future(self.schedule_restart(call, client))
