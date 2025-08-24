@@ -94,6 +94,8 @@ from herokutl.tl.types import (
     MessageEntityUnderline,
     MessageEntityUnknown,
     MessageEntityUrl,
+    MessageMediaPhoto,
+    MessageMediaDocument,
     MessageMediaWebPage,
     PeerChannel,
     PeerChat,
@@ -556,10 +558,11 @@ async def answer(
         )
     elif isinstance(response, Message):
         if message.media is None and (
-            response.media is None or isinstance(response.media, MessageMediaWebPage)
+            response.media is None or isinstance(response.media, (MessageMediaWebPage, MessageMediaPhoto, MessageMediaDocument))
         ):
             result = await message.edit(
                 response.message,
+                file=response.media,
                 parse_mode=lambda t: (t, response.entities or []),
                 link_preview=isinstance(response.media, MessageMediaWebPage),
             )

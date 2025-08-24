@@ -664,6 +664,10 @@ class Heroku:
                     await r.delete()
 
                     return True
+        try:
+            await client.get_entity(f"{username}")
+        except:
+            return True
 
     async def _initial_setup(self) -> bool:
         """Responsible for first start"""

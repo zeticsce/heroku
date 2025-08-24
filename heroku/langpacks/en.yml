@@ -473,7 +473,7 @@ heroku_info:
   setinfo_no_args: "<emoji document_id=5370881342659631698>😢</emoji> <b>You need to specify text to change info to</b>"
   setinfo_success: "<emoji document_id=5436040291507247633>🎉</emoji> <b>Info changed successfully</b>"
   switchinfo_on: "<emoji document_id=5118861066981344121>✅</emoji> Image Info turned on successfully"
-  swithcinfo_off: "<emoji document_id=5118861066981344121>✅</emoji> Image Info turned off successfully"
+  switchinfo_off: "<emoji document_id=5118861066981344121>✅</emoji> Image Info turned off successfully"
   _cfg_cst_msg: "Custom message for info. May contain {me}, {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch}, {hostname}, {user}, {os}, {kernel}, {cpu}, {ping} keywords"
   _cfg_cst_btn: "Custom button for info. Leave empty to remove button"
   _cfg_banner: "URL to image banner"

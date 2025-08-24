@@ -240,17 +240,18 @@ class CoreMod(loader.Module):
 
     @loader.command()
     async def addalias(self, message: Message):
-        if len(args := utils.get_args(message)) != 2:
+        if len(args := utils.get_args(message)) < 2:
             await utils.answer(message, self.strings("alias_args"))
             return
 
-        alias, cmd = args
-        if self.allmodules.add_alias(alias, cmd):
+        alias, cmd, *rest = args
+        rest = " ".join(rest) if rest else None
+        if self.allmodules.add_alias(alias, cmd, rest):
             self.set(
                 "aliases",
                 {
                     **self.get("aliases", {}),
-                    alias: cmd,
+                    alias: f"{cmd} {rest}" if rest else cmd,
                 },
             )
             await utils.answer(
