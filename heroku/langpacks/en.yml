@@ -221,6 +221,7 @@ heroku_backup:
   db_warning: "❗️ Hikka backup detected. If you continue, the userbot will <b>try</b> to convert it to a format suitable for Heroku.\nThere may be some errors in the conversion. Continue?"
   advice_converting: "You can manually replace <a>'hikka.'</a> with <a>'heroku.'</a> in the backup content. This is necessary for loading it."
   converting_db: "🔄 Converting..."
+  probably_zip: "<emoji document_id=5210952531676504517>❗️</emoji> <b>The backup from the file could not be restored. You are probably trying to restore a full backup (.zip or .backup). In that case, use</b> <code>{}restoreall</code> <b>in reply to the file.</b>"
   _cls_doc: "Processes database and module backups"
   _cmd_doc_backupdb: "Create a database backup [will be sent to PM]"
   _cmd_doc_backupmods: "Create a backup of mods [will be sent to PM]"
