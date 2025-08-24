@@ -923,13 +923,13 @@ class Modules:
 
         return next(
             (
-                (cmd, self.commands[cmd.lower()])
+                (cmd, self.commands[cmd.split()[0].lower()])
                 for cmd in [
                     _command,
                     self.aliases.get(_command.lower()),
                     self.find_alias(_command),
                 ]
-                if cmd and cmd.lower() in self.commands
+                if cmd and cmd.split()[0].lower() in self.commands
             ),
             (_command, None),
         )
@@ -1165,12 +1165,12 @@ class Modules:
                     handler.id,
                 )
 
-    def add_alias(self, alias: str, cmd: str) -> bool:
+    def add_alias(self, alias: str, cmd: str, args: str = None) -> bool:
         """Make an alias"""
         if cmd not in self.commands:
             return False
 
-        self.aliases[alias.lower().strip()] = cmd
+        self.aliases[alias.lower().strip()] = f"{cmd} {args}" if args else cmd
         return True
 
     def remove_alias(self, alias: str) -> bool:
