@@ -248,7 +248,7 @@ class HerokuWebMod(loader.Module):
 
     async def inline_phone_handler(self, call, data, user):
         if not (phone := parse_phone(data)):
-            await self._inline_login(call, user)
+            await self._inline_login(call, user, after_fail=True)
             return
         
         client = self._get_client()
