@@ -231,7 +231,7 @@ class HerokuWebMod(loader.Module):
             main.heroku.api_token.ID,
             main.heroku.api_token.HASH,
             connection=main.heroku.conn,
-            proxy=main.heroku.prox,
+            proxy=main.heroku.proxy,
             connection_retries=None,
             device_model=main.get_app_name(),
             system_version="Windows 10",
