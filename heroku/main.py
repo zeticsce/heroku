@@ -616,7 +616,7 @@ class Heroku:
         db = database.Database(client)
         await db.init()
 
-        while (bot := input("You can enter a custom bot username or leave it empty and Heroku will generate a random one")):
+        while (bot := input("You can enter a custom bot username or leave it empty and Heroku will generate a random one: ")):
             try:
                 if await self._check_bot(client, bot):
                     db.set("heroku.inline", "custom_bot", bot)
