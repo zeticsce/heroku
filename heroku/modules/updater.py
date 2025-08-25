@@ -300,10 +300,6 @@ class UpdaterMod(loader.Module):
 
         # await self._db.remote_force_save()
 
-        if "LAVHOST" in os.environ:
-            await self.client.send_message("lavhostbot", "🔄 Restart")
-            return
-
         with contextlib.suppress(Exception):
             await main.heroku.web.stop()
 
@@ -315,6 +311,11 @@ class UpdaterMod(loader.Module):
             # Won't work if not all clients are ready
             if client is not message.client:
                 await client.disconnect()
+
+        if "LAVHOST" in os.environ:
+            await self.client.send_message("lavhostbot", "🔄 Restart")
+            await message.client.disconnect()
+            return
 
         await message.client.disconnect()
         restart()
@@ -362,8 +363,6 @@ class UpdaterMod(loader.Module):
             )
         except subprocess.CalledProcessError:
             logger.exception("Req install failed")
-
-    async def autoupdate(self): pass
 
     @loader.command()
     async def update(self, message: Message):
