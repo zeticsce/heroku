@@ -13,29 +13,22 @@
 import asyncio
 import logging
 import os
-import random
 import string
 import typing
 
-import herokutl
 from herokutl.errors import (
     FloodWaitError,
     PasswordHashInvalidError,
     PhoneCodeExpiredError,
     PhoneCodeInvalidError,
     SessionPasswordNeededError,
-    YouBlockedUserError,
 )
 from herokutl.sessions import MemorySession
-from herokutl.utils import get_display_name, parse_phone
-from herokutl.tl.functions.messages import (
-    GetDialogFiltersRequest,
-    UpdateDialogFilterRequest,
-)
+from herokutl.utils import parse_phone
 from herokutl.tl.types import Message, User
 
-from .. import loader, log, main, utils
-from .._internal import fw_protect, restart
+from .. import loader, main, utils
+from .._internal import restart
 from ..inline.types import InlineCall
 from ..tl_cache import CustomTelegramClient
 from ..version import __version__
