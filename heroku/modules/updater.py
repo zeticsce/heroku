@@ -70,7 +70,7 @@ class UpdaterMod(loader.Module):
         self.set("autoupdate", True)
         if not state:
             self.config["autoupdate"] = False
-            await self.inline.bot(call.answer(self.strings("autoupdate_off").format(prefix=self.get_prefix()), show_alert=True)) # "Автоматическое обновление выключено. Используйте {prefix}(команда), чтобы включить его."
+            await self.inline.bot(call.answer(self.strings("autoupdate_off").format(prefix=self.get_prefix()), show_alert=True))
             await call.delete()
             return
         

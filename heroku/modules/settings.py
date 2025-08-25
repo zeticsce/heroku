@@ -17,7 +17,6 @@ from herokutl.tl.types import Message
 
 from .. import loader, main, utils, version
 from ..inline.types import InlineCall
-import random
 
 
 @loader.tds

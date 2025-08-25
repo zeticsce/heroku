@@ -36,7 +36,7 @@ import requests
 from herokutl.errors.common import ScamDetectionError
 from herokutl.errors.rpcerrorlist import MediaCaptionTooLongError
 from herokutl.tl.functions.channels import JoinChannelRequest
-from herokutl.tl.types import Channel, Message, PeerUser
+from herokutl.tl.types import Channel, Message
 
 from .. import loader, main, utils
 from .._local_storage import RemoteStorage
