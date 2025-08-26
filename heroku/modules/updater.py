@@ -75,7 +75,8 @@ class UpdaterMod(loader.Module):
             return
         
         self.config["autoupdate"] = True
-        await self.inline.bot(call.answer(self.strings("autoupdate_on").format(prefix=self.get_prefix()), show_alert=True))
+
+        await self.inline.bot(call.answer(self.strings("autoupdate_on"), show_alert=True))
         await call.delete()
 
     def get_changelog(self) -> str:
@@ -404,7 +405,7 @@ class UpdaterMod(loader.Module):
         if self.config["autoupdate"]:
             await utils.answer(message, self.strings["autoupdate_on"])
         else:
-            await utils.answer(message, self.strings["autoupdate_off"])
+            await utils.answer(message, self.strings["autoupdate_off"].format(prefix=self.get_prefix()))
             
     async def inline_update(
         self,
@@ -493,7 +494,7 @@ class UpdaterMod(loader.Module):
             await self.inline.bot.send_photo(
                 self.tg_id,
                 photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
-                caption=self.strings("autoupdate"), # "⌚️ <b>Юнит «ALPHA»</b> автоматически обновляет юзербота сразу после выхода нового патча. Только мажорные обновления (1.x.x > 2.x.x) будут требовать вашего внимания\n\n<b>🔄 Не хотите ли включить автообновление?</b>"
+                caption=self.strings("autoupdate"),
                 reply_markup=self.inline.generate_markup(
                     [
                         [
