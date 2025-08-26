@@ -78,7 +78,7 @@ class TokenObtainment(InlineUnit):
                 await fw_protect()
                 from .. import main
 
-                m = await conv.send_file("https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku.png")
+                m = await conv.send_file("../assets/heroku.png")
                 r = await conv.get_response()
 
                 logger.debug(">> <Photo>")
@@ -226,7 +226,7 @@ class TokenObtainment(InlineUnit):
                         await fw_protect()
                         from .. import main
 
-                        m = await conv.send_file("https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku.png")
+                        m = await conv.send_file("../assets/heroku.png")
                         r = await conv.get_response()
 
                         logger.debug(">> <Photo>")
