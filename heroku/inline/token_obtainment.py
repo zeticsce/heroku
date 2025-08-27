@@ -13,6 +13,7 @@
 import asyncio
 import logging
 import re
+import os
 
 from herokutl.errors.rpcerrorlist import YouBlockedUserError
 from herokutl.tl.functions.contacts import UnblockRequest
@@ -78,7 +79,7 @@ class TokenObtainment(InlineUnit):
                 await fw_protect()
                 from .. import main
 
-                m = await conv.send_file("../assets/heroku.png")
+                m = await conv.send_file(f"{os.getcwd()}/assets/heroku.png")
                 r = await conv.get_response()
 
                 logger.debug(">> <Photo>")
@@ -226,7 +227,7 @@ class TokenObtainment(InlineUnit):
                         await fw_protect()
                         from .. import main
 
-                        m = await conv.send_file("../assets/heroku.png")
+                        m = await conv.send_file(f" {os.getcwd()}/assets/heroku.png")
                         r = await conv.get_response()
 
                         logger.debug(">> <Photo>")
