@@ -62,7 +62,7 @@ class InlineMessage:
         msgid = entity.get("message_id")
         cid = entity.get("chat")
 
-        await self.inline._client.delete_messages(cid, msgid)
+        await self.inline_manager._client.delete_messages(cid, msgid)
         return await self.original_call.answer("")
 
     async def unload(self) -> bool:
