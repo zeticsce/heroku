@@ -315,7 +315,6 @@ class UpdaterMod(loader.Module):
 
         if "LAVHOST" in os.environ:
             await self.client.send_message("lavhostbot", "🔄 Restart")
-            await message.client.disconnect()
             return
 
         await message.client.disconnect()
@@ -417,7 +416,7 @@ class UpdaterMod(loader.Module):
             os.system(f"cd {utils.get_base_dir()} && cd .. && git reset --hard HEAD")
 
         try:
-            if "LAVHOST" in os.environ:
+            if "LAVHOSTtest" in os.environ:
                 msg_obj = await utils.answer(
                     msg_obj,
                     self.strings("lavhost_update").format(
