@@ -416,7 +416,7 @@ class UpdaterMod(loader.Module):
             os.system(f"cd {utils.get_base_dir()} && cd .. && git reset --hard HEAD")
 
         try:
-            if "LAVHOSTtest" in os.environ:
+            if "LAVHOST" in os.environ:
                 msg_obj = await utils.answer(
                     msg_obj,
                     self.strings("lavhost_update").format(
