@@ -3,6 +3,7 @@
 # 🌐 https://github.com/hikariatama/Hikka
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
+import contextlib
 
 # ©️ Codrago, 2024-2025
 # This file is a part of Heroku Userbot
@@ -59,7 +60,9 @@ class CoreMod(loader.Module):
                     "callback": self._inline__choose__installation,
                     "args": (platform,),
                 }
-                for platform in ['vds','userland','jamhost']
+                for platform in ['vds', 'wsl',
+                                 'userland', 'jamhost',
+                                 'hikkahost', 'lavhost']
             ],
             2
         )
@@ -315,7 +318,7 @@ class CoreMod(loader.Module):
 
         args = utils.get_args_raw(message)
 
-        if (not args or args not in {'-v', '-r', '-jh', '-ms', '-u'}) and \
+        if (not args or args not in {'-vds', '-wsl', '-ul', '-jh', '-hh', '-lh'}) and \
             not (await self.inline.form(
                 self.strings("choose_installation"),
                 message,
@@ -328,17 +331,25 @@ class CoreMod(loader.Module):
             await self.client.send_file(
                 message.peer_id,
                 "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_installation.png",
-                caption=self.strings["installation"], reply_to=getattr(message, "reply_to_msg_id", None),)
-        elif "-v" in args:
-            await utils.answer(message, self.strings["vds_install"])
+                caption=self.strings("vds_install"), reply_to=getattr(message, "reply_to_msg_id", None),)
+        elif "-vds" in args:
+            await utils.answer(message, self.strings("vds_install"))
+        elif "-wsl" in args:
+            await utils.answer(message, self.strings("wsl_install"))
+        elif "-ul" in args:
+            await utils.answer(message, self.strings("userland_install"))
         elif "-jh" in args:
-            await utils.answer(message, self.strings["jamhost_install"])
-        elif "-u" in args:
-            await utils.answer(message, self.strings["userland_install"])
+            await utils.answer(message, self.strings("jamhost_install"))
+        elif "-hh" in args:
+            await utils.answer(message, self.strings("hikkahost_install"))
+        elif "-lh" in args:
+            await utils.answer(message, self.strings("lavhost_install"))
 
     async def _inline__choose__installation(self, call: InlineCall, platform: str):
-        await call.edit(
-            text=self.strings(f'{platform}_install'),
-            reply_markup=self._markup,
-        )
+        with contextlib.suppress(Exception):
+            await utils.answer(
+                call,
+                self.strings(f'{platform}_install'),
+                reply_markup=self._markup,
+            )
 
