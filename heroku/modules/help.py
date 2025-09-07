@@ -186,8 +186,8 @@ class Help(loader.Module):
 
         for name, fun in commands.items():
             reply += (
-                f'<blockquote expandable>\n{self.config["command_emoji"]}'
-                " <code>{}{}</code>{} {}</blockquote>".format(
+                f'\n{self.config["command_emoji"]}'
+                " <code>{}{}</code>{} {}".format(
                     utils.escape_html(self.get_prefix()),
                     name,
                     (
@@ -213,7 +213,7 @@ class Help(loader.Module):
 
         await utils.answer(
             message,
-            reply
+            f'<blockquote expandable>{reply}</blockquote'
             + (f"\n\n{self.strings('not_exact')}" if not exact else "")
             + (
                 f"\n\n{self.strings('core_notice')}"
