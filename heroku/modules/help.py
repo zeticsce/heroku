@@ -157,6 +157,8 @@ class Help(loader.Module):
             _name,
             ""
         )
+        inline_cmd = ""
+        cmds = ""
         if module.__doc__:
             reply += (
                 "\n<i><emoji document_id=5879813604068298387>ℹ️</emoji> "
@@ -172,7 +174,7 @@ class Help(loader.Module):
 
         if hasattr(module, "inline_handlers"):
             for name, fun in module.inline_handlers.items():
-                reply += (
+                inline_cmd += (
                     "\n<emoji document_id=5372981976804366741>🤖</emoji>"
                     " <code>{}</code> {}".format(
                         f"@{self.inline.bot_username} {name}",
@@ -185,7 +187,7 @@ class Help(loader.Module):
                 )
 
         for name, fun in commands.items():
-            reply += (
+            cmds += (
                 f'\n{self.config["command_emoji"]}'
                 " <code>{}{}</code>{} {}".format(
                     utils.escape_html(self.get_prefix()),
@@ -213,7 +215,7 @@ class Help(loader.Module):
 
         await utils.answer(
             message,
-            f'<blockquote expandable>{reply}</blockquote'
+            f'{reply}<blockquote expandable>{cmds}{inline_cmd}</blockquote'
             + (f"\n\n{self.strings('not_exact')}" if not exact else "")
             + (
                 f"\n\n{self.strings('core_notice')}"
