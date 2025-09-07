@@ -186,8 +186,8 @@ class Help(loader.Module):
 
         for name, fun in commands.items():
             reply += (
-                f'\n{self.config["command_emoji"]}'
-                " <code>{}{}</code>{} {}".format(
+                f'<blockquote expandable>\n{self.config["command_emoji"]}'
+                " <code>{}{}</code>{} {}</blockquote>".format(
                     utils.escape_html(self.get_prefix()),
                     name,
                     (
