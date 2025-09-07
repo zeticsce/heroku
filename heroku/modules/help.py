@@ -215,7 +215,7 @@ class Help(loader.Module):
 
         await utils.answer(
             message,
-            f'{reply}<blockquote expandable>{cmds}{inline_cmd}</blockquote'
+            f'{reply}<blockquote expandable>{cmds}{inline_cmd}</blockquote>'
             + (f"\n\n{self.strings('not_exact')}" if not exact else "")
             + (
                 f"\n\n{self.strings('core_notice')}"
