@@ -27,8 +27,7 @@ from logging.handlers import RotatingFileHandler
 import herokutl
 from aiogram.exceptions import TelegramNetworkError
 from herokutl.errors import PersistentTimestampOutdatedError
-from herokutl.errors.rpcbaseerrors import 
-(
+from herokutl.errors.rpcbaseerrors import (
     ServerError,
     RPCError
 )
