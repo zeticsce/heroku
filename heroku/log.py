@@ -84,7 +84,7 @@ def override_text(exception: Exception) -> typing.Optional[str]:
         return "✈️ <b>Telegram has problems with their datacenters.</b>"
 
     if isinstance(exception, CoreOverwriteError):
-        return str(exception)
+        return f"⚠️ {str(exception)}"
 
     if isinstance(exception, ServerError):
         return "📡 <b>Telegram servers are currently experiencing issues. Please try again later.</b>"
