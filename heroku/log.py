@@ -31,11 +31,10 @@ from herokutl.errors.rpcbaseerrors import (
     ServerError,
     RPCError
 )
-from .types import CoreOverwriteError
 
 from . import utils
 from .tl_cache import CustomTelegramClient
-from .types import BotInlineCall, Module
+from .types import BotInlineCall, Module, CoreOverwriteError
 from .web.debugger import WebDebugger
 
 # Monkeypatch linecache to make interactive line debugger available
