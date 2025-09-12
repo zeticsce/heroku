@@ -697,8 +697,8 @@ class UpdaterMod(loader.Module):
         """| stops your userbot"""
 
         if "LAVHOST" in os.environ:
-            await utils.answer(message, self.strings["ub_stop"].format(emoji=self.get_platform_emoji()))
+            await utils.answer(message, self.strings["ub_stop"].format(emoji=utils.get_platform_emoji()))
             await self.client.send.message("lavhostbot", "⏹ Stop")
         else:
-            await utils.answer(message, self.strings["ub_stop"].format(emoji=self.get_platform_emoji()))
+            await utils.answer(message, self.strings["ub_stop"].format(emoji=utils.get_platform_emoji()))
             exit()
