@@ -77,16 +77,22 @@ linecache.getlines = getlines
 
 def override_text(exception: Exception) -> typing.Optional[str]:
     """Returns error-specific description if available, else `None`"""
+
     if isinstance(exception, (TelegramNetworkError, asyncio.exceptions.TimeoutError)):
         return "✈️ <b>You have problems with internet connection on your server.</b>"
+
     if isinstance(exception, PersistentTimestampOutdatedError):
         return "✈️ <b>Telegram has problems with their datacenters.</b>"
+
     if isinstance(exception, CoreOverwriteError):
-        return(f" {'Module if self.type == 'module' else 'command' } {self.target} will not be overwritten, because it's core")
+        return str(exception)
+
     if isinstance(exception, ServerError):
         return "📡 <b>Telegram servers are currently experiencing issues. Please try again later.</b>"
+
     if isinstance(exception, RPCError) and "TRANSLATION_TIMEOUT" in str(exception):
         return ("🕓 <b>Telegram translation service timed out. Please try again later.</b>")
+
     if isinstance(exception, ModuleNotFoundError):
         return f"📦 {traceback.format_exception_only(type(exception), exception)[0].split(':')[1].strip()}"
 
