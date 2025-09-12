@@ -34,6 +34,7 @@ import logging
 import os
 import re
 import typing
+import signal
 
 import herokutl
 
@@ -363,8 +364,8 @@ class TerminalMod(loader.Module):
             if needsswitch:
                 cmd = " ".join([cmd.split(" ", 1)[0], "-S", cmd.split(" ", 1)[1]])
 
-        sproc = await asyncio.create_subprocess_shell(
-            cmd,
+        sproc = await asyncio.create_subprocess_exec(
+            "/bin/bash", "-c", cmd,
             stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
@@ -404,12 +405,11 @@ class TerminalMod(loader.Module):
 
         if hash_msg(await message.get_reply_message()) in self.activecmds:
             try:
+                kill_pids = self.activecmds[hash_msg(await message.get_reply_message())] 
                 if "-f" not in utils.get_args_raw(message):
-                    self.activecmds[
-                        hash_msg(await message.get_reply_message())
-                    ].terminate()
+                     os.killpg(kill_pids.pid, signal.SIGTERM)
                 else:
-                    self.activecmds[hash_msg(await message.get_reply_message())].kill()
+                    os.killpg(kill_pids.pid, signal.SIGKILL)
             except Exception:
                 logger.exception("Killing process failed")
                 await utils.answer(message, self.strings("kill_fail"))
