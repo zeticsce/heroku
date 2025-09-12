@@ -31,7 +31,7 @@ from herokutl.errors.rpcbaseerrors import (
     ServerError,
     RPCError
 )
-from types import CoreOverwriteError
+from ..types import CoreOverwriteError
 
 from . import utils
 from .tl_cache import CustomTelegramClient
