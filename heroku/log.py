@@ -31,6 +31,7 @@ from herokutl.errors.rpcbaseerrors import (
     ServerError,
     RPCError
 )
+from types import CoreOverwriteError
 
 from . import utils
 from .tl_cache import CustomTelegramClient
@@ -80,6 +81,8 @@ def override_text(exception: Exception) -> typing.Optional[str]:
         return "✈️ <b>You have problems with internet connection on your server.</b>"
     if isinstance(exception, PersistentTimestampOutdatedError):
         return "✈️ <b>Telegram has problems with their datacenters.</b>"
+    if isinstance(exception, CoreOverwriteError):
+        return(f" {'Module if self.type == 'module' else 'command' } {self.target} will not be overwritten, because it's core")
     if isinstance(exception, ServerError):
         return "📡 <b>Telegram servers are currently experiencing issues. Please try again later.</b>"
     if isinstance(exception, RPCError) and "TRANSLATION_TIMEOUT" in str(exception):
