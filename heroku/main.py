@@ -205,12 +205,6 @@ def generate_random_system_version():
     return version
 
 
-if not IS_WINDOWS:
-    import uvloop
-
-    uvloop.install()
-
-
 def run_config():
     """Load configurator.py"""
     from . import configurator
