@@ -132,9 +132,9 @@ class MessageEditor:
 
 class SudoMessageEditor(MessageEditor):
     # Let's just hope these are safe to parse
-    PASS_REQ = "[sudo] password for"
-    WRONG_PASS = r"\[sudo\] password for (.*): Sorry, try again\."
-    TOO_MANY_TRIES = (r"\[sudo\] password for (.*): sudo: [0-9]+ incorrect password attempts")  # fmt: skip
+    PASS_REQ = ["[sudo] password for", "[sudo] пароль для"]
+    WRONG_PASS = [r"\[sudo\] password for (.*): Sorry, try again\.", r"\[sudo\] пароль для (.*): Попробуйте еще раз.\."]
+    TOO_MANY_TRIES = [r"\[sudo\] password for (.*): sudo: [0-9]+ incorrect password attempts", r"\[sudo\] пароль для (.*): sudo: [0-9]+ неверные попытки ввода пароля"]  # fmt: skip
 
     def __init__(self, message, command, config, strings, request_message):
         super().__init__(message, command, config, strings, request_message)
@@ -156,20 +156,21 @@ class SudoMessageEditor(MessageEditor):
 
         if (
             len(lines) > 1
-            and re.fullmatch(self.WRONG_PASS, lines[-2])
-            and lastlines[0] == self.PASS_REQ
+            and any(re.fullmatch(i, linesp[-2]) for i in self.WRONG_PASS)
+            and any(lastlines[0] == i for i in self.PASS_REQ)
             and self.state == 1
         ):
             logger.debug("switching state to 0")
-            await self.authmsg.edit(self.strings("auth_failed"))
+            await utils.answer(message, self.strings("auth_fail"))
             self.state = 0
             handled = True
             await asyncio.sleep(2)
-            await self.authmsg.delete()
+            if self.authmsg:
+                await self.authmsg.delete()
 
-        if lastlines[0] == self.PASS_REQ and self.state == 0:
+        if any(lastlines[0] == i for i in self.PASS_REQ) and self.state == 0:
             logger.debug("Success to find sudo log!")
-            text = self.strings("auth_needed").format(self._tg_id)
+            text = self.strings("auth_needed").format(self.message.client.heroku_me.id)
 
             try:
                 await utils.answer(self.message, text)
@@ -180,14 +181,14 @@ class SudoMessageEditor(MessageEditor):
             command = "<code>" + utils.escape_html(self.command) + "</code>"
             user = utils.escape_html(lastlines[1][:-1])
 
-            self.authmsg = await self.message[0].client.send_message(
+            self.authmsg = await self.message.client.send_message(
                 "me",
                 self.strings("auth_msg").format(command, user),
             )
             logger.debug("sent message to self")
 
-            self.message[0].client.remove_event_handler(self.on_message_edited)
-            self.message[0].client.add_event_handler(
+            self.message.client.remove_event_handler(self.on_message_edited)
+            self.message.client.add_event_handler(
                 self.on_message_edited,
                 herokutl.events.messageedited.MessageEdited(chats=["me"]),
             )
@@ -196,7 +197,7 @@ class SudoMessageEditor(MessageEditor):
             handled = True
 
         if len(lines) > 1 and (
-            re.fullmatch(self.TOO_MANY_TRIES, lastline) and self.state in {1, 3, 4}
+            any(re.fullmatch(i, lastline) for i in self.TOO_MANY_TRIES) and self.state in {1, 3, 4}
         ):
             logger.debug("password wrong lots of times")
             await utils.answer(self.message, self.strings("auth_locked"))
@@ -207,7 +208,7 @@ class SudoMessageEditor(MessageEditor):
         if not handled:
             logger.debug("Didn't find sudo log.")
             if self.authmsg is not None:
-                await self.authmsg[0].delete()
+                await self.authmsg.delete()
                 self.authmsg = None
             self.state = 2
             await self.redraw()
