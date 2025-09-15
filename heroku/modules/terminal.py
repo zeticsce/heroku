@@ -156,7 +156,7 @@ class SudoMessageEditor(MessageEditor):
 
         if (
             len(lines) > 1
-            and any(re.fullmatch(i, linesp[-2]) for i in self.WRONG_PASS)
+            and any(re.fullmatch(i, lines[-2]) for i in self.WRONG_PASS)
             and any(lastlines[0] == i for i in self.PASS_REQ)
             and self.state == 1
         ):
