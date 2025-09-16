@@ -11,7 +11,10 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import asyncio
+import functools
 import logging
+
+from math import ceil
 
 from .. import loader, utils
 from ..inline.types import BotInlineMessage, InlineCall
@@ -19,6 +22,10 @@ from ..types import Message
 
 logger = logging.getLogger(__name__)
 
+
+NUM_ROWS = 2
+
+ROW_SIZE = 4
 
 PRESETS = {
     "fun": [
@@ -131,18 +138,113 @@ class Presets(loader.Module):
     async def _back(self, call: InlineCall):
         await call.edit(self.strings("welcome"), reply_markup=self._markup)
 
-    async def _install(self, call: InlineCall, preset: str):
+    async def _choose_menu(self, call: InlineCall, page: int = 0, preset: str = "", to_remove: list | None = None):
+        if not preset:
+            return
+        to_remove = to_remove or []
+        to_buttons = [link for link in PRESETS[preset] if not self._is_installed(link)]
+        to_install = PRESETS[preset]
+        for index in to_remove:
+            to_install.pop(index)
+
+
+        kb = []
+        for mod_row in utils.chunks(
+            to_buttons[page * NUM_ROWS * ROW_SIZE : (page + 1) * NUM_ROWS * ROW_SIZE],
+            2,
+        ):
+            row = []
+            index = 0
+            for link in mod_row:
+                text = (
+                    f"{("✅ " if link not in to_install else "❌ ")}"
+                    f"{link.rsplit("/", maxsplit=1)[1].split(".")[0]}"
+                )
+                row.append(
+                    {
+                        "text": text,
+                        "callback": self._switch,
+                        "args": (page, preset, index, to_remove),
+                    }
+                )
+                index += 1
+            kb += [row]
+
+        if len(to_buttons) > NUM_ROWS * ROW_SIZE:
+            kb += self.inline.build_pagination(
+                callback=functools.partial(
+                    self._choose_menu, preset=preset, to_remove=to_remove
+                ),
+                total_pages=ceil(len(to_buttons) / (NUM_ROWS * ROW_SIZE)),
+                current_page=page + 1,
+            )
+
+        kb += [
+            [
+                {"text": self.strings("back"), "callback": self._back},
+                {
+                    "text": self.strings("install"),
+                    "callback": self._install,
+                    "args": (preset, to_install),
+                },
+            ]
+        ]
+
+        await call.edit(
+            self.strings("preset").format(
+                self.strings(f"_{preset}_title"),
+                self.strings(f"_{preset}_desc"),
+                "\n".join(
+                    map(
+                        lambda x: x[0],
+                        sorted(
+                            [
+                                (
+                                    "{} <b>{}</b>".format(
+                                        (
+                                            self.strings("already_installed")
+                                            if self._is_installed(link)
+                                            else "▫️"
+                                        ),
+                                        (
+                                            f"<s>{link.rsplit("/", maxsplit=1)[1].split(".")[0]}</s>"
+                                            if link not in to_install
+                                            else link.rsplit("/", maxsplit=1)[1].split(".")[0]),
+                                    ),
+                                    int(self._is_installed(link)),
+                                )
+                                for link in PRESETS[preset]
+                            ],
+                            key=lambda x: x[1],
+                            reverse=True,
+                        ),
+                    )
+                ),
+            ),
+            reply_markup=kb,
+        )
+        
+
+    async def _switch(self, call: InlineCall, page: int, preset: str, index_of_module: str, to_remove: list):
+        if index_of_module in to_remove:
+            to_remove.remove(index_of_module)
+        else:
+            to_remove.append(index_of_module)
+        
+        await self._choose_menu(call, page, preset, to_remove)
+
+    async def _install(self, call: InlineCall, preset: str, modules: list):
         await call.delete()
         m = await self._client.send_message(
             self.inline.bot_id,
             self.strings("installing").format(preset),
         )
-        for i, module in enumerate(PRESETS[preset]):
+        for i, module in enumerate(modules):
             await m.edit(
                 self.strings("installing_module").format(
                     preset,
                     i,
-                    len(PRESETS[preset]),
+                    len(modules),
                     module,
                 )
             )
