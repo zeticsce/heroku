@@ -27,10 +27,14 @@ from logging.handlers import RotatingFileHandler
 import herokutl
 from aiogram.exceptions import TelegramNetworkError
 from herokutl.errors import PersistentTimestampOutdatedError
+from herokutl.errors.rpcbaseerrors import (
+    ServerError,
+    RPCError
+)
 
 from . import utils
 from .tl_cache import CustomTelegramClient
-from .types import BotInlineCall, Module
+from .types import BotInlineCall, Module, CoreOverwriteError
 from .web.debugger import WebDebugger
 
 # Monkeypatch linecache to make interactive line debugger available
@@ -72,10 +76,24 @@ linecache.getlines = getlines
 
 def override_text(exception: Exception) -> typing.Optional[str]:
     """Returns error-specific description if available, else `None`"""
+
     if isinstance(exception, (TelegramNetworkError, asyncio.exceptions.TimeoutError)):
         return "✈️ <b>You have problems with internet connection on your server.</b>"
-    elif isinstance(exception, PersistentTimestampOutdatedError):
+
+    if isinstance(exception, PersistentTimestampOutdatedError):
         return "✈️ <b>Telegram has problems with their datacenters.</b>"
+
+    if isinstance(exception, CoreOverwriteError):
+        return f"⚠️ {str(exception)}"
+
+    if isinstance(exception, ServerError):
+        return "📡 <b>Telegram servers are currently experiencing issues. Please try again later.</b>"
+
+    if isinstance(exception, RPCError) and "TRANSLATION_TIMEOUT" in str(exception):
+        return ("🕓 <b>Telegram translation service timed out. Please try again later.</b>")
+
+    if isinstance(exception, ModuleNotFoundError):
+        return f"📦 {traceback.format_exception_only(type(exception), exception)[0].split(':')[1].strip()}"
 
     return None
 

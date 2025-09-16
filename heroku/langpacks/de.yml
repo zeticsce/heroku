@@ -379,6 +379,7 @@ updater:
   installing: "<emoji document_id=5208622108191506906>🕗</emoji> <b>Updates werden installiert...</b>"
   success: "<emoji document_id=5208661316947955396>⏱</emoji> <b>Neustart erfolgreich! {}</b>\n<i>Die Module werden jedoch noch geladen...</i>\n<i>Der Neustart dauerte {} Sekunden</i>"
   full_success: "<emoji document_id=6028215594707324419>👍</emoji> <b>Der Userbot ist vollständig geladen! {}</b>\n<i>Der vollständige Neustart dauerte {} Sekunden.</i>"
+  ub_stop: "Dein {} wurde gestoppt!"
   secure_boot_complete: "<emoji document_id=5472308992514464048>🔐</emoji> <b>Sicherer Start abgeschlossen! {}</b>\n<i>Der Neustart dauerte {} Sekunden</i>"
   origin_cfg_doc: "Die URL, von der die Updates heruntergeladen werden"
   btn_restart: "🔄 Neu starten"

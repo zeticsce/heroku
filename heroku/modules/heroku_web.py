@@ -137,71 +137,76 @@ class HerokuWebMod(loader.Module):
 
     @loader.command()
     async def addacc(self, message: Message):
-        id = utils.get_args(message)
-        if not id:
-            reply = await message.get_reply_message()
-            id = reply.sender_id if reply else None
+
+        if "JAMHOST" in os.environ or "HIKKAHOST" in os.environ or "LAVHOST" in os.environ or "SHARKHOST" in os.environ:
+            await utils.answer(message, self.strings["host_denied"])
         else:
-            id = id[0]
-        
-        user = None
-        if id:
-            try:
-                id = int(id)
-            except ValueError:
-                pass
 
-            try:
-                user = await self._client.get_entity(id)
-            except Exception as e:
-                logger.error(f"Error while fetching user: {e}")
+            id = utils.get_args(message)
+            if not id:
+                reply = await message.get_reply_message()
+                id = reply.sender_id if reply else None
+            else:
+                id = id[0]
+        
+            user = None
+            if id:
+                try:
+                    id = int(id)
+                except ValueError:
+                    pass
 
-        if not user or not isinstance(user, User) or user.bot:
-            await utils.answer(
-                message,
-                self.strings("invalid_target")
-            )
-            return
+                try:
+                    user = await self._client.get_entity(id)
+                except Exception as e:
+                    logger.error(f"Error while fetching user: {e}")
+
+            if not user or not isinstance(user, User) or user.bot:
+                await utils.answer(
+                    message,
+                    self.strings("invalid_target")
+                )
+                return
         
-        if user.id == self._client.tg_id:
-            await utils.answer(
-                message,
-                self.strings("cant_add_self")
-            )
-            return
+            if user.id == self._client.tg_id:
+                await utils.answer(
+                    message,
+                    self.strings("cant_add_self")
+                )
+                return
         
-        if "force_insecure" in message.text.lower():
-            await self._inline_login(message, user)
+            if "force_insecure" in message.text.lower():
+                await self._inline_login(message, user)
         
-        try:
-            if not await self.inline.form(
-                    self.strings("add_user_confirm").format(
+            try:
+                if not await self.inline.form(
+                        self.strings("add_user_confirm").format(
+                            utils.escape_html(user.first_name),
+                            user.id,
+                        ),
+                        message=message,
+                        reply_markup=[
+                            {
+                                "text": self.strings("btn_yes"),
+                                "callback": self._inline_login,
+                                "args": (user,),
+                            },
+                            {"text": self.strings("btn_no"), "action": "close"},
+                        ],
+                        photo="",
+                    ):
+                    raise Exception
+            except Exception:
+                await utils.answer(
+                    message,
+                    self.strings("add_user_insecure").format(
                         utils.escape_html(user.first_name),
                         user.id,
-                    ),
-                    message=message,
-                    reply_markup=[
-                        {
-                            "text": self.strings("btn_yes"),
-                            "callback": self._inline_login,
-                            "args": (user,),
-                        },
-                        {"text": self.strings("btn_no"), "action": "close"},
-                    ],
-                    photo="",
-                ):
-                raise Exception
-        except Exception:
-            await utils.answer(
-                message,
-                self.strings("add_user_insecure").format(
-                    utils.escape_html(user.first_name),
-                    user.id,
-                    utils.escape_html(self.get_prefix()),
-                    user.id,
+                        utils.escape_html(self.get_prefix()),
+                        user.id,
+                    )
                 )
-            )
-        return
+            return
         
     async def _inline_login(self, call: typing.Union[Message, InlineCall], user: User, after_fail: bool = False):
         reply_markup = [
