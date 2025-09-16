@@ -300,8 +300,8 @@ class Presets(loader.Module):
                 {"text": self.strings("back"), "callback": self._back},
                 {
                     "text": self.strings("install"),
-                    "callback": self._install,
-                    "args": (preset,),
+                    "callback": self._choose_menu,
+                    "args": (0, preset,),
                 },
             ],
         )
