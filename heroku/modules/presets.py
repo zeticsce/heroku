@@ -142,9 +142,9 @@ class Presets(loader.Module):
         if not preset:
             return
         to_remove = to_remove or []
-        to_buttons = [link for link in PRESETS[preset] if not self._is_installed(link)]
-        to_install = PRESETS[preset]
-        for index in to_remove:
+        to_buttons = [(indx, link) for indx, link in enumerate(PRESETS[preset]) if not self._is_installed(link)]
+        to_install = PRESETS[preset].copy()
+        for index in sorted(to_remove, reverse=True):
             to_install.pop(index)
 
 
@@ -154,10 +154,9 @@ class Presets(loader.Module):
             2,
         ):
             row = []
-            index = 0
-            for link in mod_row:
+            for index, link in mod_row:
                 text = (
-                    f"{('✅ ' if link not in to_install else '❌ ')}"
+                    f"{('✅ ' if link in to_install else '❌ ')}"
                     f"{link.rsplit('/', maxsplit=1)[1].split('.')[0]}"
                 )
                 row.append(
@@ -167,7 +166,6 @@ class Presets(loader.Module):
                         "args": (page, preset, index, to_remove),
                     }
                 )
-                index += 1
             kb += [row]
 
         if len(to_buttons) > NUM_ROWS * ROW_SIZE:
@@ -225,7 +223,7 @@ class Presets(loader.Module):
         )
         
 
-    async def _switch(self, call: InlineCall, page: int, preset: str, index_of_module: str, to_remove: list):
+    async def _switch(self, call: InlineCall, page: int, preset: str, index_of_module: int, to_remove: list):
         if index_of_module in to_remove:
             to_remove.remove(index_of_module)
         else:
