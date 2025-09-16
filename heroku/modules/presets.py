@@ -157,8 +157,8 @@ class Presets(loader.Module):
             index = 0
             for link in mod_row:
                 text = (
-                    f"{("✅ " if link not in to_install else "❌ ")}"
-                    f"{link.rsplit("/", maxsplit=1)[1].split(".")[0]}"
+                    f"{('✅ ' if link not in to_install else '❌ ')}"
+                    f"{link.rsplit('/', maxsplit=1)[1].split('.')[0]}"
                 )
                 row.append(
                     {
@@ -207,9 +207,9 @@ class Presets(loader.Module):
                                             else "▫️"
                                         ),
                                         (
-                                            f"<s>{link.rsplit("/", maxsplit=1)[1].split(".")[0]}</s>"
+                                            f"<s>{link.rsplit('/', maxsplit=1)[1].split('.')[0]}</s>"
                                             if link not in to_install
-                                            else link.rsplit("/", maxsplit=1)[1].split(".")[0]),
+                                            else link.rsplit('/', maxsplit=1)[1].split('.')[0]),
                                     ),
                                     int(self._is_installed(link)),
                                 )
