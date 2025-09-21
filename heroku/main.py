@@ -95,7 +95,6 @@ CONFIG_PATH = BASE_PATH / "config.json"
 
 IS_DOCKER = "DOCKER" in os.environ
 IS_LAVHOST = "LAVHOST" in os.environ
-IS_HIKKAHOST = "HIKKAHOST" in os.environ
 IS_MACOS = "com.apple" in os.environ.get("PATH", "")
 IS_AEZA = "aeza" in socket.gethostname()
 IS_USERLAND = "userland" in os.environ.get("USER", "")
