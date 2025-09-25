@@ -1010,6 +1010,7 @@ class Heroku:
     async def _main(self):
         """Main entrypoint"""
         self._init_web()
+        inital_web = False
         save_config_key("port", self.arguments.port)
         await self._get_token()
 
