@@ -642,7 +642,7 @@ class HerokuSecurityMod(loader.Module):
 
         prefixes = self._db.get(main.__name__, f"command_prefixes", {})
         for user in _resolved_users:
-            _and_prefixes += prefixes.get(user.id, None)
+            _and_prefixes += [prefixes.get(user.id, None)]
 
         await utils.answer(
             message,
