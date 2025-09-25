@@ -654,10 +654,14 @@ class HerokuSecurityMod(loader.Module):
         )
 
     def _lookup(self, needle: str) -> str:
+        command = needle
+        for prefix in self.get_prefixes():
+            command = command.lower().removeprefix(prefix)
+
         return (
             (
                 []
-                if needle.lower().startswith(self.get_prefix())
+                if needle.lower().startswith(self.get_prefixes())
                 else (
                     [f"module/{self.lookup(needle).__class__.__name__}"]
                     if self.lookup(needle)
@@ -665,13 +669,13 @@ class HerokuSecurityMod(loader.Module):
                 )
             )
             + (
-                [f"command/{needle.lower().strip(self.get_prefix())}"]
-                if needle.lower().strip(self.get_prefix()) in self.allmodules.commands
+                [f"command/{command}"]
+                if command in self.allmodules.commands
                 else []
             )
             + (
-                [f"inline/{needle.lower().strip('@')}"]
-                if needle.lower().strip("@") in self.allmodules.inline_handlers
+                [f"inline/{needle.lower().removeprefix('@')}"]
+                if needle.lower().removeprefix("@") in self.allmodules.inline_handlers
                 else []
             )
         )

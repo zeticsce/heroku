@@ -125,6 +125,7 @@ class Module:
         self._client = self.allmodules.client
         self.lookup = self.allmodules.lookup
         self.get_prefix = self.allmodules.get_prefix
+        self.get_prefixes = self.allmodules.get_prefixes
         self.inline = self.allmodules.inline
         self.allclients = self.allmodules.allclients
         self.tg_id = self._client.tg_id
@@ -666,6 +667,7 @@ class Library:
         self._tg_id = self._client.tg_id
         self.lookup = self.allmodules.lookup
         self.get_prefix = self.allmodules.get_prefix
+        self.get_prefixes = self.allmodules.get_prefixes
         self.inline = self.allmodules.inline
         self.allclients = self.allmodules.allclients
 

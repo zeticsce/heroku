@@ -843,14 +843,32 @@ class Modules:
     def get_approved_channel(self):
         return self.__approve.pop(0) if self.__approve else None
 
-    def get_prefix(self) -> str:
+    def get_prefix(self, ent_id: int = None) -> str:
         """Get command prefix"""
         from . import main
 
         key = main.__name__
         default = "."
 
-        return self._db.get(key, "command_prefix", default)
+        if ent_id:
+            prefixes = self._db.get(key, f"command_prefixes", {})
+            result = prefixes[ent_id] if ent_id in prefixes else default
+        else:
+            result = self._db.get(key, "command_prefix", default)
+        return result
+    
+    def get_prefixes(self) -> tuple[str]:
+        """Get all command prefixes"""
+        from . import main
+
+        key = main.__name__
+        default = "."
+
+        prefixes = ()
+        prefixes += tuple(self._db.get(key, f"command_prefixes", {}).values())
+        prefixes += tuple(self._db.get(key, "command_prefix", default))
+
+        return prefixes
 
     async def complete_registration(self, instance: Module):
         """Complete registration of instance"""
