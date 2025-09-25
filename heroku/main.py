@@ -1015,8 +1015,14 @@ class Heroku:
 
         if (
             not self.clients and not self.sessions or not await self._init_clients()
-        ) and not await self._initial_setup():
+        ) and not (inital_web := await self._initial_setup()):
             return
+        if inital_web:
+            async def scheduled_web_stop():
+                await asyncio.sleep(delay=120)
+                await self.web.stop()
+                logging.debug("inital web was stopped for security reasons")
+            asyncio.create_task(scheduled_web_stop())
 
         self.loop.set_exception_handler(
             lambda _, x: logging.error(
