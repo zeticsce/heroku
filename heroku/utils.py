@@ -939,8 +939,8 @@ def get_named_platform() -> str:
     if main.IS_AEZA:
         return "🛡 Aeza"
 
-    #if main.IS_HIKKAHOST:
-        #return "🌼 HikkaHost"
+    if main.IS_HIKKAHOST:
+        return "🌼 HikkaHost"
 
     if main.IS_DOCKER:
         return "🐳 Docker"
@@ -964,8 +964,8 @@ def get_platform_emoji() -> str:
         )
     )
 
-   # if main.IS_HIKKAHOST:
-   #     return BASE.format(5395745114494624362)
+    if main.IS_HIKKAHOST:
+        return BASE.format(5395745114494624362)
     
     if main.IS_JAMHOST:
         return BASE.format(5242536621659678947)
