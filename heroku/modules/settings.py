@@ -211,7 +211,7 @@ class CoreMod(loader.Module):
 
         if len(args) == 2:
             try:
-                entity = self.client.get_entity(args[1])
+                entity = await self.client.get_entity(args[1])
             except:
                 return await utils.answer(message, "Invalid id/username was given")
             
