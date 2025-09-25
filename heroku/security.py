@@ -220,7 +220,7 @@ class SecurityManager:
 
         prefixes = self._db.get(main.__name__, "command_prefixes", {})
 
-        for id in prefixes:
+        for id in prefixes.copy():
             if id not in all_users:
                 del prefixes[id]
 
