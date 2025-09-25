@@ -852,12 +852,12 @@ class Modules:
 
         if ent_id:
             prefixes = self._db.get(key, f"command_prefixes", {})
-            result = prefixes[ent_id] if ent_id in prefixes else default
+            result = prefixes.get(ent_id, default)
         else:
             result = self._db.get(key, "command_prefix", default)
         return result
     
-    def get_prefixes(self) -> tuple[str]:
+    def get_prefixes(self) -> set[str]:
         """Get all command prefixes"""
         from . import main
 
@@ -868,7 +868,7 @@ class Modules:
         prefixes += tuple(self._db.get(key, f"command_prefixes", {}).values())
         prefixes += tuple(self._db.get(key, "command_prefix", default))
 
-        return prefixes
+        return set(prefixes)
 
     async def complete_registration(self, instance: Module):
         """Complete registration of instance"""

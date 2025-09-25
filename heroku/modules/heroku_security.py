@@ -654,6 +654,7 @@ class HerokuSecurityMod(loader.Module):
         )
 
     def _lookup(self, needle: str) -> str:
+        # TODO: to not removing ALL prefixes from needle using message author's id
         command = needle
         for prefix in self.get_prefixes():
             command = command.lower().removeprefix(prefix)
@@ -661,7 +662,7 @@ class HerokuSecurityMod(loader.Module):
         return (
             (
                 []
-                if needle.lower().startswith(self.get_prefixes())
+                if needle.lower().startswith(tuple(self.get_prefixes()))
                 else (
                     [f"module/{self.lookup(needle).__class__.__name__}"]
                     if self.lookup(needle)

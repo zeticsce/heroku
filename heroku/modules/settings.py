@@ -245,7 +245,7 @@ class CoreMod(loader.Module):
                 "command_prefixes",
                 all_prefixes,
             )
-            await utils.answer(
+            return await utils.answer(
                 message,
                 self.strings("entity_prefix_set").format(
                     "<emoji document_id=5197474765387864959>👍</emoji>",
