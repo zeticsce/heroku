@@ -1,4 +1,4 @@
-у"""Main script, where all the fun starts"""
+"""Main script, where all the fun starts"""
 
 #    Friendly Telegram (telegram userbot)
 #    Copyright (C) 2018-2021 The Authors
