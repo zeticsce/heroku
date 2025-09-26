@@ -330,13 +330,9 @@ class Help(loader.Module):
                 )
                 shown_warn = True
 
-        def extract_name(line):
-            match = re.search(r'[\U0001F300-\U0001FAFF\U0001F900-\U0001F9FF]*\s*(name.*)', line)
-            return match.group(1) if match else line
-
-        plain_.sort(key=extract_name)
-        core_.sort(key=extract_name)
-        no_commands_.sort(key=extract_name)
+        plain_.sort()
+        core_.sort()
+        no_commands_.sort()
 
         await utils.answer(
             message,
