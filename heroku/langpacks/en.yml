@@ -317,7 +317,7 @@ settings:
   _cmd_doc_cleardb: "Clear the entire database, effectively performing a factory reset"
   _cmd_doc_delalias: "Remove an alias for a command"
   _cmd_doc_heroku: "Get Heroku version"
-  _cmd_doc_setprefix: "<prefix> - Sets command prefix"
+  _cmd_doc_setprefix: "<prefix> [owner] - Sets command prefix"
   _cmd_doc_unblacklist: "<chat_id> - Unblacklist the bot from operating somewhere"
   _cmd_doc_unblacklistuser: "[user_id] - Allow this user to run permitted commands"
   _cfg_nonstandart_prefixes: "Allow non-standart prefixes like flags or more than one symbol"
