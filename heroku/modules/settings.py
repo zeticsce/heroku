@@ -210,7 +210,7 @@ class CoreMod(loader.Module):
             return
 
         if len(args) == 2:
-            if arts[1].isdigit():
+            if args[1].isdigit():
                 args[1] = int(args[1])
             try:
                 entity = await self.client.get_entity(args[1])
