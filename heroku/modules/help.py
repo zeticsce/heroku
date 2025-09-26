@@ -330,9 +330,9 @@ class Help(loader.Module):
                 )
                 shown_warn = True
 
-        plain_.sort()
-        core_.sort()
-        no_commands_.sort()
+        plain_.sort(key=str.lower)
+        core_.sort(key=str.lower)
+        no_commands_.sort(key=str.lower)
 
         await utils.answer(
             message,
