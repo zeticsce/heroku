@@ -809,7 +809,10 @@ class HerokuConfigMod(loader.Module):
                 total_pages=ceil(len(text) / 4096),
                 current_page=page + 1,
             )
-            text = text[page * 4096 : (page + 1) * 4096]
+            text = utils.smart_split(
+                *html.parse(text)
+            )[page]
+
         await call.edit(
             text,
             reply_markup=additonal_button_row
@@ -877,7 +880,7 @@ class HerokuConfigMod(loader.Module):
                                             200
                                             )
                                         )[0] +
-                                    "[...]"
+                                    "..."
                                     )
                             ),
                         )
