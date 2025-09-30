@@ -17,6 +17,7 @@ import typing
 from math import ceil
 
 from herokutl.tl.types import Message
+from herokutl.extensions import html
 
 from .. import loader, translations, utils
 from ..inline.types import InlineCall
@@ -869,7 +870,15 @@ class HerokuConfigMod(loader.Module):
                             (
                                 self._get_value(mod, key)
                                 if len(self._get_value(mod, key)) < 200
-                                else (f"{self._get_value(mod, key)[:200]}[...]")
+                                else (
+                                    list(
+                                        utils.smart_split(
+                                            *html.parse(self._get_value(mod, key)),
+                                            200
+                                            )
+                                        )[0] +
+                                    "[...]"
+                                    )
                             ),
                         )
                         for key in self.lookup(mod).config
