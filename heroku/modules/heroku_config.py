@@ -809,9 +809,9 @@ class HerokuConfigMod(loader.Module):
                 total_pages=ceil(len(text) / 4096),
                 current_page=page + 1,
             )
-            text = utils.smart_split(
+            text = list(utils.smart_split(
                 *html.parse(text)
-            )[page]
+            ))[page]
 
         await call.edit(
             text,
