@@ -361,13 +361,6 @@ class Module:
         """
         from . import utils
 
-        event = asyncio.Event()
-        await self.client(
-            UpdateNotifySettingsRequest(
-                peer=self.inline.bot_username,
-                settings=InputPeerNotifySettings(show_previews=False, silent=False),
-            )
-        )
 
         channel = await self.client.get_entity(peer)
         if channel.id in self._db.get("heroku.main", "declined_joins", []):
@@ -386,6 +379,14 @@ class Module:
 
         if not getattr(channel, "left", True):
             return True
+        
+        event = asyncio.Event()
+        await self.client(
+            UpdateNotifySettingsRequest(
+                peer=self.inline.bot_username,
+                settings=InputPeerNotifySettings(show_previews=False, silent=False),
+            )
+        )
 
         await self.inline.bot.send_photo(
             self.tg_id,
