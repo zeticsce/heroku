@@ -1144,7 +1144,7 @@ def smart_split(
         if bytes_offset + length * 2 >= bytes_length:
             yield parser.unparse(
                 text[text_offset:],
-                list(sorted(pending_entities, key=lambda x: x.offset)),
+                list(sorted(pending_entities, key=lambda x: (x.offset, -x.length))),
             )
             break
 
@@ -1244,7 +1244,7 @@ def smart_split(
         current_text = text[text_offset:split_index]
         yield parser.unparse(
             current_text,
-            list(sorted(current_entities, key=lambda x: x.offset)),
+            list(sorted(current_entities, key=lambda x: (x.offset, -x.length))),
         )
 
         text_offset = split_index + exclude
