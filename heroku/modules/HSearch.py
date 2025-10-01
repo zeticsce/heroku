@@ -197,11 +197,11 @@ class HSearch(loader.Module):
 
         self._history = self.pointer("history", [])
         self._daily_module_storage = self.pointer("daily_module", {"date": None, "path": None})
-        self.modules = await self.api.get_all_modules(
-            "https://raw.githubusercontent.com/coddrago/H-Search/refs/heads/main/modules.json"
-        )
-        await self._update_index()
-        await self._check_daily_module()
+        # self.modules = await self.api.get_all_modules(
+        #     "https://raw.githubusercontent.com/coddrago/H-Search/refs/heads/main/modules.json"
+        # )
+        # await self._update_index()
+        # await self._check_daily_module()
 
     async def _update_index(self):
         writer = self.ix.writer()

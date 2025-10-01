@@ -1560,9 +1560,22 @@ def get_ram_usage() -> float:
     except Exception:
         return 0
 
+run_first_time = True # workaround 0.00% cpu usage
 def get_cpu_usage():
+    import psutil
+
+    if run_first_time:
+        try:
+            psutil.cpu_count(logical=True)
+            for proc in psutil.process_iter():
+                try:
+                    proc.cpu_percent()
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                    pass
+        except Exception: pass
+        run_first_time = False
+
     try:
-        import psutil
         num_cores = psutil.cpu_count(logical=True)
         cpu = 0.0
         for proc in psutil.process_iter():
