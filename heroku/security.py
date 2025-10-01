@@ -409,17 +409,18 @@ class SecurityManager:
         if not (config := self.get_flags(func)):
             return False
 
-        try:
-            if not user_id:
-                user_id = message.sender_id
-        except:
-            pass
+        if not user_id:
+            user_id = message.sender_id
+
+        if not user_id:
+            user_id = message.peer_id
 
         is_channel = False
 
         if (
             message
             and message.is_channel
+            and not message.is_group
             and message.edit_date
         ):
             async for event in self._client.iter_admin_log(
