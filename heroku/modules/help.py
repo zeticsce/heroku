@@ -305,7 +305,7 @@ class Help(loader.Module):
                 for name, func in mod.inline_handlers.items()
                 if await self.inline.check_inline_security(
                     func=func,
-                    user=message.sender_id,
+                    user=message.sender_id if not message.out else self._client.tg_id,
                 )
                 or force
             ]
