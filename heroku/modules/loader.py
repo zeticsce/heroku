@@ -666,22 +666,6 @@ class LoaderMod(loader.Module):
                     "Module loading failed, attemping dependency installation (%s)",
                     e.name,
                 )
-                # Let's try to reinstall dependencies
-                # try:
-                #     requirements = list(
-                #         filter(
-                #             lambda x: not x.startswith(("-", "_", ".")),
-                #             map(
-                #                 str.strip,
-                #                 loader.VALID_PIP_PACKAGES.search(doc)[1].split(),
-                #             ),
-                #         )
-                #     )
-                # except TypeError:
-                #     logger.warning(
-                #         "No valid pip packages specified in code, attemping"
-                #         " installation from error"
-                #     )
                 requirements = [
                     {
                         "sklearn": "scikit-learn",
