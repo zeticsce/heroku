@@ -1563,6 +1563,7 @@ def get_ram_usage() -> float:
 run_first_time = True # workaround 0.00% cpu usage
 def get_cpu_usage():
     import psutil
+    global run_first_time
 
     if run_first_time:
         try:
