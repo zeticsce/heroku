@@ -186,9 +186,10 @@ class Help(loader.Module):
                     )
                 )
 
+        lines = []
         for name, fun in commands.items():
-            cmds += (
-                f'\n{self.config["command_emoji"]}'
+            lines.append(
+                f'{self.config["command_emoji"]}'
                 " <code>{}{}</code>{} {}".format(
                     utils.escape_html(self.get_prefix()),
                     name,
@@ -212,6 +213,7 @@ class Help(loader.Module):
                     ),
                 )
             )
+        cmds = "\n".join(lines)
 
         await utils.answer(
             message,
