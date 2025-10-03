@@ -215,7 +215,7 @@ class CoreMod(loader.Module):
             try:
                 entity = await self.client.get_entity(args[1])
             except:
-                return await utils.answer(message, "Invalid id/username was given")
+                return await utils.answer(message, self.strings["invalid_id_or_username"])
             
             if not isinstance(entity, User):
                 return await utils.answer(message, f"The entity {args[1]} is not a User")
@@ -231,7 +231,7 @@ class CoreMod(loader.Module):
             all_users = sgroup_users + tsec_users + ub_owners
 
             if entity.id not in all_users:
-                return await utils.answer(message, "This entity does not exist in any security group. Therefore, adding a prefix for it is pointless")
+                return await utils.answer(message, self.strings["id_not_found_scgroup"])
             
             oldprefix = utils.escape_html(self.get_prefix(entity.id))
             all_prefixes = self._db.get(
