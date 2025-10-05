@@ -292,7 +292,7 @@ class CommandDispatcher:
             prefix = main_prefix
         else:
             prefix = self._db.get(main.__name__, "command_prefixes", {})
-            prefix = prefix.get(initiator, main_prefix)
+            prefix = prefix.get(str(initiator), main_prefix)
             
         change = str.maketrans(ru_keys + en_keys, en_keys + ru_keys)
         message = utils.censor(event.message)

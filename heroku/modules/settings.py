@@ -240,7 +240,7 @@ class CoreMod(loader.Module):
                 {},
             )
 
-            all_prefixes[entity.id] = args[0]
+            all_prefixes[str(entity.id)] = args[0]
 
             self._db.set(
                 main.__name__,

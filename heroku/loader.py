@@ -852,7 +852,7 @@ class Modules:
 
         if ent_id:
             prefixes = self._db.get(key, f"command_prefixes", {})
-            result = prefixes.get(ent_id, default)
+            result = prefixes.get(str(ent_id), default)
         else:
             result = self._db.get(key, "command_prefix", default)
         return result
