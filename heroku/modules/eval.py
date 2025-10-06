@@ -196,7 +196,7 @@ class Evaluator(loader.Module):
         with contextlib.suppress(MessageIdInvalidError):
             await utils.answer(
                 message,
-                self.strings("eval").format(
+                self.strings("eval_py").format(
                     "4985626654563894116",
                     "python",
                     utils.escape_html(utils.get_args_raw(message)),
