@@ -894,9 +894,8 @@ class LoaderMod(loader.Module):
             instance.strings.external_strings = transations
 
         for alias, cmd in self.lookup("settings").get("aliases", {}).items():
-            _cmd = cmd.split(maxsplit=1)
-            if _cmd[0] in instance.commands:
-                self.allmodules.add_alias(alias, *_cmd)
+            if cmd in instance.commands:
+                self.allmodules.add_alias(alias, cmd)
 
         try:
             modname = instance.strings("name")
@@ -1258,7 +1257,7 @@ class LoaderMod(loader.Module):
             aliases = {
                 alias: cmd
                 for alias, cmd in self.lookup("settings").get("aliases", {}).items()
-                if self.allmodules.add_alias(alias, *cmd.split(maxsplit=1))
+                if self.allmodules.add_alias(alias, cmd)
             }
 
             self.lookup("settings").set("aliases", aliases)

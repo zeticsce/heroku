@@ -688,7 +688,7 @@ class Modules:
         """Saves aliases and applies them to <core>/<file> modules"""
         self.aliases.update(aliases)
         for alias, cmd in aliases.items():
-            self.add_alias(alias, *cmd.split(maxsplit=1))
+            self.add_alias(alias, cmd)
 
     def register_raw_handlers(self, instance: Module):
         """Register event handlers for a module"""
@@ -733,9 +733,8 @@ class Modules:
             self.commands.update({_command.lower(): cmd})
 
         for alias, cmd in self.aliases.copy().items():
-            _cmd = cmd.split(maxsplit=1)
-            if _cmd[0] in instance.heroku_commands:
-                self.add_alias(alias, *_cmd)
+            if cmd in instance.heroku_commands:
+                self.add_alias(alias, cmd)
 
         self.register_inline_stuff(instance)
 
