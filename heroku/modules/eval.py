@@ -163,7 +163,7 @@ class Evaluator(loader.Module):
                     utils.get_args_raw(message),
                     globals(),
                     **await self.getattrs(message),
-                
+                )
             print_output = output_print.getvalue()
 
         except Exception:
@@ -202,7 +202,7 @@ class Evaluator(loader.Module):
                     utils.escape_html(utils.get_args_raw(message)),
                     "python",
                 ) + (utils.escape_html(self.censor(str(result)))
-                    ) if result or not print_output else ""
+                     if result or not print_output else ""
                 ) + (self.strings["print_outp"].format(
                     "python",
                     print_output,
@@ -522,3 +522,4 @@ class Evaluator(loader.Module):
                 )
             ),
         }
+        
