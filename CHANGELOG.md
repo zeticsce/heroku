@@ -29,6 +29,10 @@
 - refactor close button
 - fix _mod_import_lib
 - added stop command
+- refactor utils.answer logic
+- added back button in many menus
+- update support command
+- added quote for list commands in help
 
 ## 🪐 Heroku 1.7.1
 - fixed bug with web 
