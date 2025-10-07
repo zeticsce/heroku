@@ -56,12 +56,12 @@ class Help(loader.Module):
                 "<emoji document_id=5197195523794157505>▫️</emoji>",
                 lambda: "Emoji for command",
             ),
-           loader.ConfigValue(
-                "banner_url",
-                None,
-                lambda: "banner for help",
-            ),
-        )
+           #loader.ConfigValue(
+           #     "banner_url",
+           #     None,
+           #     lambda: "banner for help",
+           # ),
+        )  # отложенно до фикса
 
     @loader.command(ru_doc="[args] | Спрячет ваши модули", ua_doc="[args] | Сховає ваші модулі", de_doc="[args] | Versteckt Ihre Module")
     async def helphide(self, message: Message):
@@ -348,7 +348,7 @@ class Help(loader.Module):
                     else f"\n\n{self.strings('partial_load')}"
                 ),
             ),
-            file = self.config["banner_url"],
+            #file = self.config["banner_url"],
         )
 
     @loader.command(ru_doc="| Ссылка на чат помощи", ua_doc="| посилання для чату служби підтримки", de_doc="| Link zum Support-Chat")

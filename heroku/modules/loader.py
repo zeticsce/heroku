@@ -686,7 +686,7 @@ class LoaderMod(loader.Module):
                             text = self.strings("requirements_restart").format(e.name),
                             reply_markup = [
                                 {
-                                    "text": "🚀 Restart", "callback": restart_inline
+                                    "text": "🚀 Restart", "callback": self.restart_inline
                                 }
                             ]
                         )
