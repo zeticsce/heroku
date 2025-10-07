@@ -33,6 +33,7 @@
 - added back button in many menus
 - update support command
 - added quote for list commands in help
+- fix banner in .presets command
 
 ## 🪐 Heroku 1.7.1
 - fixed bug with web 
