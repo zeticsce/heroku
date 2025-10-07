@@ -24,6 +24,7 @@ from herokutl.errors.rpcerrorlist import MessageIdInvalidError
 from herokutl.sessions import StringSession
 from herokutl.tl.types import Message
 from meval import meval
+from io import StringIO
 
 from .. import loader, main, utils
 from ..log import HerokuException
@@ -156,11 +157,15 @@ class Evaluator(loader.Module):
     @loader.command(alias="eval")
     async def e(self, message: Message):
         try:
-            result = await meval(
-                utils.get_args_raw(message),
-                globals(),
-                **await self.getattrs(message),
-            )
+            output_print = StringIO()
+            with contextlib.redirect_stdout(output_print):
+                result = await meval(
+                    utils.get_args_raw(message),
+                    globals(),
+                    **await self.getattrs(message),
+                )
+            print_output = output_print.getvalue()
+
         except Exception:
             item = HerokuException.from_exc_info(*sys.exc_info())
 
@@ -191,13 +196,19 @@ class Evaluator(loader.Module):
         with contextlib.suppress(MessageIdInvalidError):
             await utils.answer(
                 message,
-                self.strings("eval").format(
+                self.strings("eval_py").format(
                     "4985626654563894116",
                     "python",
                     utils.escape_html(utils.get_args_raw(message)),
+                ) + (self.strings["eval_result"].format(
                     "python",
-                    utils.escape_html(self.censor(str(result))),
-                ),
+                     utils.escape_html(self.censor(str(result)))
+                    ) if result or not print_output else ""
+                ) + (self.strings["print_outp"].format(
+                    "python",
+                    print_output,
+                    utils.escape_html(self.censor(print_output))
+                    ) if print_output else ""),
             )
 
     @loader.command()
@@ -474,6 +485,7 @@ class Evaluator(loader.Module):
             "chat": message.to_id,
             "herokutl": herokutl,
             "telethon": herokutl,
+            "hikkatl": herokutl,
             "utils": utils,
             "main": main,
             "loader": loader,
@@ -511,3 +523,4 @@ class Evaluator(loader.Module):
                 )
             ),
         }
+        

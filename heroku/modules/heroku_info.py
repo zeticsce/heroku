@@ -316,3 +316,11 @@ class HerokuInfoMod(loader.Module):
         self.config["custom_message"] = args
         await utils.answer(message, self.strings("setinfo_success"))
 
+    @loader.command()
+    async def switchinfo(self, message: Message):
+        """| switch Image info state"""
+        self.config["switchInfo"] = not self.config["switchInfo"]
+        if self.config["switchInfo"]:
+            await utils.answer(message, self.strings["switchinfo_on"])
+        else:
+            await utils.answer(message, self.strings["switchinfo_off"])

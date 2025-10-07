@@ -94,6 +94,8 @@ from herokutl.tl.types import (
     MessageEntityUnderline,
     MessageEntityUnknown,
     MessageEntityUrl,
+    MessageMediaPhoto,
+    MessageMediaDocument,
     MessageMediaWebPage,
     PeerChannel,
     PeerChat,
@@ -556,10 +558,11 @@ async def answer(
         )
     elif isinstance(response, Message):
         if message.media is None and (
-            response.media is None or isinstance(response.media, MessageMediaWebPage)
+            response.media is None or isinstance(response.media, (MessageMediaWebPage, MessageMediaPhoto, MessageMediaDocument))
         ):
             result = await message.edit(
                 response.message,
+                file=response.media,
                 parse_mode=lambda t: (t, response.entities or []),
                 link_preview=isinstance(response.media, MessageMediaWebPage),
             )
@@ -933,9 +936,6 @@ def get_named_platform() -> str:
     if main.IS_USERLAND:
         return "🐧 UserLand"
 
-    if main.IS_AEZA:
-        return "🛡 Aeza"
-
     if main.IS_HIKKAHOST:
         return "🌼 HikkaHost"
 
@@ -1096,7 +1096,7 @@ def rand(size: int, /) -> str:
     :return: Random string
     """
     return "".join(
-        [random.choice("abcdefghijklmnopqrstuvwxyz1234567890_") for _ in range(size)]
+        [random.choice("abcdefghijklmnopqrstuvwxyz1234567890") for _ in range(size)]
     )
 
 
@@ -1141,7 +1141,7 @@ def smart_split(
         if bytes_offset + length * 2 >= bytes_length:
             yield parser.unparse(
                 text[text_offset:],
-                list(sorted(pending_entities, key=lambda x: x.offset)),
+                list(sorted(pending_entities, key=lambda x: (x.offset, -x.length))),
             )
             break
 
@@ -1241,7 +1241,7 @@ def smart_split(
         current_text = text[text_offset:split_index]
         yield parser.unparse(
             current_text,
-            list(sorted(current_entities, key=lambda x: x.offset)),
+            list(sorted(current_entities, key=lambda x: (x.offset, -x.length))),
         )
 
         text_offset = split_index + exclude
@@ -1557,9 +1557,23 @@ def get_ram_usage() -> float:
     except Exception:
         return 0
 
+run_first_time = True # workaround 0.00% cpu usage
 def get_cpu_usage():
+    import psutil
+    global run_first_time
+
+    if run_first_time:
+        try:
+            psutil.cpu_count(logical=True)
+            for proc in psutil.process_iter():
+                try:
+                    proc.cpu_percent()
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                    pass
+        except Exception: pass
+        run_first_time = False
+
     try:
-        import psutil
         num_cores = psutil.cpu_count(logical=True)
         cpu = 0.0
         for proc in psutil.process_iter():

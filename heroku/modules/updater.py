@@ -11,6 +11,8 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 
+import aiohttp
+import ast
 import asyncio
 import contextlib
 import logging
@@ -27,11 +29,11 @@ from herokutl.tl.functions.messages import (
     GetDialogFiltersRequest,
     UpdateDialogFilterRequest,
 )
-from herokutl.tl.types import DialogFilter, Message
+from herokutl.tl.types import DialogFilter, TextWithEntities, Message
 
 from .. import loader, main, utils, version
 from .._internal import restart
-from ..inline.types import InlineCall
+from ..inline.types import InlineCall, BotInlineCall
 
 logger = logging.getLogger(__name__)
 
@@ -55,8 +57,27 @@ class UpdaterMod(loader.Module):
                 "disable_notifications",
                 doc=lambda: self.strings("_cfg_doc_disable_notifications"),
                 validator=loader.validators.Boolean(),
-            )
+            ),
+            loader.ConfigValue(
+                "autoupdate",
+                False,
+                doc=lambda: self.strings("_cfg_doc_autoupdate"),
+                validator=loader.validators.Boolean(),
+            ),
         )
+
+    async def _set_autoupdate_state(self, call: BotInlineCall, state: bool):
+        self.set("autoupdate", True)
+        if not state:
+            self.config["autoupdate"] = False
+            await self.inline.bot(call.answer(self.strings("autoupdate_off").format(prefix=self.get_prefix()), show_alert=True))
+            await call.delete()
+            return
+        
+        self.config["autoupdate"] = True
+
+        await self.inline.bot(call.answer(self.strings("autoupdate_on"), show_alert=True))
+        await call.delete()
 
     def get_changelog(self) -> str:
         try:
@@ -93,7 +114,7 @@ class UpdaterMod(loader.Module):
 
     @loader.loop(interval=60, autostart=True)
     async def poller(self):
-        if self.config["disable_notifications"] or not self.get_changelog():
+        if (self.config["disable_notifications"] and not self.config["autoupdate"]) or not self.get_changelog():
             return
 
         self._pending = self.get_latest()
@@ -106,27 +127,67 @@ class UpdaterMod(loader.Module):
             return
 
         if self._pending not in {utils.get_git_hash(), self._notified}:
-            m = await self.inline.bot.send_photo(
-                self.tg_id,
-                "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/updated.png",
-                caption=self.strings("update_required").format(
-                    utils.get_git_hash()[:6],
-                    '<a href="https://github.com/coddrago/Heroku/compare/{}...{}">{}</a>'.format(
-                        utils.get_git_hash()[:12],
-                        self.get_latest()[:12],
-                        self.get_latest()[:6],
+            if not self.config["autoupdate"]: manual_update = True
+            else:
+                try:
+                    async with aiohttp.ClientSession() as session:
+                        r = await session.get(
+                            url=f"https://api.github.com/repos/coddrago/Heroku/contents/heroku/version.py?ref={version.branch}",
+                            headers={"Accept": "application/vnd.github.v3.raw"}
+                        )
+                        text = await r.text()
+                    
+                    new_version = ""
+                    for line in text.splitlines():
+                        if line.strip().startswith("__version__"):
+                            new_version = ast.literal_eval(line.split("=")[1])
+
+                    if version.__version__[0] == new_version[0]:
+                        manual_update = False
+                    else:
+                        logger.info("Got a major update, updating manually")
+                        manual_update = True
+                except:
+                    manual_update = True
+
+            if manual_update:
+                m = await self.inline.bot.send_photo(
+                    self.tg_id,
+                    "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/updated.png",
+                    caption=self.strings("update_required").format(
+                        utils.get_git_hash()[:6],
+                        '<a href="https://github.com/coddrago/Heroku/compare/{}...{}">{}</a>'.format(
+                            utils.get_git_hash()[:12],
+                            self.get_latest()[:12],
+                            self.get_latest()[:6],
+                        ),
+                        self.get_changelog(),
                     ),
-                    self.get_changelog(),
-                ),
-                reply_markup=self._markup(),
-            )
+                    reply_markup=self._markup(),
+                )
 
-            self._notified = self._pending
-            self.set("ignore_permanent", False)
+                self._notified = self._pending
+                self.set("ignore_permanent", False)
 
-            await self._delete_all_upd_messages()
+                await self._delete_all_upd_messages()
 
-            self.set("upd_msg", m.message_id)
+                self.set("upd_msg", m.message_id)
+
+            else:
+                m = await self.inline.bot.send_photo(
+                    self.tg_id,
+                    "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/updated.png",
+                    caption=self.strings("autoupdate_notifier").format(
+                        self.get_latest()[:6],
+                        self.get_changelog(),
+                        '<a href="https://github.com/coddrago/Heroku/compare/{}...{}">{}</a>'.format(
+                            utils.get_git_hash()[:12],
+                            self.get_latest()[:12],
+                            "🔎 diff",
+                        ),
+                    ),
+                )
+                await self.invoke("update", "-f", peer=self.inline.bot_username)
 
     async def _delete_all_upd_messages(self):
         for client in self.allclients:
@@ -238,11 +299,7 @@ class UpdaterMod(loader.Module):
 
         self.set("restart_ts", time.time())
 
-        await self._db.remote_force_save()
-
-        if "LAVHOST" in os.environ:
-            os.system("lavhost restart")
-            return
+        # await self._db.remote_force_save()
 
         with contextlib.suppress(Exception):
             await main.heroku.web.stop()
@@ -255,6 +312,10 @@ class UpdaterMod(loader.Module):
             # Won't work if not all clients are ready
             if client is not message.client:
                 await client.disconnect()
+
+        if "LAVHOST" in os.environ:
+            await self.client.send_message("lavhostbot", "🔄 Restart")
+            return
 
         await message.client.disconnect()
         restart()
@@ -335,6 +396,15 @@ class UpdaterMod(loader.Module):
                 raise
         except Exception:
             await self.inline_update(message)
+
+    @loader.command()
+    async def autoupdate(self, message: Message):
+        """| switch autoupdate state"""
+        self.config["autoupdate"] = not self.config["autoupdate"]
+        if self.config["autoupdate"]:
+            await utils.answer(message, self.strings["autoupdate_on"])
+        else:
+            await utils.answer(message, self.strings["autoupdate_off"].format(prefix=self.get_prefix()))
             
     async def inline_update(
         self,
@@ -361,7 +431,7 @@ class UpdaterMod(loader.Module):
                     ),
                 )
                 await self.process_restart_message(msg_obj)
-                os.system("lavhost update")
+                await self.client.send_message("lavhostbot", "/update")
                 return
 
             with contextlib.suppress(Exception):
@@ -410,14 +480,39 @@ class UpdaterMod(loader.Module):
                 logger.exception("Failed to complete update!")
 
         if self.get("do_not_create", False):
-            return
+            pass
+        else:
+            try:
+                await self._add_folder()
+            except Exception:
+                logger.exception("Failed to add folder!")
 
-        try:
-            await self._add_folder()
-        except Exception:
-            logger.exception("Failed to add folder!")
+            self.set("do_not_create", True)
 
-        self.set("do_not_create", True)
+        if not self.config["autoupdate"] and not self.get("autoupdate", False):
+            await self.inline.bot.send_photo(
+                self.tg_id,
+                photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/unit_alpha.png",
+                caption=self.strings("autoupdate"),
+                reply_markup=self.inline.generate_markup(
+                    [
+                        [
+                            {
+                                "text": f"✅ Turn on",
+                                "callback": self._set_autoupdate_state,
+                                "args": (True,),
+                            }
+                        ],
+                        [
+                            {
+                                "text": "🚫 Turn off",
+                                "callback": self._set_autoupdate_state,
+                                "args": (False,),
+                            }
+                        ]
+                    ]
+                ),
+            )
 
     async def _add_folder(self):
         folders = await self._client(GetDialogFiltersRequest())
@@ -442,7 +537,10 @@ class UpdaterMod(loader.Module):
                     folder_id,
                     DialogFilter(
                         folder_id,
-                        title="heroku",
+                        title=TextWithEntities(
+                            text='Heroku',
+                            entities=[]
+                        ),
                         pinned_peers=(
                             [
                                 await self._client.get_input_entity(
@@ -503,7 +601,7 @@ class UpdaterMod(loader.Module):
                 "Can't create Heroku folder. Possible reasons are:\n"
                 "- User reached the limit of folders in Telegram\n"
                 "- User got floodwait\n"
-                "Ignoring error and adding folder addition to ignore list"
+                "Ignoring error and adding folder addition to ignore list\n"
             )
 
     async def update_complete(self):
@@ -594,3 +692,13 @@ class UpdaterMod(loader.Module):
         await asyncio.create_subprocess_shell(f'git reset --hard HEAD~{number}', stdout=asyncio.subprocess.PIPE)
         await self.restart_common(call)
 
+    @loader.command()
+    async def stop(self, message: Message):
+        """| stops your userbot"""
+
+        if "LAVHOST" in os.environ:
+            await utils.answer(message, self.strings["ub_stop"].format(emoji=utils.get_platform_emoji()))
+            await self.client.send_message("lavhostbot", "⏹ Stop")
+        else:
+            await utils.answer(message, self.strings["ub_stop"].format(emoji=utils.get_platform_emoji()))
+            exit()
