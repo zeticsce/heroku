@@ -33,6 +33,7 @@ from herokutl.hints import EntityLike
 from herokutl.tl.functions.account import UpdateNotifySettingsRequest
 from herokutl.tl.types import (
     Channel,
+    ChannelForbidden,
     ChannelFull,
     InputPeerNotifySettings,
     Message,
@@ -363,6 +364,14 @@ class Module:
 
 
         channel = await self.client.get_entity(peer)
+        if isinstance(channel, ChannelForbidden):
+            if assure_joined:
+                raise LoadError(
+                    f"You need to join {channel.title} (@{peer}) in order to use this module, "
+                    "but you have been banned there"
+                )
+            return False
+
         if channel.id in self._db.get("heroku.main", "declined_joins", []):
             if assure_joined:
                 raise LoadError(
