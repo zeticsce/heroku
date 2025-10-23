@@ -102,14 +102,14 @@ else:
     if "HEROKU_DO_NOT_RESTART2" in os.environ:
         del os.environ["HEROKU_DO_NOT_RESTART2"]
 
-    prev_hash = None
-    if os.path.exists(".requirements_hash"):
-        with open(".requirements_hash", "r") as f:
-            prev_hash = f.read().strip()
+    # prev_hash = None
+    # if os.path.exists(".requirements_hash"):
+    #     with open(".requirements_hash", "r") as f:
+    #         prev_hash = f.read().strip()
 
-    if prev_hash != get_file_hash("requirements.txt"):
-        print("\U0001F504 Detected changes in requirements.txt, updating dependencies...")
-        deps()
-        restart()
+    # if prev_hash != get_file_hash("requirements.txt"):
+    #     print("\U0001F504 Detected changes in requirements.txt, updating dependencies...")
+    #     deps()
+    #     restart()
     
     main.heroku.main()

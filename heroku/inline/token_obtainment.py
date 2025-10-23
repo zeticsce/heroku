@@ -41,8 +41,8 @@ class TokenObtainment(InlineUnit):
 
             await fw_protect()
 
-            await m.delete()
-            await r.delete()
+            # await m.delete()
+            # await r.delete()
 
             if self._db.get("heroku.inline", "custom_bot", False):
                 username = self._db.get("heroku.inline", "custom_bot").strip("@")
@@ -61,8 +61,8 @@ class TokenObtainment(InlineUnit):
             for msg in [
                 f"🪐 Heroku userbot"[:64],
                 username,
-                "/setuserpic",
-                username,
+                # "/setuserpic",
+                # username,
             ]:
                 await fw_protect()
                 m = await conv.send_message(msg)
@@ -72,30 +72,30 @@ class TokenObtainment(InlineUnit):
                 logger.debug("<< %s", r.raw_text)
 
                 await fw_protect()
-                await m.delete()
-                await r.delete()
+                # await m.delete()
+                # await r.delete()
 
-            try:
-                await fw_protect()
-                from .. import main
+            # try:
+            #     await fw_protect()
+            #     from .. import main
 
-                m = await conv.send_file(f"{os.getcwd()}/assets/heroku.png")
-                r = await conv.get_response()
+            #     m = await conv.send_file(f"{os.getcwd()}/assets/heroku.png")
+            #     r = await conv.get_response()
 
-                logger.debug(">> <Photo>")
-                logger.debug("<< %s", r.raw_text)
-            except Exception:
-                await fw_protect()
-                m = await conv.send_message("/cancel")
-                r = await conv.get_response()
+            #     logger.debug(">> <Photo>")
+            #     logger.debug("<< %s", r.raw_text)
+            # except Exception:
+            #     await fw_protect()
+            #     m = await conv.send_message("/cancel")
+            #     r = await conv.get_response()
 
-                logger.debug(">> %s", m.raw_text)
-                logger.debug("<< %s", r.raw_text)
+            #     logger.debug(">> %s", m.raw_text)
+            #     logger.debug("<< %s", r.raw_text)
 
             await fw_protect()
 
-            await m.delete()
-            await r.delete()
+            # await m.delete()
+            # await r.delete()
 
         return await self._assert_token(False)
 
@@ -109,13 +109,13 @@ class TokenObtainment(InlineUnit):
 
         logger.info("Bot token not found in db, attempting search in BotFather")
 
-        if not self._db.get(__name__, "no_mute", False):
-            await utils.dnd(
-                self._client,
-                await self._client.get_entity("@BotFather"),
-                True,
-            )
-            self._db.set(__name__, "no_mute", True)
+        # if not self._db.get(__name__, "no_mute", False):
+        #     await utils.dnd(
+        #         self._client,
+        #         await self._client.get_entity("@BotFather"),
+        #         True,
+        #     )
+        #     self._db.set(__name__, "no_mute", True)
 
         async with self._client.conversation("@BotFather", exclusive=False) as conv:
             try:
@@ -133,7 +133,7 @@ class TokenObtainment(InlineUnit):
 
             await fw_protect()
 
-            await m.delete()
+            # await m.delete()
             await r.delete()
 
             if not hasattr(r, "reply_markup") or not hasattr(r.reply_markup, "rows"):
@@ -167,8 +167,8 @@ class TokenObtainment(InlineUnit):
 
                     if revoke_token:
                         await fw_protect()
-                        await m.delete()
-                        await r.delete()
+                        # await m.delete()
+                        # await r.delete()
 
                         await fw_protect()
 
@@ -180,8 +180,8 @@ class TokenObtainment(InlineUnit):
 
                         await fw_protect()
 
-                        await m.delete()
-                        await r.delete()
+                        # await m.delete()
+                        # await r.delete()
 
                         await fw_protect()
 
@@ -198,13 +198,13 @@ class TokenObtainment(InlineUnit):
 
                     await fw_protect()
 
-                    await m.delete()
-                    await r.delete()
+                    # await m.delete()
+                    # await r.delete()
 
                     for msg in [
-                        "/setinline",
-                        button.text,
-                        "user@heroku:~$",
+                        # "/setinline",
+                        # button.text,
+                        # "user@heroku:~$",
                         "/setinlinefeedback",
                         button.text,
                         "Enabled",
@@ -218,8 +218,8 @@ class TokenObtainment(InlineUnit):
 
                         await fw_protect()
 
-                        await m.delete()
-                        await r.delete()
+                        # await m.delete()
+                        # await r.delete()
 
 
                     return True

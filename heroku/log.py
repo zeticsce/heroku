@@ -267,8 +267,8 @@ class TelegramLogsHandler(logging.Handler):
 
     async def queue_poller(self):
         while True:
-            with contextlib.suppress(Exception):
-                await self.sender()
+            # with contextlib.suppress(Exception):
+            await self.sender()
             await asyncio.sleep(3)
 
     def setLevel(self, level: int):

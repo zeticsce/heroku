@@ -39,12 +39,12 @@ class ProxyPasser:
 
     async def get_url(self, timeout: float = 25) -> typing.Optional[str]:
         
-        if "DOCKER" in os.environ:
-            # We're in a Docker container, so we can't use ssh
-            # Also, the concept of Docker is to keep
-            # everything isolated, so we can't proxy-pass to
-            # open web.
-            return None
+        # if "DOCKER" in os.environ:
+        #     # We're in a Docker container, so we can't use ssh
+        #     # Also, the concept of Docker is to keep
+        #     # everything isolated, so we can't proxy-pass to
+        #     # open web.
+        #     return None
         
         for tunnel in self._tunnels:
             try:

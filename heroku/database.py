@@ -234,7 +234,7 @@ class Database(dict):
             return True
 
         try:
-            self._db_file.write_text(json.dumps(self, indent=4))
+            self._db_file.write_text(json.dumps(self, ensure_ascii=False))
         except Exception:
             logger.exception("Database save failed!")
             return False

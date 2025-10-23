@@ -1,4 +1,4 @@
-FROM python:3.10 AS python-base
+FROM python:3.13 AS python-base
 FROM python-base AS builder-base
 
 ENV PYTHONUNBUFFERED=1 \
@@ -15,7 +15,8 @@ ENV PYTHONUNBUFFERED=1 \
     DOCKER=true \
     GIT_PYTHON_REFRESH=quiet
 
-RUN apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
+# RUN apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
     curl \
     ffmpeg \
@@ -32,8 +33,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install --no-install-recomme
     openssh-server \
     python3 \
     python3-dev \
-    python3-pip \
-    wkhtmltopdf
+    python3-pip
 RUN curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh && \
     bash nodesource_setup.sh && \
     apt-get install -y nodejs && \
@@ -43,9 +43,9 @@ RUN rm -rf /var/lib/apt/lists/ /var/cache/apt/archives/ /tmp/*
 WORKDIR /data
 RUN mkdir /data/private
 
-RUN git clone https://github.com/coddrago/Heroku /data/Heroku
+COPY . /data/Heroku
 WORKDIR /data/Heroku
-RUN git fetch && git checkout master && git pull
+# RUN git fetch && git checkout master && git pull
 
 RUN pip install --no-warn-script-location --no-cache-dir -U -r requirements.txt
 

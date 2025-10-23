@@ -49,7 +49,7 @@ class UpdaterMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "GIT_ORIGIN_URL",
-                "https://github.com/coddrago/Heroku",
+                "https://github.com/zeticsce/heroku",
                 lambda: self.strings("origin_cfg_doc"),
                 validator=loader.validators.Link(),
             ),
@@ -479,15 +479,15 @@ class UpdaterMod(loader.Module):
             except Exception:
                 logger.exception("Failed to complete update!")
 
-        if self.get("do_not_create", False):
-            pass
-        else:
-            try:
-                await self._add_folder()
-            except Exception:
-                logger.exception("Failed to add folder!")
+        # if self.get("do_not_create", False):
+        #     pass
+        # else:
+        #     try:
+        #         await self._add_folder()
+        #     except Exception:
+        #         logger.exception("Failed to add folder!")
 
-            self.set("do_not_create", True)
+        #     self.set("do_not_create", True)
 
         if not self.config["autoupdate"] and not self.get("autoupdate", False):
             await self.inline.bot.send_photo(
@@ -650,8 +650,8 @@ class UpdaterMod(loader.Module):
             chat_id, message_id = ms.split(":")
             chat_id, message_id = int(chat_id), int(message_id)
             await self._client.edit_message(chat_id, message_id, msg)
-            await asyncio.sleep(60)
-            await self._client.delete_messages(chat_id, message_id)
+            # await asyncio.sleep(60)
+            # await self._client.delete_messages(chat_id, message_id)
             return
 
         await self.inline.bot.edit_message_text(
